@@ -1,0 +1,21 @@
+{
+    "name": "Clickbus 2.0",
+    "description": "New Archteture",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Thiago Valentim",
+            "email": "thiago.valentim@clickbus.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Clickbus\\": "src/"}
+    },
+    "require": {
+        "silex/silex": "~1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    }
+}
