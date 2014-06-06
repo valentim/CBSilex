@@ -1,13 +1,13 @@
 <?php
-use Clickbus\BusServiceLayer\BookingEngine\ServiceProvider;
-use Clickbus\BusServiceLayer\BookingEngine\Driver\CbConnect;
-use Clickbus\BusServiceLayer\Payment\PaymentContext;
-use Clickbus\BusServiceLayer\Payment\Adapter\CreditCardAdapter;
-use Clickbus\BusServiceLayer\Payment\Driver\BankSlip\MundiPagg as MundiPaggBankSlip;
-use Clickbus\BusServiceLayer\Payment\Driver\CreditCard\MundiPagg as MundiPaggCreditCard;
-use Clickbus\BusServiceLayer\Payment\Driver\BankTransfer\Moip;
-use Clickbus\BusServiceLayer\Payment\Adapter\BankTransferAdapter;
-use Clickbus\BusServiceLayer\Payment\Adapter\BankSlipAdapter;
+use Clickbus\BusServiceLayer\BookingEngineService\ServiceProvider;
+use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
+use Clickbus\BusServiceLayer\PaymentService\PaymentContext;
+use Clickbus\BusServiceLayer\PaymentService\Adapter\CreditCardAdapter;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankSlip\MundiPagg as MundiPaggBankSlip;
+use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard\MundiPagg as MundiPaggCreditCard;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransfer\Moip;
+use Clickbus\BusServiceLayer\PaymentService\Adapter\BankTransferAdapter;
+use Clickbus\BusServiceLayer\PaymentService\Adapter\BankSlipAdapter;
 
 /**
  * Drivers of Booking Engine
