@@ -8,12 +8,16 @@ use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard\MundiPagg as Mundi
 use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransfer\Moip;
 use Clickbus\BusServiceLayer\PaymentService\Adapter\BankTransferAdapter;
 use Clickbus\BusServiceLayer\PaymentService\Adapter\BankSlipAdapter;
+use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
 
 /**
  * Drivers of Booking Engine
  */
 $app['booking_engine_driver_cbconnect'] = $app->share(function () {
-    return new ServiceProvider(new CbConnect);
+
+    $filter = new Intersection
+    $bookingEngine = new CbConnect($filter);
+    return new ServiceProvider($bookingEngine);
 });
 
 /**
