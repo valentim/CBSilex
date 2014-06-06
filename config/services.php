@@ -15,7 +15,7 @@ use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
  */
 $app['booking_engine_driver_cbconnect'] = $app->share(function () {
 
-    $filter = new Intersection
+    $filter = new Intersection;
     $bookingEngine = new CbConnect($filter);
     return new ServiceProvider($bookingEngine);
 });
