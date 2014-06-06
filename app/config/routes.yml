@@ -1,0 +1,3 @@
+home:
+    path: hello/{name}
+    defaults: { _controller: 'Clickbus\Controller\IndexController::indexAction' }
