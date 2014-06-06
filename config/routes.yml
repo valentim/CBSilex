@@ -1,3 +1,49 @@
-home:
-    path: hello/{name}
-    defaults: { _controller: 'Clickbus\Controller\IndexController::indexAction' }
+search:
+    path: /api/v2/search/
+    defaults: { _controller: 'Clickbus\Controller\SearchController::getAction' }
+    methods: [GET]
+
+trip_portfolio:
+    path: /api/v2/trip/portfolio/{from}/{to}/{date}
+    defaults: { _controller: 'Clickbus\Controller\Trip::portfolioAction' }
+    methods: [GET]
+    requirements:
+        from: "[a-zA-Z0-9]"
+        to: "[a-zA-Z0-9]"
+
+seat_block_session:
+    path: /api/v2/seat/block/{sessionId}
+    defaults: { _controller: 'Clickbus\Controller\SeatblockController::sessionAction' }
+    methods: [GET]
+    requirements:
+        sessionId: "[a-zA-Z0-9]"
+
+seat_block:
+    path: /api/v2/seat/block/
+    defaults: { _controller: 'Clickbus\Controller\SeatblockController::blockAction' }
+    methods: [PUT]
+
+seat_block_delete:
+    path: /api/v2/seat/block/
+    defaults: { _controller: 'Clickbus\Controller\SeatblockController::deleteAction' }
+    methods: [DELETE]
+
+booking_put:
+    path: /api/v2/booking/
+    defaults: { _controller: 'Clickbus\Controller\BookingController::putAction' }
+    methods: [PUT]
+
+booking_guid_get:
+    path: /api/v2/booking/{guid}
+    defaults: { _controller: 'Clickbus\Controller\BookingController::getAction' }
+    methods: [GET]
+    requirements:
+        guid: "[a-zA-Z0-9]"
+
+booking_guid_delete:
+    path: /api/v2/booking/{guid}
+    defaults: { _controller: 'Clickbus\Controller\BookingController::deleteAction' }
+    methods: [DELETE]
+    requirements:
+        guid: "[a-zA-Z0-9]"
+
