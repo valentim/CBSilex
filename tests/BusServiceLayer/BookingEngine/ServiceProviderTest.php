@@ -8,6 +8,7 @@
 
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
 use Clickbus\BusServiceLayer\BookingEngineService\ServiceProvider;
+use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
 
 class ServiceProviderTest extends PHPUnit_Framework_TestCase
 {
@@ -20,7 +21,8 @@ class ServiceProviderTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $driver = new CbConnect;
+        $filter = new Intersection;
+        $driver = new CbConnect($filter);
         $this->object = new ServiceProvider($driver);
     }
 
