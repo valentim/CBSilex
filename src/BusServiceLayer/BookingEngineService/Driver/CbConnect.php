@@ -10,28 +10,27 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\Adaptable;
-use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
 
 class CbConnect extends Adaptable
 {
 
-    public function getSearch(Transfer $searchTransfer)
+    protected function callBooking()
     {
-
+        // TODO: Implement callBooking() method.
     }
 
-    public function getSeats(Transfer $searchTransfer)
+    protected function callReserve()
     {
-
+        // TODO: Implement callReserve() method.
     }
 
-    public function reserve(Transfer $searchTransfer)
+    protected function callSeats()
     {
-
+        // TODO: Implement callSeats() method.
     }
 
-    public function doBooking(Transfer $searchTransfer)
+    protected function callSearch()
     {
-
+        // TODO: Implement callSearch() method.
     }
 }
