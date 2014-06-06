@@ -7,6 +7,7 @@ use Clickbus\BusServiceLayer\Payment\Driver\BankSlip\MundiPagg as MundiPaggBankS
 use Clickbus\BusServiceLayer\Payment\Driver\CreditCard\MundiPagg as MundiPaggCreditCard;
 use Clickbus\BusServiceLayer\Payment\Driver\BankTransfer\Moip;
 use Clickbus\BusServiceLayer\Payment\Adapter\BankTransferAdapter;
+use Clickbus\BusServiceLayer\Payment\Adapter\BankSlipAdapter;
 
 /**
  * Drivers of Booking Engine
@@ -35,7 +36,7 @@ $app['payment_gateway_driver_banktransfer_moip'] = $app->share(function () {
 
 $app['payment_gateway_driver_bankSlip_mundipagg'] = $app->share(function () {
     $driver = new MundiPaggBankSlip;
-    $adapter = new CreditCardAdapter($driver);
+    $adapter = new BankSlipAdapter($driver);
 
     return new PaymentContext($adapter);
 });
