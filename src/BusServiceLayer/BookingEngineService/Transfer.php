@@ -11,5 +11,5 @@ namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 interface Transfer
 {
-
+    public function transformData();
 } 
