@@ -9,8 +9,8 @@
 namespace Adapter;
 
 
-use Clickbus\BusServiceLayer\Payment\Adapter\BankTransferAdapter;
-use Clickbus\BusServiceLayer\Payment\Driver\BankTransfer\Moip;
+use Clickbus\BusServiceLayer\PaymentService\Adapter\BankTransferAdapter;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransfer\Moip;
 
 class BankTransferAdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,7 @@ class BankTransferAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testBankTransferAdapterObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\Payment\\Adapter\\BankTransferAdapter", $this->object);
+        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\PaymentService\\Adapter\\BankTransferAdapter", $this->object);
     }
 
     protected function setUp()

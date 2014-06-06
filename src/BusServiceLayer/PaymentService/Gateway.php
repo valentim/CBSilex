@@ -6,7 +6,7 @@
  * Time: 1:08
  */
 
-namespace Clickbus\BusServiceLayer\Payment;
+namespace Clickbus\BusServiceLayer\PaymentService;
 
 
 interface Gateway extends Payment

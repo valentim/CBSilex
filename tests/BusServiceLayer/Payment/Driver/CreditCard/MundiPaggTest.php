@@ -9,7 +9,7 @@
 namespace Driver\CreditCard;
 
 
-use Clickbus\BusServiceLayer\Payment\Driver\CreditCard\MundiPagg;
+use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard\MundiPagg;
 
 class MundiPaggTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class MundiPaggTest extends \PHPUnit_Framework_TestCase
 
     public function testMundiPaggObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\Payment\\Driver\\CreditCard\\MundiPagg", $this->object);
+        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\PaymentService\\Driver\\CreditCard\\MundiPagg", $this->object);
     }
 
     protected function setUp()

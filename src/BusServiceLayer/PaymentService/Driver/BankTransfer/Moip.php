@@ -6,10 +6,10 @@
  * Time: 1:24
  */
 
-namespace Clickbus\BusServiceLayer\Payment\Driver\BankTransfer;
+namespace Clickbus\BusServiceLayer\PaymentService\Driver\BankTransfer;
 
-use Clickbus\BusServiceLayer\Payment\Driver\BankTransferDriver;
-use Clickbus\BusServiceLayer\Payment\PaymentTransfer;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransferDriver;
+use Clickbus\BusServiceLayer\PaymentService\PaymentTransfer;
 
 class Moip implements BankTransferDriver
 {

@@ -6,7 +6,7 @@
  * Time: 1:07
  */
 
-namespace Clickbus\BusServiceLayer\Payment;
+namespace Clickbus\BusServiceLayer\PaymentService;
 
 
 interface PaymentTransfer

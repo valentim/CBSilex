@@ -6,7 +6,7 @@
  * Time: 19:51
  */
 
-namespace Clickbus\BusServiceLayer\BookingEngine;
+namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
 interface Transfer

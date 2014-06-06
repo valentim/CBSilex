@@ -8,7 +8,7 @@
 
 namespace Driver\BankTransfer;
 
-use Clickbus\BusServiceLayer\Payment\Driver\BankTransfer\Moip;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransfer\Moip;
 
 class MoipTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +16,7 @@ class MoipTest extends \PHPUnit_Framework_TestCase
 
     public function testMoipObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\Payment\\Driver\\BankTransfer\\Moip", $this->object);
+        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\PaymentService\\Driver\\BankTransfer\\Moip", $this->object);
     }
 
     protected function setUp()

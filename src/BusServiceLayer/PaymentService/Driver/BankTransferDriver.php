@@ -6,9 +6,9 @@
  * Time: 1:10
  */
 
-namespace Clickbus\BusServiceLayer\Payment\Driver;
+namespace Clickbus\BusServiceLayer\PaymentService\Driver;
 
-use Clickbus\BusServiceLayer\Payment\Gateway;
+use Clickbus\BusServiceLayer\PaymentService\Gateway;
 
 interface BankTransferDriver extends Gateway
 {

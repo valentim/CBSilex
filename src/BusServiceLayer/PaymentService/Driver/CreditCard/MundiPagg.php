@@ -6,11 +6,11 @@
  * Time: 1:22
  */
 
-namespace Clickbus\BusServiceLayer\Payment\Driver\CreditCard;
+namespace Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard;
 
 
-use Clickbus\BusServiceLayer\Payment\Driver\CreditCardDriver;
-use Clickbus\BusServiceLayer\Payment\PaymentTransfer;
+use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCardDriver;
+use Clickbus\BusServiceLayer\PaymentService\PaymentTransfer;
 
 class MundiPagg implements CreditCardDriver
 {

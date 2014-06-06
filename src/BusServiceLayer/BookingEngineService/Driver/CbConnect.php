@@ -6,11 +6,11 @@
  * Time: 21:08
  */
 
-namespace Clickbus\BusServiceLayer\BookingEngine\Driver;
+namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
-use Clickbus\BusServiceLayer\BookingEngine\BookingEngineAdapter;
-use Clickbus\BusServiceLayer\BookingEngine\Transfer;
+use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineAdapter;
+use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
 
 class CbConnect implements BookingEngineAdapter
 {

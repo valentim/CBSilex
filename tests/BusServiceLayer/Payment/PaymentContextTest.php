@@ -6,9 +6,9 @@
  * Time: 1:49
  */
 
-use Clickbus\BusServiceLayer\Payment\PaymentContext;
-use Clickbus\BusServiceLayer\Payment\Driver\CreditCard\MundiPagg as MundiPaggCreditCard;
-use Clickbus\BusServiceLayer\Payment\Adapter\CreditCardAdapter;
+use Clickbus\BusServiceLayer\PaymentService\PaymentContext;
+use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard\MundiPagg as MundiPaggCreditCard;
+use Clickbus\BusServiceLayer\PaymentService\Adapter\CreditCardAdapter;
 
 class PaymentContextTest extends PHPUnit_Framework_TestCase {
 
@@ -16,7 +16,7 @@ class PaymentContextTest extends PHPUnit_Framework_TestCase {
 
     public function testPaymentContextObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\Payment\\PaymentContext", $this->object);
+        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\PaymentService\\PaymentContext", $this->object);
     }
 
     protected function setUp()

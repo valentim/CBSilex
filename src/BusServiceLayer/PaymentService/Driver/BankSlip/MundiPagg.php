@@ -6,11 +6,11 @@
  * Time: 1:22
  */
 
-namespace Clickbus\BusServiceLayer\Payment\Driver\BankSlip;
+namespace Clickbus\BusServiceLayer\PaymentService\Driver\BankSlip;
 
 
-use Clickbus\BusServiceLayer\Payment\Driver\BankSlipDriver;
-use Clickbus\BusServiceLayer\Payment\PaymentTransfer;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankSlipDriver;
+use Clickbus\BusServiceLayer\PaymentService\PaymentTransfer;
 
 class MundiPagg implements BankSlipDriver
 {

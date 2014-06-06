@@ -6,7 +6,7 @@
  * Time: 19:52
  */
 
-namespace Clickbus\BusServiceLayer\BookingEngine;
+namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
 class ServiceProvider implements ExternalProvider

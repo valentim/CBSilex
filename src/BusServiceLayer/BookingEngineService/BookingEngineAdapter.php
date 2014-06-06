@@ -6,7 +6,7 @@
  * Time: 19:55
  */
 
-namespace Clickbus\BusServiceLayer\BookingEngine;
+namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
 interface BookingEngineAdapter extends ExternalProvider

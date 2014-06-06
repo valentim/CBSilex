@@ -6,7 +6,7 @@
  * Time: 1:26
  */
 
-namespace Clickbus\BusServiceLayer\Payment;
+namespace Clickbus\BusServiceLayer\PaymentService;
 
 class PaymentContext implements Payment
 {

@@ -9,8 +9,8 @@
 namespace Adapter;
 
 
-use Clickbus\BusServiceLayer\Payment\Adapter\BankSlipAdapter;
-use Clickbus\BusServiceLayer\Payment\Driver\BankSlip\MundiPagg;
+use Clickbus\BusServiceLayer\PaymentService\Adapter\BankSlipAdapter;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankSlip\MundiPagg;
 
 class BankSlipAdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,7 @@ class BankSlipAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testBankSlipAdapterObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\Payment\\Adapter\\BankSlipAdapter", $this->object);
+        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\PaymentService\\Adapter\\BankSlipAdapter", $this->object);
     }
 
     protected function setUp()

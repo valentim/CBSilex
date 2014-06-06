@@ -3,21 +3,21 @@
  * Created by PhpStorm.
  * User: thiagovalentim
  * Date: 6/6/14
- * Time: 1:13
+ * Time: 1:14
  */
 
-namespace Clickbus\BusServiceLayer\Payment\Adapter;
+namespace Clickbus\BusServiceLayer\PaymentService\Adapter;
 
 
-use Clickbus\BusServiceLayer\Payment\Driver\BankSlipDriver;
-use Clickbus\BusServiceLayer\Payment\Gateway;
-use Clickbus\BusServiceLayer\Payment\PaymentTransfer;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransferDriver;
+use Clickbus\BusServiceLayer\PaymentService\Gateway;
+use Clickbus\BusServiceLayer\PaymentService\PaymentTransfer;
 
-class BankSlipAdapter implements Gateway
+class BankTransferAdapter implements Gateway
 {
     protected $driver;
 
-    public function __construct(BankSlipDriver $driver)
+    public function __construct(BankTransferDriver $driver)
     {
         $this->driver = $driver;
     }

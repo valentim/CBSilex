@@ -17,7 +17,7 @@ $app['booking_engine_driver_cbconnect'] = $app->share(function () {
 });
 
 /**
- * Drivers of Payment
+ * Drivers of PaymentService
  */
 $app['payment_gateway_driver_creditcard_mundipagg'] = $app->share(function () {
 

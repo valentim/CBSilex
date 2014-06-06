@@ -9,8 +9,8 @@
 namespace Adapter;
 
 
-use Clickbus\BusServiceLayer\Payment\Adapter\CreditCardAdapter;
-use Clickbus\BusServiceLayer\Payment\Driver\CreditCard\MundiPagg;
+use Clickbus\BusServiceLayer\PaymentService\Adapter\CreditCardAdapter;
+use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard\MundiPagg;
 
 class CreditCardAdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,7 @@ class CreditCardAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testCreditCardAdapterObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\Payment\\Adapter\\CreditCardAdapter", $this->object);
+        $this->assertInstanceOf("Clickbus\\BusServiceLayer\\PaymentService\\Adapter\\CreditCardAdapter", $this->object);
     }
 
     protected function setUp()
