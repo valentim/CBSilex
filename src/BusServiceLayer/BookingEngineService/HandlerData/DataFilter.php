@@ -11,5 +11,5 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 
 interface DataFilter
 {
-    public function filter(array $pieces);
+    public function filter(array $pieces, array $data);
 } 
