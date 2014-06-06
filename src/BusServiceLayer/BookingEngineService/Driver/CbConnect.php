@@ -9,10 +9,10 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
-use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineAdapter;
+use Clickbus\BusServiceLayer\BookingEngineService\Adaptable;
 use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
 
-class CbConnect implements BookingEngineAdapter
+class CbConnect extends Adaptable
 {
 
     public function getSearch(Transfer $searchTransfer)
