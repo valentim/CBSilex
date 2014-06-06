@@ -20,6 +20,17 @@ class IntersectionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf("Clickbus\\BusServiceLayer\\BookingEngineService\\HandlerData\\Intersection", $this->object);
     }
 
+    public function testIntersectionFilterMethod()
+    {
+        $inputData = ['foo' => [], 'bar' => 'nd', 'piccolo' => 'daimao'];
+        $ownData = ['piccolo' => null, 'kakaroto' => null];
+
+        $filteredData = $this->object->filter($inputData, $ownData);
+        $expectedFilteredData = ['piccolo' => 'daimao'];
+
+        $this->assertEquals($filteredData, $expectedFilteredData);
+    }
+
     protected function setUp()
     {
         $this->object = new Intersection;
