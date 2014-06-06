@@ -12,8 +12,8 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 class Intersection implements DataFilter
 {
 
-    public function filter(array $pieces)
+    public function filter(array $pieces, array $data)
     {
-        // TODO: Implement filter() method.
+        return array_intersect_key($pieces, $data);
     }
 }
