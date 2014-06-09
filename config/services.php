@@ -1,6 +1,6 @@
 <?php
-use Clickbus\BusServiceLayer\BookingEngineService\ServiceProvider;
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
+use Clickbus\BusServiceLayer\BookingEngineService\Service\ServiceProvider;
 use Clickbus\BusServiceLayer\PaymentService\PaymentContext;
 use Clickbus\BusServiceLayer\PaymentService\Adapter\CreditCardAdapter;
 use Clickbus\BusServiceLayer\PaymentService\Driver\BankSlip\MundiPagg as MundiPaggBankSlip;
