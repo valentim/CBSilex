@@ -1,5 +1,6 @@
 <?php
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
+use Clickbus\BusServiceLayer\BookingEngineService\Driver\RapidoOchoa;
 use Clickbus\BusServiceLayer\BookingEngineService\Service\ServiceProvider;
 use Clickbus\BusServiceLayer\PaymentService\PaymentContext;
 use Clickbus\BusServiceLayer\PaymentService\Adapter\CreditCardAdapter;
@@ -17,6 +18,13 @@ $app['booking_engine_driver_cbconnect'] = $app->share(function () {
 
     $filter = new Intersection;
     $bookingEngine = new CbConnect($filter);
+    return new ServiceProvider($bookingEngine);
+});
+
+$app['booking_engine_driver_rapidoochoa'] = $app->share(function () {
+
+    $filter = new Intersection;
+    $bookingEngine = new RapidoOchoa($filter);
     return new ServiceProvider($bookingEngine);
 });
 
