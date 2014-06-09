@@ -23,6 +23,6 @@ class DataDTO implements Transfer, Input
 
     public function transformData()
     {
-        // TODO: Implement transformData() method.
+        return $this->data;
     }
 }
