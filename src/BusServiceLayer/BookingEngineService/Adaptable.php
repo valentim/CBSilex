@@ -56,7 +56,7 @@ abstract class Adaptable implements BookingEngineAdapter
             return;
         }
 
-        $this->data = $this->filter->filter($this->myData, $data);
+        $this->data = $this->filter->filter($data, $this->myData);
     }
 
     abstract protected function callBooking();
