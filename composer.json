@@ -7,6 +7,10 @@
         {
             "name": "Thiago Valentim",
             "email": "thiago.valentim@clickbus.com.br"
+        },
+        {
+            "name": "Tiago Butzke",
+            "email": "tiago.butzke@clickbus.com.br"
         }
     ],
     "autoload": {
@@ -16,7 +20,8 @@
         "silex/silex": "~1.2",
         "monolog/monolog": "~1.6",
         "symfony/yaml":"v2.2.0",
-        "symfony/config":"v2.2.0"
+        "symfony/config":"v2.2.0",
+        "guzzlehttp/guzzle": "~4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
