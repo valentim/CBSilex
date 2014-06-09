@@ -24,39 +24,45 @@ abstract class Adaptable implements BookingEngineAdapter
 
     public function getSearch(Transfer $searchTransfer)
     {
-        $this->filterData($searchTransfer->transformData());
+        $this->filterData($searchTransfer);
 
         return $this->callSearch();
     }
 
     public function getSeats(Transfer $searchTransfer)
     {
-        $this->filterData($searchTransfer->transformData());
+        $this->filterData($searchTransfer);
 
         return $this->callSeats();
     }
 
     public function reserve(Transfer $searchTransfer)
     {
-        $this->filterData($searchTransfer->transformData());
+        $this->filterData($searchTransfer);
 
         return $this->callReserve();
     }
 
     public function doBooking(Transfer $searchTransfer)
     {
-        $this->filterData($searchTransfer->transformData());
+        $this->filterData($searchTransfer);
 
         return $this->callBooking();
     }
 
-    private function filterData($data)
+    private function filterData(Transfer $data)
+    {
+        $this->setInternalData($data);
+
+        $this->filter->filter($data->getData(), $this->myData);
+    }
+
+    private function setInternalData(Transfer $searchTransfer)
     {
         if ($this->data) {
             return;
         }
-
-        $this->data = $this->filter->filter($data, $this->myData);
+        $this->data = $searchTransfer;
     }
 
     abstract protected function callBooking();
