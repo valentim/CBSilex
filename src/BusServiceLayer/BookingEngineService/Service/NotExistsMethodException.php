@@ -8,6 +8,6 @@
 
 namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
-use Clickbus\BusServiceLayer\Exception\GenericCallbackMessageException;
+use Clickbus\Exception\GenericCallbackMessageException;
 
 class NotExistsMethodException extends GenericCallbackMessageException {}

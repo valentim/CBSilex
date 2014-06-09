@@ -8,6 +8,6 @@
 
 namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
-use Clickbus\BusServiceLayer\Exception\GenericCallbackMessageException;
+use Clickbus\Exception\GenericCallbackMessageException;
 
 class ServerException extends GenericCallbackMessageException {}
