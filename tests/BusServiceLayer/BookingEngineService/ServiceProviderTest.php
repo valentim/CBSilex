@@ -7,7 +7,7 @@
  */
 
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
-use Clickbus\BusServiceLayer\BookingEngineService\ServiceProvider;
+use Clickbus\BusServiceLayer\BookingEngineService\Service\ServiceProvider;
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
 
 class ServiceProviderTest extends PHPUnit_Framework_TestCase
@@ -16,7 +16,7 @@ class ServiceProviderTest extends PHPUnit_Framework_TestCase
 
     public function testServiceProviderObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\BusServiceLayer\BookingEngineService\\ServiceProvider", $this->object);
+        $this->assertInstanceOf("Clickbus\\BusServiceLayer\BookingEngineService\\Service\\ServiceProvider", $this->object);
     }
 
     protected function setUp()

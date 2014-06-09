@@ -14,6 +14,8 @@ class Intersection implements DataFilter
 
     public function filter(array $pieces, array $data)
     {
-        return array_intersect_key($pieces, $data);
+        $pieces['request'] = array_intersect_key($pieces['request'], $data);
+
+        return $pieces;
     }
 }

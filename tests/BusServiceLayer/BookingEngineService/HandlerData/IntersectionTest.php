@@ -20,15 +20,60 @@ class IntersectionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf("Clickbus\\BusServiceLayer\\BookingEngineService\\HandlerData\\Intersection", $this->object);
     }
 
-    public function testIntersectionFilterMethod()
+    /**
+     * @dataProvider inputProvider
+     */
+    public function testIntersectionFilterMethod($inputData, $ownData, $expectedFilteredData)
     {
-        $inputData = ['foo' => [], 'bar' => 'nd', 'piccolo' => 'daimao'];
-        $ownData = ['piccolo' => null, 'kakaroto' => null];
-
         $filteredData = $this->object->filter($inputData, $ownData);
-        $expectedFilteredData = ['piccolo' => 'daimao'];
-
         $this->assertEquals($filteredData, $expectedFilteredData);
+    }
+
+    public function inputProvider()
+    {
+        return [
+            [
+                [
+                    'meta' => [],
+                    'request' => [
+                        'from' => 'Terminal do Tiete',
+                        'to' => 'Rio de Janeiro - Galeão',
+                        'departure' => '2010-10-10',
+                        'quantity' => 2,
+                        'return' => '2010-11-10',
+                        'waypoints' => [],
+                        'locale' => 'pt_BR',
+                        'flexibleDates' => true,
+                        'otherData' => 'asa',
+                        'other' => 'as'
+                    ]
+                ],
+                [
+                    'from' => null,
+                    'to' => null,
+                    'departure' => null,
+                    'quantity' => null,
+                    'return' => null,
+                    'waypoints' => null,
+                    'locale' => null,
+                    'flexibleDates' => null
+                ],
+                [
+                    'meta' => [],
+                    'request' => [
+                        'from' => 'Terminal do Tiete',
+                        'to' => 'Rio de Janeiro - Galeão',
+                        'departure' => '2010-10-10',
+                        'quantity' => 2,
+                        'return' => '2010-11-10',
+                        'waypoints' => [],
+                        'locale' => 'pt_BR',
+                        'flexibleDates' => true
+                    ]
+                ]
+
+            ]
+        ];
     }
 
     protected function setUp()
