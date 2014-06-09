@@ -15,14 +15,25 @@ use Clickbus\Request\Input;
 class DataDTO implements Transfer, Input
 {
     protected $data;
+    protected $method;
 
     public function input(array $contentBody)
     {
         $this->data = $contentBody;
     }
 
-    public function transformData()
+    public function getData()
     {
         return $this->data;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    public function setMethod($method)
+    {
+        $this->method = $method;
     }
 }
