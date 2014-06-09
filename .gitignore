@@ -1,5 +1,7 @@
 composer.lock
 vendor
+tests/_reports
 .vagrant
 .git
 .idea
+
