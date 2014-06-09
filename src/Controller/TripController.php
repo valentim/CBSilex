@@ -5,10 +5,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
 
-class TripController
+class TripController extends AbstractController
 {
-    public function portfolioAction(Application $app, $from, $to, $date)
+    public function portfolioAction(Application $app, Request $request)
     {
-        return $app->json(array(), 200);
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $dataTransfer = $this->getData($request, 'get');
+        $response = $bookingEngine->getSeats($dataTransfer);
+
+        return $app->json($response, 200);
     }
 }

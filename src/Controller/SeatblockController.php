@@ -5,15 +5,23 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
 
-class SeatblockController
+class SeatblockController extends AbstractController
 {
-    public function sessionAction(Application $app, $sessionId)
+    public function sessionAction(Application $app, Request $request, $sessionId)
     {
-        return $app->json(array(), 200);
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $dataTransfer = $this->getData($request, 'get');
+        $response = $bookingEngine->reserve($dataTransfer);
+
+        return $app->json($response, 200);
     }
 
-    public function blockAction(Application $app)
+    public function blockAction(Application $app, Request $request)
     {
-        return $app->json(array(), 200);
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $dataTransfer = $this->getData($request, 'put');
+        $response = $bookingEngine->reserve($dataTransfer);
+
+        return $app->json($response, 200);
     }
 }

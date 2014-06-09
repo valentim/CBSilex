@@ -5,20 +5,32 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
 
-class BookingController
+class BookingController extends AbstractController
 {
-    public function putAction(Application $app)
+    public function putAction(Application $app, Request $request)
     {
-        return $app->json(array(), 200);
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $dataTransfer = $this->getData($request, 'put');
+        $response = $bookingEngine->doBooking($dataTransfer);
+
+        return $app->json($response, 200);
     }
 
-    public function getAction(Application $app, $guide)
+    public function getAction(Application $app, Request $request, $guide)
     {
-        return $app->json(array(), 200);
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $dataTransfer = $this->getData($request, 'get');
+        $response = $bookingEngine->doBooking($dataTransfer);
+
+        return $app->json($response, 200);
     }
 
-    public function deleteAction(Application $app, $guide)
+    public function deleteAction(Application $app, Request $request, $guide)
     {
-        return $app->json(array(), 200);
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $dataTransfer = $this->getData($request, 'delete');
+        $response = $bookingEngine->doBooking($dataTransfer);
+
+        return $app->json($response, 200);
     }
 }

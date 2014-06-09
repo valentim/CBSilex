@@ -1,18 +1,16 @@
 <?php
 namespace Clickbus\Controller;
 
-use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\DataDTO;
 use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
 
-class SearchController
+class SearchController extends AbstractController
 {
     public function getAction(Application $app, Request $request)
     {
-        $bookingEngine = $app['booking_engine_driver_cbconnect'];
-        $dataTransfer = new DataDTO;
-        $dataTransfer->input($request->query->all());
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $dataTransfer = $this->getData($request, 'post');
 
         $response = $bookingEngine->getSearch($dataTransfer);
 
