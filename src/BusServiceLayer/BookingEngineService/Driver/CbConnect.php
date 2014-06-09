@@ -53,7 +53,8 @@ class CbConnect extends Adaptable
 
     protected function callSearch()
     {
-        $response = $this->client->post('/search', ['body' => json_encode($this->data)]);
+        $method = $this->data->getMethod();
+        $response = $this->client->$method('/search', ['body' => json_encode($this->data->getData())]);
 
         return $response->json();
 
