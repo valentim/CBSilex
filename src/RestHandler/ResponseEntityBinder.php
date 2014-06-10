@@ -30,7 +30,7 @@ abstract class ResponseEntityBinder
     {
         $content = array();
 
-        foreach ($templates as $template) {
+        foreach ($this->templates as $template) {
             $this->content = array_merge_recursive($this->content, $template);
         }
     }
