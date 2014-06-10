@@ -10,6 +10,7 @@ namespace Clickbus\Controller;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\DataDTO;
+use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsServiceException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,8 +27,13 @@ abstract class AbstractController
 
     protected function getBookingEngine(Application $app, Request $request)
     {
-        $bookingEngine = $app['booking_engine_driver_cbconnect'];
+        $meta = $request->get('meta');
+        if (isset($meta['bookingengine']) && isset($app[$meta['bookingengine']])) {
+            $bookingEngine = $app[$meta['bookingengine']];
 
-        return $bookingEngine;
+            return $bookingEngine;
+        }
+
+        throw new NotExistsServiceException;
     }
 } 

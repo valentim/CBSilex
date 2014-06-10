@@ -11,8 +11,14 @@ namespace Clickbus\Exception;
 
 class GenericCallbackMessageException extends ProcessCallbackException
 {
+    protected $message;
+
     public function __construct($message = null)
     {
+        if (!is_null($this->message)) {
+            $message = $this->message;
+        }
+
         $f = function() use ($message) {
 
             $messageTemplate = [

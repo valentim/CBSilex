@@ -11,16 +11,47 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 use Clickbus\BusServiceLayer\BookingEngineService\Adaptable;
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\DataFilter;
+use Clickbus\BusServiceLayer\BookingEngineService\Template;
+use Clickbus\Response\Output;
 use GuzzleHttp\Client;
 
-class CbConnect extends Adaptable
+class CbConnect extends Template
 {
     protected $host = 'http://33.33.33.94';
     protected $client;
 
     public function __construct(DataFilter $filter)
     {
-        $this->myData = [
+        $this->client = new Client(['base_url' => $this->host]);
+
+        parent::__construct($filter);
+    }
+
+    protected function callBooking(Output $output)
+    {
+        // TODO: Implement callBooking() method.
+    }
+
+    protected function callReserve(Output $output)
+    {
+        // TODO: Implement callReserve() method.
+    }
+
+    protected function callSeats(Output $output)
+    {
+        // TODO: Implement callSeats() method.
+    }
+
+    protected function callSearch(Output $output)
+    {
+        $method = $this->data->getMethod();
+        $response = $this->client->$method('/search', ['body' => json_encode($this->data->getData())]);
+        $output->setOutput($response->json());
+    }
+
+    protected function getData()
+    {
+        return [
             'from' => null,
             'to' => null,
             'departure' => null,
@@ -30,33 +61,5 @@ class CbConnect extends Adaptable
             'locale' => null,
             'flexibleDates' => null
         ];
-
-        $this->client = new Client(['base_url' => $this->host]);
-
-        parent::__construct($filter);
-    }
-
-    protected function callBooking()
-    {
-        // TODO: Implement callBooking() method.
-    }
-
-    protected function callReserve()
-    {
-        // TODO: Implement callReserve() method.
-    }
-
-    protected function callSeats()
-    {
-        // TODO: Implement callSeats() method.
-    }
-
-    protected function callSearch()
-    {
-        $method = $this->data->getMethod();
-        $response = $this->client->$method('/search', ['body' => json_encode($this->data->getData())]);
-
-        return $response->json();
-
     }
 }

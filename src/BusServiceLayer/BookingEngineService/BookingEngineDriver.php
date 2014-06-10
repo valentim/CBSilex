@@ -9,7 +9,7 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
-interface BookingEngineAdapter extends ExternalProvider
+interface BookingEngineDriver extends ExternalProvider
 {
-
+    public function getResult();
 } 
