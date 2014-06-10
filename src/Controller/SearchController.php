@@ -14,6 +14,6 @@ class SearchController extends AbstractController
 
         $response = $bookingEngine->getSearch($dataTransfer);
 
-        return $app->json($response, 200);
+        return $app->json($response->getResult(), 200);
     }
 }
