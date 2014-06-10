@@ -1,6 +1,8 @@
 <?php
 namespace Clicbus\RestHandler;
 
+use Clickbus\RestHandler\ResponseTemplateException;
+
 abstract class ResponseEntityBinder
 {
     /**
@@ -28,6 +30,10 @@ abstract class ResponseEntityBinder
      */
     public function bind()
     {
+        if (count($this->templates) == 0) {
+            throw new ResponseTemplateException('Templates not seted');
+        }
+
         $content = array();
 
         foreach ($this->templates as $template) {
