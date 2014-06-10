@@ -13,8 +13,8 @@ trip_portfolio:
     defaults: { _controller: 'Clickbus\Controller\Trip::portfolioAction' }
     methods: [GET]
     requirements:
-        from: "[a-zA-Z0-9]"
-        to: "[a-zA-Z0-9]"
+        from: "[a-zA-Z0-9-]+"
+        to: "[a-zA-Z0-9-]+"
 
 seat_block_session:
     path: /{country}/api/v2/seat/block/{sessionId}
