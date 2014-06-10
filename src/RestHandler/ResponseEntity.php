@@ -1,5 +1,5 @@
 <?php
-namespace Clicbus\RestHandler;
+namespace Clickbus\RestHandler;
 
 use Clicbus\RestHandler\ResponseEntityBinder;
 
