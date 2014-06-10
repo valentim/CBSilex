@@ -102,6 +102,7 @@ class Client extends \SoapClient
         $this->response = $response;
 
         $action = preg_replace('/"(?:.+?:)?(.+?)"/', '\1', $response->getRequest()->getHeader('SOAPAction'));
+
         return $this->__soapCall($action, []);
     }
 }
