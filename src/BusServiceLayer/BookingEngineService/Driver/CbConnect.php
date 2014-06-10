@@ -12,6 +12,7 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 use Clickbus\BusServiceLayer\BookingEngineService\Adaptable;
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\DataFilter;
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
+use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
 use Clickbus\Response\Output;
 use GuzzleHttp\Client;
 
@@ -19,47 +20,44 @@ class CbConnect extends Template
 {
     protected $host = 'http://33.33.33.94';
     protected $client;
+    protected $method;
 
-    public function __construct(DataFilter $filter)
+    public function __construct()
     {
+        parent::__construct();
         $this->client = new Client(['base_url' => $this->host]);
-
-        parent::__construct($filter);
     }
 
     protected function callBooking(Output $output)
     {
-        // TODO: Implement callBooking() method.
+        $this->call('/booking', $output, ['body' => json_encode($this->data['body'])]);
     }
 
     protected function callReserve(Output $output)
     {
-        // TODO: Implement callReserve() method.
+        $this->call('/seat/block', $output, ['body' => json_encode($this->data['body'])]);
     }
 
     protected function callSeats(Output $output)
     {
-        // TODO: Implement callSeats() method.
+        $this->call('/trip/portfolio', $output, ['query' => $this->data['queryString']]);
     }
 
     protected function callSearch(Output $output)
     {
-        $method = $this->data->getMethod();
-        $response = $this->client->$method('/search', ['body' => json_encode($this->data->getData())]);
-        $output->setOutput($response->json());
+        $this->call('/search', $output, ['body' => json_encode($this->data['body'])]);
     }
 
-    protected function getData()
+    protected function setData(Transfer $data)
     {
-        return [
-            'from' => null,
-            'to' => null,
-            'departure' => null,
-            'quantity' => null,
-            'return' => null,
-            'waypoints' => null,
-            'locale' => null,
-            'flexibleDates' => null
-        ];
+        parent::setData($data);
+        $this->method = $data->getMethod();
+    }
+
+    private function call($action, Output $output, $data)
+    {
+        $method = $this->method;
+        $response = $this->client->$method($action, $data);
+        $output->setOutput($response->json());
     }
 }
