@@ -1,10 +1,12 @@
 <?php
 namespace Clickbus\RestHandler\ResponseEntity;
 
+use Clickbus\RestHandler\ResponseEntity;
+
 /**
  * Entity example class
  */
-class User
+class User implements ResponseEntity
 {
     /**
      * User template
