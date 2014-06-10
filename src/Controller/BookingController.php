@@ -13,7 +13,7 @@ class BookingController extends AbstractController
         $dataTransfer = $this->getData($request, 'put');
         $response = $bookingEngine->doBooking($dataTransfer);
 
-        return $app->json($response, 200);
+        return $app->json($response->getResult(), 200);
     }
 
     public function getAction(Application $app, Request $request, $guide)
@@ -22,7 +22,7 @@ class BookingController extends AbstractController
         $dataTransfer = $this->getData($request, 'get');
         $response = $bookingEngine->doBooking($dataTransfer);
 
-        return $app->json($response, 200);
+        return $app->json($response->getResult(), 200);
     }
 
     public function deleteAction(Application $app, Request $request, $guide)
@@ -31,6 +31,6 @@ class BookingController extends AbstractController
         $dataTransfer = $this->getData($request, 'delete');
         $response = $bookingEngine->doBooking($dataTransfer);
 
-        return $app->json($response, 200);
+        return $app->json($response->getResult(), 200);
     }
 }
