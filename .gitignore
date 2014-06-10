@@ -1,7 +1,7 @@
 composer.lock
+parameters.yml
 vendor
 tests/_reports
 .vagrant
 .git
 .idea
-
