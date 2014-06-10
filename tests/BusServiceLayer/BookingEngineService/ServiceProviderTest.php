@@ -21,8 +21,7 @@ class ServiceProviderTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $filter = new Intersection;
-        $driver = new CbConnect($filter);
+        $driver = new CbConnect;
         $this->object = new ServiceProvider($driver);
     }
 
