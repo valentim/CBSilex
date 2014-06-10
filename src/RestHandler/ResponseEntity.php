@@ -1,9 +1,13 @@
 <?php
 namespace Clicbus\RestHandler;
 
-interface ResponseEntity
+use Clicbus\RestHandler\ResponseEntityBinder;
+
+interface ResponseEntity extends ResponseEntityBinder
 {
     public function bind();
 
     public function getContent();
+
+    protected function registerTemplates();
 }

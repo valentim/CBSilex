@@ -1,9 +1,8 @@
 <?php
-
 namespace Clickbus\Request\Soap;
 
-use Guzzle\Http\Client as GuzzleClient;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Message\Response;
 
 class Client extends \SoapClient
 {
@@ -34,7 +33,7 @@ class Client extends \SoapClient
      */
     public function __construct($wsdl, array $options = null, $locationReplace = null)
     {
-        parent::SoapClient($wsdl, []);
+        parent::SoapClient($wsdl, $options);
         $this->locationReplace = $locationReplace;
     }
 
