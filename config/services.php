@@ -9,7 +9,6 @@ use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard\MundiPagg as Mundi
 use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransfer\Moip;
 use Clickbus\BusServiceLayer\PaymentService\Adapter\BankTransferAdapter;
 use Clickbus\BusServiceLayer\PaymentService\Adapter\BankSlipAdapter;
-use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
 use Symfony\Component\HttpFoundation\Request;
 
 use DerAlex\Silex\YamlConfigServiceProvider;
