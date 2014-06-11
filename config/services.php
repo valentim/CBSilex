@@ -27,11 +27,6 @@ $app['booking_engine_driver_rapidoochoa'] = $app->share(function () {
 });
 
 /**
- * Registering country from call
- */
-$app->register(new CountryServiceProvider());
-
-/**
  * Registering Yaml service provider
  */
 $app->register(new YamlConfigServiceProvider(__DIR__ . '/parameters.yml'));
@@ -45,7 +40,7 @@ $app->register(new PaymentDriverServiceProvider());
  * Doctrine services
  */
 $app->register(new DoctrineServiceProvider(), array(
-    'db.options' => $app['config']['database'][$app['country']]
+    'db.options' => $app['config']['database']
 ));
 
 $app->register(new DoctrineORMServiceProvider(), array(
