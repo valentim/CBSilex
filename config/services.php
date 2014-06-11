@@ -2,13 +2,6 @@
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\RapidoOchoa;
 use Clickbus\BusServiceLayer\BookingEngineService\Service\ServiceProvider;
-use Clickbus\BusServiceLayer\PaymentService\PaymentContext;
-use Clickbus\BusServiceLayer\PaymentService\Adapter\CreditCardAdapter;
-// use Clickbus\BusServiceLayer\PaymentService\Driver\BankSlip\MundiPagg as MundiPaggBankSlip;
-// use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard\MundiPagg as MundiPaggCreditCard;
-// use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransfer\Moip;
-use Clickbus\BusServiceLayer\PaymentService\Adapter\BankTransferAdapter;
-use Clickbus\BusServiceLayer\PaymentService\Adapter\BankSlipAdapter;
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
 use Clickbus\BusServiceLayer\PaymentService\Provider\PaymentDriverServiceProvider;
 
