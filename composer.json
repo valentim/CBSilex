@@ -24,6 +24,10 @@
         {
             "type": "git",
             "url": "git@bitbucket.org:tiagobutzke/moip.git"
+        },
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:tiagobutzke/paymentservice.git"
         }
     ],
     "require": {
@@ -41,7 +45,8 @@
         "guzzlehttp/guzzle": "~4.0",
         "camcima/camcima-soap-client": "dev-master",
         "clickbus/mundipagg": "~1.0",
-        "clickbus/moip": "~1.0"
+        "clickbus/moip": "~1.0",
+        "clickbus/payment-service": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
