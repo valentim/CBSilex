@@ -9,7 +9,7 @@
 namespace Clickbus\Controller;
 
 
-use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\DataDTO;
+use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\InputData;
 use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsServiceException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +18,10 @@ abstract class AbstractController
 {
     protected function getData(Request $request, $method)
     {
-        $dataTransfer = new DataDTO;
+        $dataTransfer = new InputData;
         $dataTransfer->setMethod($method);
-        $dataTransfer->input($request->query->all());
+        $dataTransfer->setQueryString($request->query->all());
+        $dataTransfer->setBody($request->request->all());
 
         return $dataTransfer;
     }

@@ -10,28 +10,16 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
 use Camcima\Soap\Client;
-use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\DataFilter;
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
 use Clickbus\Response\Output;
 
 class RapidoOchoa extends Template
 {
-    public function __construct(DataFilter $filter)
+    public function __construct()
     {
-        $this->myData = [
-            'from' => null,
-            'to' => null,
-            'departure' => null,
-            'quantity' => null,
-            'return' => null,
-            'waypoints' => null,
-            'locale' => null,
-            'flexibleDates' => null
-        ];
-
+        parent::__construct();
         $this->client = new Client('http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx?wsdl');
 
-        parent::__construct($filter);
     }
 
     protected function callBooking(Output $output)
@@ -104,10 +92,5 @@ class RapidoOchoa extends Template
 
         $output->setOutput($this->template);
 
-    }
-
-    protected function getData()
-    {
-        // TODO: Implement getData() method.
     }
 }

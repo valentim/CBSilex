@@ -4,10 +4,10 @@ use Clickbus\BusServiceLayer\BookingEngineService\Driver\RapidoOchoa;
 use Clickbus\BusServiceLayer\BookingEngineService\Service\ServiceProvider;
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
 use Clickbus\BusServiceLayer\PaymentService\Provider\PaymentDriverServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 use DerAlex\Silex\YamlConfigServiceProvider;
 
-use Clickbus\Provider\CountryServiceProvider;
 use Clickbus\Provider\DoctrineORMServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 
@@ -15,14 +15,13 @@ use Silex\Provider\DoctrineServiceProvider;
  * Drivers of Booking Engine
  */
 $app['booking_engine_driver_cbconnect'] = $app->share(function () {
-    $filter = new Intersection;
-    $bookingEngine = new CbConnect($filter);
+    $bookingEngine = new CbConnect;
     return new ServiceProvider($bookingEngine);
 });
 
 $app['booking_engine_driver_rapidoochoa'] = $app->share(function () {
-    $filter = new Intersection;
-    $bookingEngine = new RapidoOchoa($filter);
+
+    $bookingEngine = new RapidoOchoa;
     return new ServiceProvider($bookingEngine);
 });
 
@@ -30,6 +29,30 @@ $app['booking_engine_driver_rapidoochoa'] = $app->share(function () {
  * Registering Yaml service provider
  */
 $app->register(new YamlConfigServiceProvider(__DIR__ . '/parameters.yml'));
+
+/**
+ * Drivers of PaymentService
+ */
+$app['payment_gateway_driver_creditcard_mundipagg'] = $app->share(function () {
+    $driver = new MundiPaggCreditCard;
+    $adapter = new CreditCardAdapter($driver);
+
+    return new PaymentContext($adapter);
+});
+
+$app['payment_gateway_driver_banktransfer_moip'] = $app->share(function () {
+    $driver = new Moip;
+    $adapter = new BankTransferAdapter($driver);
+
+    return new PaymentContext($adapter);
+});
+
+$app['payment_gateway_driver_bankSlip_mundipagg'] = $app->share(function () {
+    $driver = new MundiPaggBankSlip;
+    $adapter = new BankSlipAdapter($driver);
+
+    return new PaymentContext($adapter);
+});
 
 /**
  * Drivers of PaymentService
@@ -43,7 +66,7 @@ $app->register(new DoctrineServiceProvider(), array(
     'db.options' => $app['config']['database']
 ));
 
-$app->register(new DoctrineORMServiceProvider(), array(
+$app->register(new DoctrineORMServiceProvider, array(
     'db.orm.proxies_dir' => __DIR__ . '/cache/doctrine/Proxy',
     'db.orm.proxies_namespace' => 'DoctrineProxy',
     'db.orm.auto_generate_proxies' => true,
@@ -56,3 +79,10 @@ $app->register(new DoctrineORMServiceProvider(), array(
         )
     )
 ));
+
+$app->before(function (Request $request) {
+    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+    }
+});

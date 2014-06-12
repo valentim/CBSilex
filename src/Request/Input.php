@@ -11,5 +11,6 @@ namespace Clickbus\Request;
 
 interface Input
 {
-    public function input(array $contentBody);
+    public function setBody(array $contentBody);
+    public function setQueryString(array $contentQueryString);
 } 

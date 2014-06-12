@@ -13,15 +13,15 @@ class SeatblockController extends AbstractController
         $dataTransfer = $this->getData($request, 'get');
         $response = $bookingEngine->reserve($dataTransfer);
 
-        return $app->json($response, 200);
+        return $app->json($response->getResult(), 200);
     }
 
     public function blockAction(Application $app, Request $request)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
-        $dataTransfer = $this->getData($request, 'put');
+        $dataTransfer = $this->getData($request, 'post');
         $response = $bookingEngine->reserve($dataTransfer);
 
-        return $app->json($response, 200);
+        return $app->json($response->getResult(), 200);
     }
 }

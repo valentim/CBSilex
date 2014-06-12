@@ -12,19 +12,30 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
 use Clickbus\Request\Input;
 
-class DataDTO implements Transfer, Input
+class InputData implements Transfer, Input
 {
-    protected $data;
+    protected $body;
+    protected $queryString;
     protected $method;
 
-    public function input(array $contentBody)
+    public function setBody(array $contentBody)
     {
-        $this->data = $contentBody;
+        $this->body = $contentBody;
+    }
+
+    public function setQueryString(array $contetQueryString)
+    {
+        $this->queryString = $contetQueryString;
     }
 
     public function getData()
     {
-        return $this->data;
+        $data = [
+            'body' => $this->body,
+            'queryString' => $this->queryString
+        ];
+
+        return $data;
     }
 
     public function getMethod()

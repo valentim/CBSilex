@@ -7,7 +7,6 @@
  */
 
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
-use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
 
 class CbConnectTest extends PHPUnit_Framework_TestCase
 {
@@ -20,8 +19,7 @@ class CbConnectTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $filter = new Intersection;
-        $this->object = new CbConnect($filter);
+        $this->object = new CbConnect;
     }
 
     protected function tearDown()
