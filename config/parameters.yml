@@ -1,0 +1,21 @@
+database:
+    driver: pdo_mysql
+    host: 127.0.0.1
+    port: null
+    name: brazil
+    user: brazil
+    password: rockbus
+    charset: 'utf8'
+
+payments:
+    BankSlip: [MundiPagg]
+    CreditCard: [MundiPagg]
+    BankTransfer: [Moip]
+
+booking_engines: [CbConnect, RapidoOchoa]
+
+# payment:
+#     payu_latam:
+#         payment: https://stg.api.payulatam.com/payments-api/4.0/service.cgi
+#         consultation: https://stg.api.payulatam.com/reports-api/4.0/service.cgi
+
