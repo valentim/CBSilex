@@ -64,10 +64,14 @@ class DataBinding
             $className = current($methodData->getParameters())->name.'Request';
             $class =  $namespace.'\\'.ucfirst($className);
 
-            $instance = new $class;
+            $newValue = $eachData;
+            if (class_exists($class)) {
+                $newValue = new $class;
+                $this->bindData($eachData, $newValue);
 
-            $this->bindData($eachData, $instance);
-            $this->setter($object, $method, $instance);
+            }
+
+            $this->setter($object, $method, $newValue);
         }
     }
 
