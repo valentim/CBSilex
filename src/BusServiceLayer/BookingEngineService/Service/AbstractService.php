@@ -10,7 +10,7 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineDriver;
-use Clickbus\BusServiceLayer\DataTransfer\TransferInterface;
+use Clickbus\DataTransfer\TransferInterface;
 use GuzzleHttp\Exception\ServerException;
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\ServerException as ServerExceptionCallBack;
 

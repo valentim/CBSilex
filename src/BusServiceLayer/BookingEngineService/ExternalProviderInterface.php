@@ -9,7 +9,7 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
-use Clickbus\BusServiceLayer\DataTransfer\TransferInterface;
+use Clickbus\DataTransfer\TransferInterface;
 
 interface ExternalProviderInterface
 {

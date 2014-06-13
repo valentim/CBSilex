@@ -10,7 +10,8 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
-use Clickbus\BusServiceLayer\BookingEngineService\TransferInterface;
+use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\Request\InputInterface;
 use Clickbus\Response\OutputInterface;
 use GuzzleHttp\Client;
 
@@ -52,7 +53,7 @@ class CbConnect extends Template
         $this->method = $data->getMethod();
     }
 
-    private function call($action, TransferInterface $output, $data)
+    private function call($action, OutputInterface $output, $data)
     {
         $method = $this->method;
         $response = $this->client->$method($action, $data);
