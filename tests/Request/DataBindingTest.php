@@ -179,8 +179,6 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
         $this->object = new DataBinding(new ReservationRequest);
 
         $input = '{
-              "meta":[],
-              "request": {
                 "sessionId": "DDFF999-AAACCC-DDDFFF@113-AFAFDD",
                 "buyer": {
                   "firstName": "Klederson",
@@ -188,7 +186,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
                   "email": "dev@clickbus.com.br",
                   "document": "123.123.123-11",
                   "gender": "M",
-                  "birthday": "",
+                  "birthday": "1986-05-17",
                   "meta":[]
                 },
                 "orderItems": [
@@ -206,7 +204,6 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
                     "products":[]
                   }
                 ]
-               }
              }';
 
         $outputDataBuyer = new BuyerRequest;
@@ -221,15 +218,17 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
         $outputDataPassenger = new PassengerRequest;
         $outputDataPassenger->setMeta("")
             ->setFirstName('Klederson')
-            ->setLastName('')
+            ->setLastName('Bueno')
             ->setGender("M")
-            ->setDocument('123.123.123-11')
+            ->setDocument('123.123.123-01')
+            ->setBirthday('1986-05-17')
+            ->setMeta([])
             ->setEmail('dev@clickbus.com.br');
 
         $outputOrderItemData = new OrderItemRequest;
         $outputOrderItemData->setPassenger($outputDataPassenger)
             ->setProducts([])
-            ->setSeatReservation($outputDataPassenger);
+            ->setSeatReservation('DDFF999-AAACCC-DDDFFF@113-AFAFDD');
 
         $outputReservationData = new ReservationRequest;
         $outputReservationData->setSessionId('DDFF999-AAACCC-DDDFFF@113-AFAFDD')
@@ -237,6 +236,33 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
             ->setOrderItems($outputOrderItemData);
 
         $this->object->bindData(json_decode($input, true));
+
+        $this->assertEquals($outputReservationData->getSessionId(), $this->object->getObject()->getSessionId());
+        $this->assertEquals($outputReservationData->getBuyer()->getFirstName(), $this->object->getObject()->getBuyer()->getFirstName());
+        $this->assertEquals($outputReservationData->getBuyer()->getLastName(), $this->object->getObject()->getBuyer()->getLastName());
+        $this->assertEquals($outputReservationData->getBuyer()->getEmail(), $this->object->getObject()->getBuyer()->getEmail());
+        $this->assertEquals($outputReservationData->getBuyer()->getDocument(), $this->object->getObject()->getBuyer()->getDocument());
+        $this->assertEquals($outputReservationData->getBuyer()->getGender(), $this->object->getObject()->getBuyer()->getGender());
+        $this->assertEquals($outputReservationData->getBuyer()->getBirthday(), $this->object->getObject()->getBuyer()->getBirthday());
+        $this->assertEquals($outputReservationData->getBuyer()->getMeta(), $this->object->getObject()->getBuyer()->getMeta());
+
+        $outputReservationData->getOrderItems()->rewind();
+        $this->object->getObject()->getOrderItems()->rewind();
+
+        while($outputReservationData->getOrderItems()->valid() && $this->object->getObject()->getOrderItems()->valid()) {
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getSeatReservation(), $this->object->getObject()->getOrderItems()->current()->getSeatReservation());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getProducts(), $this->object->getObject()->getOrderItems()->current()->getProducts());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getPassenger()->getBirthday(), $this->object->getObject()->getOrderItems()->current()->getPassenger()->getBirthday());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getPassenger()->getDocument(), $this->object->getObject()->getOrderItems()->current()->getPassenger()->getDocument());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getPassenger()->getEmail(), $this->object->getObject()->getOrderItems()->current()->getPassenger()->getEmail());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getPassenger()->getFirstName(), $this->object->getObject()->getOrderItems()->current()->getPassenger()->getFirstName());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getPassenger()->getGender(), $this->object->getObject()->getOrderItems()->current()->getPassenger()->getGender());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getPassenger()->getLastName(), $this->object->getObject()->getOrderItems()->current()->getPassenger()->getLastName());
+            $this->assertEquals($outputReservationData->getOrderItems()->current()->getPassenger()->getMeta(), $this->object->getObject()->getOrderItems()->current()->getPassenger()->getMeta());
+
+            $outputReservationData->getOrderItems()->next();
+            $this->object->getObject()->getOrderItems()->next();
+        }
     }
 
     public function testBindDataBuyerRequest()
