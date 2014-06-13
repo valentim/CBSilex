@@ -9,10 +9,10 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 
 
-use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
-use Clickbus\Request\Input;
+use Clickbus\BusServiceLayer\DataTransfer\TransferInterface;
+use Clickbus\Request\InputInterface;
 
-class InputData implements Transfer, Input
+class InputData implements TransferInterface, InputInterface
 {
     protected $body;
     protected $queryString;
