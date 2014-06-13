@@ -11,7 +11,7 @@ namespace Clickbus\Response;
 
 use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsMethodException;
 
-class OutputData implements Output
+class OutputData implements OutputInterface
 {
     protected $result;
 

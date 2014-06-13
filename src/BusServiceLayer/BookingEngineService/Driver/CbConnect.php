@@ -9,11 +9,10 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
-use Clickbus\BusServiceLayer\BookingEngineService\Adaptable;
-use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\DataFilter;
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
-use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
-use Clickbus\Response\Output;
+use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\Request\InputInterface;
+use Clickbus\Response\OutputInterface;
 use GuzzleHttp\Client;
 
 class CbConnect extends Template
@@ -28,33 +27,33 @@ class CbConnect extends Template
         $this->client = new Client(['base_url' => $this->host]);
     }
 
-    protected function callBooking(Output $output)
+    protected function callBooking(OutputInterface $output)
     {
         $this->call('/booking', $output, ['body' => json_encode($this->data['body'])]);
     }
 
-    protected function callReserve(Output $output)
+    protected function callReserve(OutputInterface $output)
     {
         $this->call('/seat/block', $output, ['body' => json_encode($this->data['body'])]);
     }
 
-    protected function callSeats(Output $output)
+    protected function callSeats(OutputInterface $output)
     {
         $this->call('/trip/portfolio', $output, ['query' => $this->data['queryString']]);
     }
 
-    protected function callSearch(Output $output)
+    protected function callSearch(OutputInterface $output)
     {
         $this->call('/search', $output, ['body' => json_encode($this->data['body'])]);
     }
 
-    protected function setData(Transfer $data)
+    protected function setData(TransferInterface $data)
     {
         parent::setData($data);
         $this->method = $data->getMethod();
     }
 
-    private function call($action, Output $output, $data)
+    private function call($action, OutputInterface $output, $data)
     {
         $method = $this->method;
         $response = $this->client->$method($action, $data);

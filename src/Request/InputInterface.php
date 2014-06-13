@@ -9,8 +9,10 @@
 namespace Clickbus\Request;
 
 
-interface Input
+interface InputInterface
 {
     public function setBody(array $contentBody);
     public function setQueryString(array $contentQueryString);
+    public function setMethod($method);
+    public function getMethod();
 } 

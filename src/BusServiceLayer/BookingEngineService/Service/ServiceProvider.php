@@ -8,26 +8,27 @@
 
 namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
-use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
+
+use Clickbus\DataTransfer\TransferInterface;
 
 class ServiceProvider extends AbstractService
 {
-    protected function getSearch(Transfer $dataTransfer)
+    protected function getSearch(TransferInterface $dataTransfer)
     {
         return $this->adapter->getSearch($dataTransfer);
     }
 
-    protected function getSeats(Transfer $dataTransfer)
+    protected function getSeats(TransferInterface $dataTransfer)
     {
         return $this->adapter->getSeats($dataTransfer);
     }
 
-    protected function reserve(Transfer $dataTransfer)
+    protected function reserve(TransferInterface $dataTransfer)
     {
         return $this->adapter->reserve($dataTransfer);
     }
 
-    protected function doBooking(Transfer $dataTransfer)
+    protected function doBooking(TransferInterface $dataTransfer)
     {
         return $this->adapter->doBooking($dataTransfer);
     }

@@ -9,47 +9,48 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
-use Clickbus\Response\Output;
+use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\Response\OutputInterface;
 
 abstract class Template extends HandlerData
 {
     protected $template;
 
-    public function getSearch(Transfer $searchTransfer)
+    public function getSearch(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->template = $this->output->getTemplate('callSearch');
         $this->callSearch($this->output);
     }
 
-    public function getSeats(Transfer $searchTransfer)
+    public function getSeats(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->template = $this->output->getTemplate('callSeats');
         $this->callSeats($this->output);
     }
 
-    public function reserve(Transfer $searchTransfer)
+    public function reserve(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->template = $this->output->getTemplate('callReserve');
         $this->callReserve($this->output);
     }
 
-    public function doBooking(Transfer $searchTransfer)
+    public function doBooking(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->template = $this->output->getTemplate('callBooking');
         $this->callBooking($this->output);
     }
 
-    protected function setData(Transfer $searchTransfer)
+    protected function setData(TransferInterface $searchTransfer)
     {
         $this->data = $searchTransfer->getData();
     }
 
-    abstract protected function callBooking(Output $output);
-    abstract protected function callReserve(Output $output);
-    abstract protected function callSeats(Output $output);
-    abstract protected function callSearch(Output $output);
+    abstract protected function callBooking(OutputInterface $output);
+    abstract protected function callReserve(OutputInterface $output);
+    abstract protected function callSeats(OutputInterface $output);
+    abstract protected function callSearch(OutputInterface $output);
 }

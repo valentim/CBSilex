@@ -9,7 +9,7 @@
 namespace Clickbus\Response;
 
 
-interface Output
+interface OutputInterface
 {
     public function getResult();
     public function setOutput(array $output);
