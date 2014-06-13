@@ -10,7 +10,7 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineDriver;
-use Clickbus\BusServiceLayer\BookingEngineService\Transfer;
+use Clickbus\BusServiceLayer\DataTransfer\TransferInterface;
 use GuzzleHttp\Exception\ServerException;
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\ServerException as ServerExceptionCallBack;
 
@@ -46,8 +46,8 @@ abstract class AbstractService
         return $this->adapter->getResult();
     }
 
-    abstract protected function getSearch(Transfer $dataTransfer);
-    abstract protected function getSeats(Transfer $dataTransfer);
-    abstract protected function reserve(Transfer $dataTransfer);
-    abstract protected function doBooking(Transfer $dataTransfer);
+    abstract protected function getSearch(TransferInterface $dataTransfer);
+    abstract protected function getSeats(TransferInterface $dataTransfer);
+    abstract protected function reserve(TransferInterface $dataTransfer);
+    abstract protected function doBooking(TransferInterface $dataTransfer);
 } 
