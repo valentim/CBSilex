@@ -3,7 +3,7 @@ namespace RestHandler;
 
 use Clickbus\RestHandler\Response;
 
-class ResponseManagerTest extends \PHPUnit_Framework_TestCase
+class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     protected $dto;
 
