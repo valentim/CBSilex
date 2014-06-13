@@ -1,5 +1,5 @@
 <?php
-namespace RestHandler\DTO\SeatBlockSession;
+namespace RestHandler\DTO\SeatBlock;
 
 use Clickbus\RestHandler\DTO\SeatBlock\Schedule;
 
