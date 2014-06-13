@@ -339,25 +339,21 @@ class SearchDTOTest extends \PHPUnit_Framework_TestCase
         $search->addParts($parts);
 
         $this->searchDTO = new SearchDTO($search);
+        $this->searchDTO->add($search);
     }
 
     public function testResponseFormat()
     {
-        $response = new Response($this->searchDTO, 'items');
+        $response = new Response($this->searchDTO);
 
         $responseExpected = [
             'meta' => null,
-            'items' => $this->expected
+            'items' => array($this->expected)
         ];
 
         $this->assertEquals(
             json_encode($responseExpected),
             json_encode($response)
         );
-    }
-
-    public function testJsonFormat()
-    {
-        $this->assertEquals(json_encode($this->expected), json_encode($this->searchDTO));
     }
 }

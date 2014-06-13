@@ -104,9 +104,4 @@ class TripDTOTest extends \PHPUnit_Framework_TestCase
             json_encode($response)
         );
     }
-
-    public function testJsonFormat()
-    {
-        $this->assertEquals(json_encode($this->expected), json_encode($this->tripDTO));
-    }
 }

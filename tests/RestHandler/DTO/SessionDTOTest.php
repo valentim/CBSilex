@@ -1,6 +1,7 @@
 <?php
 namespace RestHandler\DTO;
 
+use Clickbus\RestHandler\Response;
 use Clickbus\RestHandler\DTO\Session\Session;
 use Clickbus\RestHandler\DTO\SessionDTO;
 
@@ -22,8 +23,18 @@ class SessionDTOTest extends \PHPUnit_Framework_TestCase
         $this->sessionDTO = new SessionDTO($session);
     }
 
-    public function testJsonFormat()
+    public function testResponseFormat()
     {
-        $this->assertEquals(json_encode($this->expected), json_encode($this->sessionDTO));
+        $response = new Response($this->sessionDTO);
+
+        $responseExpected = [
+            'meta' => null,
+            'content' => $this->expected
+        ];
+
+        $this->assertEquals(
+            json_encode($responseExpected),
+            json_encode($response)
+        );
     }
 }

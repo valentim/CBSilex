@@ -17,9 +17,12 @@ class Response implements \JsonSerializable
 
     public function jsonSerialize()
     {
+        $properties = get_object_vars($this->dto);
+        $contentType = key($properties);
+
         return [
             'meta' => null,
-            $this->responseKey => get_object_vars($this->dto)
+             $contentType => $properties[$contentType]
         ];
     }
 }

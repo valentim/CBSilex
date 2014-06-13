@@ -6,9 +6,10 @@ use Clickbus\RestHandler\DTO\Session\Session;
 
 class SessionDTO implements Dto
 {
+    public $content;
+
     public function __construct(Session $session)
     {
-        $this->sessionId = $session->sessionId;
-        $this->expireAt = $session->expireAt;
+        $this->content = $session;
     }
 }

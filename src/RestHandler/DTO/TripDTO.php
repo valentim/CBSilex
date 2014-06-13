@@ -6,11 +6,10 @@ use Clickbus\RestHandler\DTO\Trip\Trip;
 
 class TripDTO implements Dto
 {
+    public $content;
+
     public function __construct(Trip $trip)
     {
-        $this->trip_id = $trip->trip_id;
-        $this->busCompany = $trip->busCompany;
-        $this->bus = $trip->bus;
-        $this->seats = $trip->seats;
+        $this->content = $trip;
     }
 }
