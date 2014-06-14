@@ -89,9 +89,9 @@ class AbstractBookingFactory
                 $arrival->setSchedule($arrivalSchedule);
 
                 $type = new Type();
-                $type->setName($item['type']['id']);
-                $type->setDicount($item['type']['discount']);
                 $type->setId($item['type']['id']);
+                $type->setDicount($item['type']['discount']);
+                $type->setName($item['type']['name']);
 
                 $seat = new Seat();
                 $seat->setId($item['seat']['id']);
@@ -105,7 +105,7 @@ class AbstractBookingFactory
                 $passenger->setFirstName($item['passenger']['firstName']);
                 $passenger->setLastName($item['passenger']['lastName']);
                 $passenger->setEmail($item['passenger']['email']);
-                $passenger->setDocument($item['passenger']['currency']);
+                $passenger->setDocument($item['passenger']['document']);
                 $passenger->setGender($item['passenger']['gender']);
                 $passenger->setBirthday($item['passenger']['birthday']);
                 $passenger->setMeta($item['passenger']['meta']);

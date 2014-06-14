@@ -1,10 +1,90 @@
 <?php
 namespace RestHandler\DTO\Booking;
 
+use Clickbus\RestHandler\Response;
+use Clickbus\RestHandler\DTO\BookingDTO;
 use Clickbus\RestHandler\DTO\Booking\AbstractBookingFactory;
 
 class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
 {
+    protected $expectedBooking = array(
+        "meta" => null,
+        "content" => array(
+            "id" => 123,
+            "status" => "pending",
+            "localizer" => "ABDDDD999",
+            "uuid"  => "53347e09aee47",
+            "payment" => array(
+                "method" => "Credit Card",
+                "total" => 3900,
+                "currency" => "BRL",
+                "status" => "pending",
+                "meta" => array(
+                    "card" => "XXXX-XXXX-XXXX-1234",
+                    "code" => "XXX",
+                    "name" => "Klederson Bueno Bezerra da Silva",
+                    "expiration" => "XXXX-XX-XX"
+                )
+            ),
+            "items" => [
+                array(
+                    "trip_id" => 123123123,
+                    "order_item" => 1234,
+                    "departure" => array(
+                        "waypoint" => 113,
+                        "schedule" => array(
+                            "id" => 12,
+                            "date" => "2014-10-31",
+                            "time" => "10:00",
+                            "timezone"  => "America/Sao_Paulo"
+                        )
+                    ),
+                    "arrival" => array(
+                        "waypoint" => 123,
+                        "schedule" => array(
+                            "id" => 15,
+                            "date" => "2014-10-31",
+                            "time" => "23:00",
+                            "timezone" => "America/Sao_Paulo"
+                        )
+                    ),
+                    "seat" => array(
+                        "id" => 14,
+                        "name" => "A01",
+                        "price" => 1000,
+                        "status"  => "pending",
+                        "currency" => "BRL",
+                        "type" => array(
+                            "name" => "Professor",
+                            "discount" => 0.9,
+                            "id" => 1
+                        )
+                    ),
+                    "passenger" => array(
+                        "firstName" => "Klederson",
+                        "lastName" => "Bueno",
+                        "email" => "dev@clickbus.com.br",
+                        "document" => "123.123.123-01",
+                        "gender" => "M",
+                        "birthday" => "1986-05-17",
+                        "meta" => array()
+                    ),
+                    "products" => [
+                        array(
+                            "uuid" => "abcd123s",
+                            "name" => "Potato Chips",
+                            "quantity" => 2,
+                            "price" => 500,
+                            "currency" => "BRL"
+                        )
+                    ],
+                    "subtotal" => 1900
+                )
+            ],
+            "createdAt" => "2010-10-30"
+        )
+    );
+
     public function testBuildBooking()
     {
         $id = 123;
@@ -30,9 +110,9 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
                 'orderItem' => 1234,
                 'departure' => array(
                     'schedule' => array(
-                        'id' => 15,
+                        'id' => 12,
                         'date' => '2014-10-31',
-                        'time' => '23:00',
+                        'time' => '10:00',
                         'timezone' => 'America/Sao_Paulo',
                     ),
                     'waypoint' => 113,
@@ -48,7 +128,7 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
                 ),
                 'type' => array(
                     'name' => 'Professor',
-                    'dicount' => 0.9,
+                    'discount' => 0.9,
                     'id' => 1,
                 ),
                 'seat' => array(
@@ -102,6 +182,15 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertInstanceOf('Clickbus\RestHandler\DTO\Booking\Booking', $booking);
+
+        $bookingDTO = new BookingDTO($booking);
+        $response = new Response($bookingDTO);
+
+        $this->assertEquals(
+            json_encode($this->expectedBooking),
+            json_encode($response)
+        );
+
     }
 
     public function testBuildBookingDelete()
@@ -146,8 +235,5 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
             $name,
             $expiration
         );
-
-        $this->assertInstanceOf('Clickbus\RestHandler\DTO\Booking\BookingDelete',
-            $booking);
     }
 }
