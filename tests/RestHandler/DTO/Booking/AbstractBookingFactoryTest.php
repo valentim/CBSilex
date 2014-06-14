@@ -3,6 +3,7 @@ namespace RestHandler\DTO\Booking;
 
 use Clickbus\RestHandler\Response;
 use Clickbus\RestHandler\DTO\BookingDTO;
+use Clickbus\RestHandler\DTO\BookingDeleteDTO;
 use Clickbus\RestHandler\DTO\Booking\AbstractBookingFactory;
 
 class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
@@ -82,6 +83,41 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
                 )
             ],
             "createdAt" => "2010-10-30"
+        )
+    );
+
+    protected $expectedBookingDelete = array(
+        "meta" => null,
+        "content" => array(
+            "id" => "AAABC123-AAACCC-DDDFFF23323-DDDAAFFF",
+            "status" => "canceled",
+            "localizer" => "ABDDDD999",
+            "payment" => array(
+                "method" => "Credit Card",
+                "total" => 3900,
+                "currency" => "BRL",
+                "status" => "paid",
+                "meta" => array(
+                    "card" => "XXXX-XXXX-XXXX-1234",
+                    "code" => "XXX",
+                    "name" => "Klederson Bueno Bezerra da Silva",
+                    "expiration" => "XXXX-XX-XX"
+                ),
+                "refund" => array(
+                    "type"  => "partial",
+                    "total"  => 2000
+                )
+            ),
+            "items" => [
+                array(
+                    "order_item" => "EEAAAF-AAS@@22-KKKLLA1213-DA99DDD",
+                    "subtotal" => 1900,
+                    "status" => "error",
+                    "messages" => [
+                        "This ticket was already used, refund is not possible"
+                    ]
+                ),
+            ]
         )
     );
 
@@ -190,7 +226,6 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
             json_encode($this->expectedBooking),
             json_encode($response)
         );
-
     }
 
     public function testBuildBookingDelete()
@@ -199,8 +234,8 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
         $code = 'XXX';
         $name = 'Klederson Bueno Bezerra da Silva';
         $expiration = 'XXXX-XX-XX';
-        $type = 'partial';
-        $total = 2000;
+        $refundType = 'partial';
+        $refundTotal = 2000;
         $paymentMethod = 'Credit Card';
         $paymentTotal = 3900;
         $paymentCurrency = 'BRL';
@@ -226,7 +261,7 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
             $paymentMethod,
             $paymentTotal,
             $paymentCurrency,
-            $paymentStauts,
+            $paymentStatus,
             $items,
             $refundType,
             $refundTotal,
@@ -234,6 +269,16 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
             $code,
             $name,
             $expiration
+        );
+
+        $this->assertInstanceOf('Clickbus\RestHandler\DTO\Booking\BookingDelete', $booking);
+
+        $bookingDeleteDTO = new BookingDeleteDTO($booking);
+        $response = new Response($bookingDeleteDTO);
+
+        $this->assertEquals(
+            json_encode($this->expectedBookingDelete),
+            json_encode($response)
         );
     }
 }
