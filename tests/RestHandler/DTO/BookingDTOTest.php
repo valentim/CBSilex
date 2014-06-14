@@ -180,7 +180,6 @@ class BookingDTOTest extends \PHPUnit_Framework_TestCase
         $booking->addItem($item);
         $booking->setCreatedAt('2010-10-30');
 
-
         $this->bookingDTO = new BookingDTO($booking);
     }
 

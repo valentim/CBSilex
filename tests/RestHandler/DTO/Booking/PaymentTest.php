@@ -22,5 +22,11 @@ class PaymentTest extends \PHPUnit_Framework_TestCase
         $this->payment->setCurrency('BRL');
         $this->payment->setStatus('pending');
         $this->payment->setMeta($meta);
+
+        $this->assertInternalType('string', $this->payment->method);
+        $this->assertInternalType('int', $this->payment->total);
+        $this->assertInternalType('string', $this->payment->currency);
+        $this->assertInternalType('string', $this->payment->status);
+        $this->assertInstanceOf('Clickbus\RestHandler\DTO\Booking\Meta', $this->payment->meta);
     }
 }
