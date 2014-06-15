@@ -36,8 +36,7 @@ class AbstractBookingFactory
         $typeDicount,
         $typeId,
         array $items
-    )
-    {
+    ) {
         $meta = new Meta();
         $meta->setCard($card);
         $meta->setCode($code);
@@ -66,69 +65,7 @@ class AbstractBookingFactory
 
         if (count($items) > 0) {
             foreach ($items as $item) {
-                $bookingItem = new Item();
-                $bookingItem->setTripId($item['tripId']);
-                $bookingItem->setOrderItem($item['orderItem']);
-
-                $departureSchedule = new Schedule();
-                $departureSchedule->setId($item['departure']['schedule']['id']);
-                $departureSchedule->setDate($item['departure']['schedule']['date']);
-                $departureSchedule->setTime($item['departure']['schedule']['time']);
-                $departureSchedule->setTimezone($item['departure']['schedule']['timezone']);
-                $departure = new Departure();
-                $departure->setWaypoint($item['departure']['waypoint']);
-                $departure->setSchedule($departureSchedule);
-
-                $arrivalSchedule = new Schedule();
-                $arrivalSchedule->setId($item['arrival']['schedule']['id']);
-                $arrivalSchedule->setDate($item['arrival']['schedule']['date']);
-                $arrivalSchedule->setTime($item['arrival']['schedule']['time']);
-                $arrivalSchedule->setTimezone($item['arrival']['schedule']['timezone']);
-                $arrival = new Arrival();
-                $arrival->setWaypoint($item['arrival']['waypoint']);
-                $arrival->setSchedule($arrivalSchedule);
-
-                $type = new Type();
-                $type->setId($item['type']['id']);
-                $type->setDicount($item['type']['discount']);
-                $type->setName($item['type']['name']);
-
-                $seat = new Seat();
-                $seat->setId($item['seat']['id']);
-                $seat->setName($item['seat']['name']);
-                $seat->setPrice($item['seat']['price']);
-                $seat->setStatus($item['seat']['status']);
-                $seat->setCurrency($item['seat']['currency']);
-                $seat->setType($type);
-
-                $passenger = new Passenger();
-                $passenger->setFirstName($item['passenger']['firstName']);
-                $passenger->setLastName($item['passenger']['lastName']);
-                $passenger->setEmail($item['passenger']['email']);
-                $passenger->setDocument($item['passenger']['document']);
-                $passenger->setGender($item['passenger']['gender']);
-                $passenger->setBirthday($item['passenger']['birthday']);
-                $passenger->setMeta($item['passenger']['meta']);
-
-                $bookingItem->setDeparture($departure);
-                $bookingItem->setArrival($arrival);
-                $bookingItem->setSeat($seat);
-                $bookingItem->setPassenger($passenger);
-                $bookingItem->setSubtotal($item['subtotal']);
-
-                if (count($item['products']) > 0) {
-                    foreach ($item['products'] as $product) {
-                        $bookingProduct = new Product();
-                        $bookingProduct->setUuid($product['uuid']);
-                        $bookingProduct->setName($product['name']);
-                        $bookingProduct->setQuantity($product['quantity']);
-                        $bookingProduct->setPrice($product['price']);
-                        $bookingProduct->setCurrency($product['currency']);
-                        $bookingItem->addProduct($bookingProduct);
-                    }
-                }
-
-                $booking->addItem($bookingItem);
+                $booking->addItem($item);
             }
         }
 
@@ -150,8 +87,7 @@ class AbstractBookingFactory
         $code,
         $name,
         $expiration
-    )
-    {
+    ) {
         $meta = new Meta();
         $meta->setCard($card);
         $meta->setCode($code);
@@ -178,20 +114,128 @@ class AbstractBookingFactory
 
         if (count($items) > 0) {
             foreach ($items as $item) {
-                $bookingDeleteItem = new DeleteItem();
-                $bookingDeleteItem->setOrderItem($item['orderItem']);
-                $bookingDeleteItem->setSubtotal($item['subtotal']);
-                $bookingDeleteItem->setStatus($item['status']);
-
-                if (count($item['messages'] > 0)) {
-                    foreach ($item['messages'] as $message) {
-                        $bookingDeleteItem->addMessage($message);
-                    }
-                }
-                $bookingDelete->addItem($bookingDeleteItem);
+                $bookingDelete->addItem($item);
             }
         }
 
         return $bookingDelete;
+    }
+
+    public static function buildProduct($uuid, $name, $quantity, $price, $currency)
+    {
+        $product = new Product();
+        $product->setUuid($uuid);
+        $product->setName($name);
+        $product->setQuantity($quantity);
+        $product->setPrice($price);
+        $product->setCurrency($currency);
+
+        return $product;
+    }
+
+    public static function buildItem(
+        $tripId,
+        $orderItem,
+        $departureScheduleId,
+        $departureScheduleDate,
+        $departureScheduleTime,
+        $departureScheduleTimezone,
+        $departureWaypoint,
+        $arrivalScheduleId,
+        $arrivalScheduleDate,
+        $arrivalScheduleTime,
+        $arrivalScheduleTimezone,
+        $arrivalWaypoint,
+        $typeName,
+        $typeDiscount,
+        $typeId,
+        $seatId,
+        $seatName,
+        $seatPrice,
+        $seatStatus,
+        $seatCurrency,
+        $passengerFirstName,
+        $passengerLastName,
+        $passengerEmail,
+        $passengerDocument,
+        $passengerGender,
+        $passengerBirthday,
+        $passengerMeta,
+        array $products,
+        $subtotal
+    ) {
+        $item = new Item();
+        $item->setTripId($tripId);
+        $item->setOrderItem($orderItem);
+
+        $departureSchedule = new Schedule();
+        $departureSchedule->setId($departureScheduleId);
+        $departureSchedule->setDate($departureScheduleDate);
+        $departureSchedule->setTime($departureScheduleTime);
+        $departureSchedule->setTimezone($departureScheduleTimezone);
+        $departure = new Departure();
+        $departure->setWaypoint($departureWaypoint);
+        $departure->setSchedule($departureSchedule);
+
+        $arrivalSchedule = new Schedule();
+        $arrivalSchedule->setId($arrivalScheduleId);
+        $arrivalSchedule->setDate($arrivalScheduleDate);
+        $arrivalSchedule->setTime($arrivalScheduleTime);
+        $arrivalSchedule->setTimezone($arrivalScheduleTimezone);
+        $arrival = new Arrival();
+        $arrival->setWaypoint($arrivalWaypoint);
+        $arrival->setSchedule($arrivalSchedule);
+
+        $type = new Type();
+        $type->setId($typeId);
+        $type->setDicount($typeDiscount);
+        $type->setName($typeName);
+
+        $seat = new Seat();
+        $seat->setId($seatId);
+        $seat->setName($seatName);
+        $seat->setPrice($seatPrice);
+        $seat->setStatus($seatStatus);
+        $seat->setCurrency($seatCurrency);
+        $seat->setType($type);
+
+        $passenger = new Passenger();
+        $passenger->setFirstName($passengerFirstName);
+        $passenger->setLastName($passengerLastName);
+        $passenger->setEmail($passengerEmail);
+        $passenger->setDocument($passengerDocument);
+        $passenger->setGender($passengerGender);
+        $passenger->setBirthday($passengerBirthday);
+        $passenger->setMeta($passengerMeta);
+
+        $item->setDeparture($departure);
+        $item->setArrival($arrival);
+        $item->setSeat($seat);
+        $item->setPassenger($passenger);
+        $item->setSubtotal($subtotal);
+
+        if (count($products) > 0) {
+            foreach ($products as $product) {
+                $item->addProduct($product);
+            }
+        }
+
+        return $item;
+    }
+
+    public static function buildDeleteItem($orderItem, $subtotal, $status, array $messages)
+    {
+        $item = new DeleteItem();
+        $item->setOrderItem($orderItem);
+        $item->setSubtotal($subtotal);
+        $item->setStatus($status);
+
+        if (count($messages > 0)) {
+            foreach ($messages as $message) {
+                $item->addMessage($message);
+            }
+        }
+
+        return $item;
     }
 }

@@ -141,58 +141,38 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
         $typeDicount = 0.9;
         $typeId = 1;
         $items = array(
-            array(
-                'tripId' => 123123123,
-                'orderItem' => 1234,
-                'departure' => array(
-                    'schedule' => array(
-                        'id' => 12,
-                        'date' => '2014-10-31',
-                        'time' => '10:00',
-                        'timezone' => 'America/Sao_Paulo',
-                    ),
-                    'waypoint' => 113,
+            AbstractBookingFactory::buildItem(
+                123123123,
+                1234,
+                12,
+                '2014-10-31',
+                '10:00',
+                'America/Sao_Paulo',
+                113,
+                15,
+                '2014-10-31',
+                '23:00',
+                'America/Sao_Paulo',
+                123,
+                'Professor',
+                0.9,
+                1,
+                14,
+                'A01',
+                1000,
+                'pending',
+                'BRL',
+                'Klederson',
+                'Bueno',
+                'dev@clickbus.com.br',
+                '123.123.123-01',
+                'M',
+                '1986-05-17',
+                array(),
+                array(
+                    AbstractBookingFactory::buildProduct('abcd123s', 'Potato Chips', 2, 500, 'BRL')
                 ),
-                'arrival' => array(
-                    'schedule' => array(
-                        'id' => 15,
-                        'date' => '2014-10-31',
-                        'time' => '23:00',
-                        'timezone' => 'America/Sao_Paulo',
-                    ),
-                    'waypoint' => 123,
-                ),
-                'type' => array(
-                    'name' => 'Professor',
-                    'discount' => 0.9,
-                    'id' => 1,
-                ),
-                'seat' => array(
-                    'id' => 14,
-                    'name' => 'A01',
-                    'price' => 1000,
-                    'status' => 'pending',
-                    'currency' => 'BRL',
-                ),
-                'passenger' => array(
-                    'firstName' => 'Klederson',
-                    'lastName' => 'Bueno',
-                    'email' => 'dev@clickbus.com.br',
-                    'document' => '123.123.123-01',
-                    'gender' => 'M',
-                    'birthday' => '1986-05-17',
-                    'meta' => array()
-                ),
-                'products' => array(
-                    array(
-                        'uuid' => 'abcd123s',
-                        'name' => 'Potato Chips',
-                        'quantity' => 2,
-                        'price' => 500,
-                        'currency' => 'BRL',
-                    )
-                ),
-                'subtotal' => 1900,
+                1900
             )
         );
 
@@ -241,14 +221,12 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
         $paymentCurrency = 'BRL';
         $paymentStatus = 'paid';
         $items = array(
-            array(
-                'orderItem' => 'EEAAAF-AAS@@22-KKKLLA1213-DA99DDD',
-                'subtotal' => 1900,
-                'status' => 'error',
-                'messages' => array(
-                    'This ticket was already used, refund is not possible'
-                )
-            )
+            AbstractBookingFactory::buildDeleteItem(
+                'EEAAAF-AAS@@22-KKKLLA1213-DA99DDD',
+                1900,
+                'error',
+                array('This ticket was already used, refund is not possible')
+            ),
         );
         $id = 'AAABC123-AAACCC-DDDFFF23323-DDDAAFFF';
         $status = 'canceled';
