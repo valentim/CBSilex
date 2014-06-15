@@ -24,154 +24,154 @@ class SearchDTOTest extends \PHPUnit_Framework_TestCase
     protected $searchDTO;
 
     protected $expected = array(
-                  "from" => "São Paulo, SP",
-                  "to" => "Rio de Janeiro, RJ",
-                  "parts" => [
-                    array(
-                      "trip_id" => 333,
-                      "departure" => array(
-                        "price" => 9000,
-                        "waypoint" => array(
-                          "id" => 113,
-                          "prices" => [
+        "from" => "São Paulo, SP",
+        "to" => "Rio de Janeiro, RJ",
+        "parts" => [
+            array(
+                "trip_id" => 333,
+                "departure" => array(
+                    "price" => 9000,
+                    "waypoint" => array(
+                        "id" => 113,
+                        "prices" => [
                             array(
-                              "waypoint" => 123,
-                              "price" => 9000
+                                "waypoint" => 123,
+                                "price" => 9000
                             ),
-                          ],
-                          "schedule" => array(
+                        ],
+                        "schedule" => array(
                             "id" => 12,
                             "date" => "2015-10-31",
                             "time" => "11:00",
                             "timezone" => "America/Sao_Paulo"
-                          ),
-                          "context" => "departure",
-                          "place" => array(
+                        ),
+                        "context" => "departure",
+                        "place" => array(
                             "country" => "BRA",
                             "state" => "São Paulo",
                             "city" => "São Paulo",
                             "station" => array(
-                              "current" => array(
-                                "id" => 111,
-                                "name" => "Autobus Terminal of Barra Funda",
-                                "locale" => "en_US"
-                              ),
-                              "default" => array(
-                                "id" => 1231,
-                                "name" => "Terminal Rodoviário da Barra Funda",
-                                "locale" => "pt_BR"
-                              )
+                                "current" => array(
+                                    "id" => 111,
+                                    "name" => "Autobus Terminal of Barra Funda",
+                                    "locale" => "en_US"
+                                ),
+                                "default" => array(
+                                    "id" => 1231,
+                                    "name" => "Terminal Rodoviário da Barra Funda",
+                                    "locale" => "pt_BR"
+                                )
                             ),
                             "locale" => "en_US",
                             "id" => 123
-                          ),
-                          "isDeparture" => true,
-                          "position" => 0
-                        )
-                      ),
-                      "arrival" => array(
-                        "price" => 0,
-                        "waypoint" => array(
-                          "id" => 123,
-                          "prices" => [],
-                          "schedule" => array(
+                        ),
+                        "isDeparture" => true,
+                        "position" => 0
+                    )
+                ),
+                "arrival" => array(
+                    "price" => 0,
+                    "waypoint" => array(
+                        "id" => 123,
+                        "prices" => [],
+                        "schedule" => array(
                             "id" => 13,
                             "date" => "2015-10-31",
                             "time" => "19:00",
                             "timezone" => "America/Sao_Paulo"
-                          ),
-                          "context" => "arrival",
-                          "place" => array(
+                        ),
+                        "context" => "arrival",
+                        "place" => array(
                             "country" => "BRA",
                             "state" => "São Paulo",
                             "city" => "Santos",
                             "station" => array(
-                              "current" => array(
-                                "id" => 112,
-                                "name" => "Galeao Terminal",
-                                "locale" => "en_US"
-                              ),
-                              "default" => array(
-                                "id" => 1232,
-                                "name" => "Terminal do Galeão",
-                                "locale" => "pt_BR"
-                              )
+                                "current" => array(
+                                    "id" => 112,
+                                    "name" => "Galeao Terminal",
+                                    "locale" => "en_US"
+                                ),
+                                "default" => array(
+                                    "id" => 1232,
+                                    "name" => "Terminal do Galeão",
+                                    "locale" => "pt_BR"
+                                )
                             ),
                             "locale" => "en_US",
                             "id" => 124
-                          ),
-                          "isDeparture" => true,
-                          "position" => 2
-                        )
-                      ),
-                      "busCompany" => array(
-                        "name" => "Itapemirim",
-                        "id" => 12
-                      ),
-                      "bus" => array(
-                        "serviceClass" => "Conventional",
-                        "name" => "BusName",
-                        "id" => 1
-                      ),
-                      "waypoints" => [
-                        array(
-                          "id" => 113,
-                          "prices" => [
+                        ),
+                        "isDeparture" => true,
+                        "position" => 2
+                    )
+                ),
+                "busCompany" => array(
+                    "name" => "Itapemirim",
+                    "id" => 12
+                ),
+                "bus" => array(
+                    "serviceClass" => "Conventional",
+                    "name" => "BusName",
+                    "id" => 1
+                ),
+                "waypoints" => [
+                    array(
+                        "id" => 113,
+                        "prices" => [
                             array(
-                              "waypoint" => 123,
-                              "price" => 9000
+                                "waypoint" => 123,
+                                "price" => 9000
                             ),
-                          ],
-                          "schedule" => array(
+                        ],
+                        "schedule" => array(
                             "id" => 12,
                             "date" => "2015-10-31",
                             "time" => "11:00",
                             "timezone" => "America/Sao_Paulo"
-                          ),
-                          "context" => "departure",
-                          "place" => array(
+                        ),
+                        "context" => "departure",
+                        "place" => array(
                             "country" => "BRA",
                             "state" => "São Paulo",
                             "city" => "São Paulo",
                             "station" => array(
-                              "current" => array(
-                                "id" => 111,
-                                "name" => "Autobus Terminal of Barra Funda",
-                                "locale" => "en_US"
-                              ),
-                              "default" => array(
-                                "id" => 1231,
-                                "name" => "Terminal Rodoviário da Barra Funda",
-                                "locale" => "pt_BR"
-                              )
+                                "current" => array(
+                                    "id" => 111,
+                                    "name" => "Autobus Terminal of Barra Funda",
+                                    "locale" => "en_US"
+                                ),
+                                "default" => array(
+                                    "id" => 1231,
+                                    "name" => "Terminal Rodoviário da Barra Funda",
+                                    "locale" => "pt_BR"
+                                )
                             ),
                             "locale" => "en_US",
                             "id" => 123
-                          ),
-                          "isDeparture" => true,
-                          "position" => 0
                         ),
-                      ],
-                      "seatTypes" => [
-                        array(
-                          "name" => "Professor",
-                          "discount" => 0.9,
-                          "id" => 1
-                        ),
-                      ],
-                      "products" => [
-                        array(
-                          "uuid" => "ab123d123d1",
-                          "name" => "Potato Chips",
-                          "price" => 500,
-                          "currency" => "BRL",
-                          "avaliable" => true
-                        ),
-                      ],
-                      "availableSeats" => 10
-                    )
-                  ]
-                );
+                        "isDeparture" => true,
+                        "position" => 0
+                    ),
+                ],
+                "seatTypes" => [
+                    array(
+                        "name" => "Professor",
+                        "discount" => 0.9,
+                        "id" => 1
+                    ),
+                ],
+                "products" => [
+                    array(
+                        "uuid" => "ab123d123d1",
+                        "name" => "Potato Chips",
+                        "price" => 500,
+                        "currency" => "BRL",
+                        "avaliable" => true
+                    ),
+                ],
+                "availableSeats" => 10
+            )
+        ]
+    );
 
     public function setUp()
     {
@@ -338,7 +338,7 @@ class SearchDTOTest extends \PHPUnit_Framework_TestCase
         $search->setTo('Rio de Janeiro, RJ');
         $search->addParts($parts);
 
-        $this->searchDTO = new SearchDTO($search);
+        $this->searchDTO = new SearchDTO();
         $this->searchDTO->add($search);
     }
 

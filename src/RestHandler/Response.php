@@ -7,12 +7,9 @@ class Response implements \JsonSerializable
 {
     private $dto;
 
-    private $responseKey;
-
-    public function __construct(Dto $dto, $responseKey = 'content')
+    public function __construct(Dto $dto)
     {
         $this->dto = $dto;
-        $this->responseKey = $responseKey;
     }
 
     public function jsonSerialize()

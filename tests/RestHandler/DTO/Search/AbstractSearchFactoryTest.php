@@ -1,162 +1,280 @@
 <?php
 namespace RestHandler\DTO\Search;
 
+use Clickbus\RestHandler\Response;
+use Clickbus\RestHandler\DTO\SearchDTO;
 use Clickbus\RestHandler\DTO\Search\AbstractSearchFactory;
 
 class AbstractSearchFactoryTest extends \PHPUnit_Framework_TestCase
 {
+    protected $expected = array(
+        "from" => "São Paulo, SP",
+        "to" => "Rio de Janeiro, RJ",
+        "parts" => [
+            array(
+                "trip_id" => 333,
+                "departure" => array(
+                    "price" => 9000,
+                    "waypoint" => array(
+                        "id" => 113,
+                        "prices" => [
+                            array(
+                                "waypoint" => 123,
+                                "price" => 9000
+                            ),
+                        ],
+                        "schedule" => array(
+                            "id" => 12,
+                            "date" => "2015-10-31",
+                            "time" => "11:00",
+                            "timezone" => "America/Sao_Paulo"
+                        ),
+                        "context" => "departure",
+                        "place" => array(
+                            "country" => "BRA",
+                            "state" => "São Paulo",
+                            "city" => "São Paulo",
+                            "station" => array(
+                                "current" => array(
+                                    "id" => 111,
+                                    "name" => "Autobus Terminal of Barra Funda",
+                                    "locale" => "en_US"
+                                ),
+                                "default" => array(
+                                    "id" => 1231,
+                                    "name" => "Terminal Rodoviário da Barra Funda",
+                                    "locale" => "pt_BR"
+                                )
+                            ),
+                            "locale" => "en_US",
+                            "id" => 123
+                        ),
+                        "isDeparture" => true,
+                        "position" => 0
+                    )
+                ),
+                "arrival" => array(
+                    "price" => 0,
+                    "waypoint" => array(
+                        "id" => 123,
+                        "prices" => [],
+                        "schedule" => array(
+                            "id" => 13,
+                            "date" => "2015-10-31",
+                            "time" => "19:00",
+                            "timezone" => "America/Sao_Paulo"
+                        ),
+                        "context" => "arrival",
+                        "place" => array(
+                            "country" => "BRA",
+                            "state" => "São Paulo",
+                            "city" => "Santos",
+                            "station" => array(
+                                "current" => array(
+                                    "id" => 112,
+                                    "name" => "Galeao Terminal",
+                                    "locale" => "en_US"
+                                ),
+                                "default" => array(
+                                    "id" => 1232,
+                                    "name" => "Terminal do Galeão",
+                                    "locale" => "pt_BR"
+                                )
+                            ),
+                            "locale" => "en_US",
+                            "id" => 124
+                        ),
+                        "isDeparture" => true,
+                          "position" => 2
+                    )
+                ),
+                "busCompany" => array(
+                    "name" => "Itapemirim",
+                    "id" => 12
+                ),
+                "bus" => array(
+                    "serviceClass" => "Conventional",
+                    "name" => "BusName",
+                    "id" => 1
+                ),
+                "waypoints" => [
+                    array(
+                        "id" => 113,
+                        "prices" => [
+                            array(
+                                "waypoint" => 123,
+                                "price" => 9000
+                            ),
+                        ],
+                        "schedule" => array(
+                            "id" => 12,
+                            "date" => "2015-10-31",
+                            "time" => "11:00",
+                            "timezone" => "America/Sao_Paulo"
+                        ),
+                        "context" => "departure",
+                        "place" => array(
+                            "country" => "BRA",
+                            "state" => "São Paulo",
+                            "city" => "São Paulo",
+                            "station" => array(
+                                "current" => array(
+                                    "id" => 111,
+                                    "name" => "Autobus Terminal of Barra Funda",
+                                    "locale" => "en_US"
+                                ),
+                                "default" => array(
+                                    "id" => 1231,
+                                    "name" => "Terminal Rodoviário da Barra Funda",
+                                    "locale" => "pt_BR"
+                                )
+                            ),
+                            "locale" => "en_US",
+                            "id" => 123
+                        ),
+                        "isDeparture" => true,
+                        "position" => 0
+                    ),
+                ],
+                "seatTypes" => [
+                    array(
+                        "name" => "Professor",
+                        "discount" => 0.9,
+                        "id" => 1
+                    ),
+                ],
+                "products" => [
+                    array(
+                        "uuid" => "ab123d123d1",
+                        "name" => "Potato Chips",
+                        "price" => 500,
+                        "currency" => "BRL",
+                        "avaliable" => true
+                    ),
+                ],
+                "availableSeats" => 10
+            )
+        ]
+    );
+
     public function testSearchBuild()
     {
-        // $pricesWaypoint = 123;
-        // $pricesPrice = 9000;
+        $from = 'São Paulo, SP';
+        $to = 'Rio de Janeiro, RJ';
+        $waypointDeparture = AbstractSearchFactory::buildWaypoint(
+            113,
+            'departure',
+            true,
+            0,
+            12,
+            '2015-10-31',
+            '11:00',
+            'America/Sao_Paulo',
+            123,
+            'en_US',
+            'BRA',
+            'São Paulo',
+            'São Paulo',
+            111,
+            'Autobus Terminal of Barra Funda',
+            'en_US',
+            1231,
+            'Terminal Rodoviário da Barra Funda',
+            'pt_BR',
+            array(
+                AbstractSearchFactory::buildPrice(123, 9000)
+            )
+        );
 
-        // $scheduleId = 12;
-        // $scheduleDate = '2015-10-31';
-        // $scheduleTime = '11:00';
-        // $scheduleTimezone = 'America/Sao_Paulo';
+        $waypointArrival = AbstractSearchFactory::buildWaypoint(
+            123,
+            'arrival',
+            true,
+            2,
+            13,
+            '2015-10-31',
+            '19:00',
+            'America/Sao_Paulo',
+            124,
+            'en_US',
+            'BRA',
+            'São Paulo',
+            'Santos',
+            112,
+            'Galeao Terminal',
+            'en_US',
+            1232,
+            'Terminal do Galeão',
+            'pt_BR'
+        );
 
-        // $stationCurrentId = 111;
-        // $stationCurrentName = 'Autobus Terminal of Barra Funda';
-        // $stationCurrentLocale = 'en_US';
+        $waypointPart = AbstractSearchFactory::buildWaypoint(
+            113,
+            'departure',
+            true,
+            0,
+            12,
+            '2015-10-31',
+            '11:00',
+            'America/Sao_Paulo',
+            123,
+            'en_US',
+            'BRA',
+            'São Paulo',
+            'São Paulo',
+            111,
+            'Autobus Terminal of Barra Funda',
+            'en_US',
+            1231,
+            'Terminal Rodoviário da Barra Funda',
+            'pt_BR',
+            array(
+                AbstractSearchFactory::buildPrice(123, 9000)
+            )
+        );
 
-        // $stationDefaultId = 1231;
-        // $stationDefaultName = 'Terminal Rodoviário da Barra Funda';
-        // $stationDefaultLocale = 'pt_BR';
+        $parts = array(
+            AbstractSearchFactory::buildPart(
+                333,
+                9000,
+                $waypointDeparture,
+                0,
+                $waypointArrival,
+                12,
+                'Itapemirim',
+                1,
+                'BusName',
+                'Conventional',
+                array(
+                    $waypointPart
+                ),
+                array(
+                    AbstractSearchFactory::buildSeatType(1, 'Professor', 0.9)
+                ),
+                array(
+                    AbstractSearchFactory::buildProduct('ab123d123d1', 'Potato Chips', 500, 'BRL', true)
+                ),
+                10
+            )
+        );
 
-        // $station = new Station();
-        // $station->setCurrent($stationCurrent);
-        // $station->setDefault($stationDefault);
+        $search = AbstractSearchFactory::build($from, $to, $parts);
 
-        // $placeCountry = 'BRA';
-        // $placeState = 'São Paulo';
-        // $placeCity = 'São Paulo';
-        // $placeStation = $station;
-        // $placeLocale = 'en_US';
-        // $placeId = 123;
+        $this->assertInstanceOf('Clickbus\RestHandler\DTO\Search\Search', $search);
 
-        // $waypointId = 113;
-        // $waypoint->addPrices($prices);
-        // $waypointSchedule = $schedule;
-        // $waypointContext = 'departure';
-        // $waypointPlace = $place;
-        // $waypointIsDeparture = true;
-        // $waypointPosition = 0;
+        $searchDTO = new SearchDTO();
+        $searchDTO->add($search);
 
-        // $departurePrice = 9000;
-        // $departureWaypoint = $waypoint;
+        $response = new Response($searchDTO);
 
-        // $arrivalScheduleId = 13;
-        // $arrivalScheduleDate = '2015-10-31';
-        // $arrivalScheduleTime = '19:00';
-        // $arrivalScheduleTimezone = 'America/Sao_Paulo';
+        $responseExpected = [
+            'meta' => null,
+            'items' => array($this->expected)
+        ];
 
-        // $arrivalCurrentStationId = 112;
-        // $arrivalCurrentStationName = 'Galeao Terminal';
-        // $arrivalCurrentStationLocale = 'en_US';
-
-        // $arrivalDefaultStationId = 1232;
-        // $arrivalDefaultStationName = 'Terminal do Galeão';
-        // $arrivalDefaultStationLocale = 'pt_BR';
-
-        // $arrivalStation = new Station();
-        // $arrivalStation->setCurrent($arrivalCurrentStation);
-        // $arrivalStation->setDefault($arrivalDefaultStation);
-
-        // $arrivalPlaceCountry = 'BRA';
-        // $arrivalPlaceState = 'São Paulo';
-        // $arrivalPlaceCity = 'Santos';
-        // $arrivalPlaceStation = $arrivalStation;
-        // $arrivalPlaceLocale = 'en_US';
-        // $arrivalPlaceId = 124;
-
-        // $arrivalWaypointId = 123;
-        // $arrivalWaypointSchedule = $arrivalSchedule;
-        // $arrivalWaypointContext = 'arrival';
-        // $arrivalWaypointPlace = $arrivalPlace;
-        // $arrivalWaypointIsDeparture = true;
-        // $arrivalWaypointPosition = 2;
-
-        // $arrivalPrice = 0;
-        // $arrivalWaypoint = $arrivalWaypoint;
-
-        // $busCompanyName = 'Itapemirim';
-        // $busCompanyId = 12;
-
-        // $busServiceClass = 'Conventional';
-        // $busName = 'BusName';
-        // $busId = 1;
-
-        // $partWaypointSchedule = new Schedule();
-        // $partWaypointSchedule->setId(12);
-        // $partWaypointSchedule->setDate('2015-10-31');
-        // $partWaypointSchedule->setTime('11:00');
-        // $partWaypointSchedule->setTimezone('America/Sao_Paulo');
-
-        // $partWaypointPrices = new Prices();
-        // $partWaypointPrices->setWaypoint(123);
-        // $partWaypointPrices->setPrice(9000);
-
-        // $partWaypointStationCurrent = new StationCurrent();
-        // $partWaypointStationCurrent->setId(111);
-        // $partWaypointStationCurrent->setName('Autobus Terminal of Barra Funda');
-        // $partWaypointStationCurrent->setLocale('en_US');
-
-        // $partWaypointStationDefault = new StationDefault();
-        // $partWaypointStationDefault->setId(1231);
-        // $partWaypointStationDefault->setName('Terminal Rodoviário da Barra Funda');
-        // $partWaypointStationDefault->setLocale('pt_BR');
-
-        // $partWaypointStation = new Station();
-        // $partWaypointStation->setCurrent($partWaypointStationCurrent);
-        // $partWaypointStation->setDefault($partWaypointStationDefault);
-
-        // $partWaypointPlace = new Place();
-        // $partWaypointPlace->setCountry('BRA');
-        // $partWaypointPlace->setState('São Paulo');
-        // $partWaypointPlace->setCity('São Paulo');
-        // $partWaypointPlace->setStation($partWaypointStation);
-        // $partWaypointPlace->setLocale('en_US');
-        // $partWaypointPlace->setId(123);
-
-        // $partWaypoint = new Waypoint();
-        // $partWaypoint->setId(113);
-        // $partWaypoint->addPrices($partWaypointPrices);
-        // $partWaypoint->setSchedule($partWaypointSchedule);
-        // $partWaypoint->setContext('departure');
-        // $partWaypoint->setPlace($partWaypointPlace);
-        // $partWaypoint->setIsDeparture(true);
-        // $partWaypoint->setPosition(0);
-
-        // $seatType = new SeatType();
-        // $seatType->setName('Professor');
-        // $seatType->setDiscount(0.9);
-        // $seatType->setId(1);
-
-        // $product = new Product();
-        // $product->setUuid('ab123d123d1');
-        // $product->setName('Potato Chips');
-        // $product->setPrice(500);
-        // $product->setCurrency('BRL');
-        // $product->setAvaliable(true);
-
-        // $parts = new Parts();
-        // $parts->setTripId(333);
-        // $parts->setDeparture($departure);
-        // $parts->setArrival($arrival);
-        // $parts->setBuscompany($busCompany);
-        // $parts->setBus($bus);
-        // $parts->addWaypoint($partWaypoint);
-        // $parts->addSeatType($seatType);
-        // $parts->addProduct($product);
-        // $parts->setAvailableSeats(10);
-
-        // $search = new Search();
-        // $search->setFrom('São Paulo, SP');
-        // $search->setTo('Rio de Janeiro, RJ');
-        // $search->addParts($parts);
-
-        // $search = AbstractSearchFactory::buld();
-
-        // $this->assertInstanceOf('Clickbus\RestHandler\DTO\Search\Search', $search);
+        $this->assertEquals(
+            json_encode($responseExpected),
+            json_encode($response)
+        );
     }
 }
