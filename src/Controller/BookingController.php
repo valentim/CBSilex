@@ -1,6 +1,7 @@
 <?php
 namespace Clickbus\Controller;
 
+use Clickbus\DataTransfer\Request\Seat\ReservationRequest;
 use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
@@ -10,8 +11,10 @@ class BookingController extends AbstractController
     public function putAction(Application $app, Request $request)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
-        $dataTransfer = $this->getData($request, 'put');
-        $response = $bookingEngine->doBooking($dataTransfer);
+        $dataTransfer = $this->getInput($request);
+        $dataTransfer->setTransferType(new ReservationRequest);
+
+        $response = $bookingEngine->doBooking($dataTransfer->getData());
 
         return $app->json($response->getResult(), 200);
     }
@@ -19,7 +22,7 @@ class BookingController extends AbstractController
     public function getAction(Application $app, Request $request, $guide)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
-        $dataTransfer = $this->getData($request, 'get');
+        $dataTransfer = $this->getInput($request);
         $response = $bookingEngine->doBooking($dataTransfer);
 
         return $app->json($response->getResult(), 200);
@@ -28,7 +31,7 @@ class BookingController extends AbstractController
     public function deleteAction(Application $app, Request $request, $guide)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
-        $dataTransfer = $this->getData($request, 'delete');
+        $dataTransfer = $this->getInput($request);
         $response = $bookingEngine->doBooking($dataTransfer);
 
         return $app->json($response->getResult(), 200);
