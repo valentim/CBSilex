@@ -9,10 +9,11 @@
 namespace Clickbus\Request;
 
 
+use Clickbus\DataTransfer\TransferInterface;
+
 interface InputInterface
 {
     public function setBody(array $contentBody);
     public function setQueryString(array $contentQueryString);
-    public function setMethod($method);
-    public function getMethod();
+    public function setTransferType(TransferInterface $transferData);
 } 
