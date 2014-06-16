@@ -94,92 +94,92 @@ class RapidoOchoa extends Template
 
         $factory = $this->factory;
 
+        $searchDTO = new searchDTO();
         $parts = array();
 
-        foreach ($trips as $trip) {
-            $tripTime = $trip->Table->Fecha->__toString();
-            $dateTime = \DateTime::createFromFormat(\DateTime::ISO8601, $tripTime);
+        foreach ($trips as $tripTables) {
+            foreach ($tripTables->Table as $trip) {
+                $tripTime = $trip->Fecha->__toString();
+                $dateTime = \DateTime::createFromFormat(\DateTime::ISO8601, $tripTime);
 
-            $scheduleIdString = $trip->Table->NumeroRodamiento->__toString() . $tripTime;
-            $scheduleId = base64_encode($scheduleIdString);
+                $scheduleIdString = $trip->NumeroRodamiento->__toString() . $tripTime;
+                $scheduleId = base64_encode($scheduleIdString);
 
-            // the method $dateTime->getTimezone()->getName() is retorning -05:00 and we need of string
-            $timezone = timezone_name_from_abbr('', $dateTime->getOffset(), 0);
+                // the method $dateTime->getTimezone()->getName() is retorning -05:00 and we need of string
+                $timezone = timezone_name_from_abbr('', $dateTime->getOffset(), 0);
 
-            list($departurePlace, $arrivalPlace) = explode('-', $trip->Table->Ruta->__toString());
+                list($departurePlace, $arrivalPlace) = explode('-', $trip->Ruta->__toString());
 
-            array_push(
-                $parts,
-                $factory::buildPart(
-                    $trip->Table->IdRuta->__toString(),
-                    $trip->Table->Tarifa->__toString(),
-                    $factory::buildWaypoint(
-                        $trip->Table->NumeroRodamiento->__toString(),
-                        'departure',
-                        true,
-                        0,
-                        $scheduleId,
-                        $dateTime->format('Y-m-d'),
-                        $dateTime->format('H:i:s'),
-                        $timezone,
-                        $from,
-                        'es_CO',
-                        'COL', // $placeCountry,
-                        false, // $placeState,
-                        $departurePlace, // $placeCity,
-                        base64_encode($departurePlace),
-                        $departurePlace, // $stationCurrentName,
-                        'es_CO',
-                        base64_encode($departurePlace), // $stationDefaultId,
-                        $departurePlace, // $stationDefaultName,
-                        'es_CO',
-                        array(
-                            $factory::buildPrice(
-                                $trip->Table->NumeroRodamiento->__toString(),
-                                $trip->Table->Tarifa->__toString()
+                $parts = array(
+                    $factory::buildPart(
+                        $trip->IdRuta->__toString(),
+                        $trip->Tarifa->__toString(),
+                        $factory::buildWaypoint(
+                            $trip->NumeroRodamiento->__toString(),
+                            'departure',
+                            true,
+                            0,
+                            $scheduleId,
+                            $dateTime->format('Y-m-d'),
+                            $dateTime->format('H:i:s'),
+                            $timezone,
+                            $from,
+                            'es_CO',
+                            'COL', // $placeCountry,
+                            false, // $placeState,
+                            $departurePlace, // $placeCity,
+                            base64_encode($departurePlace),
+                            $departurePlace, // $stationCurrentName,
+                            'es_CO',
+                            base64_encode($departurePlace), // $stationDefaultId,
+                            $departurePlace, // $stationDefaultName,
+                            'es_CO',
+                            array(
+                                $factory::buildPrice(
+                                    $trip->NumeroRodamiento->__toString(),
+                                    $trip->Tarifa->__toString()
+                                )
                             )
-                        )
-                    ),
-                    0,
-                    $factory::buildWaypoint(
-                        $trip->Table->NumeroRodamiento->__toString(),
-                        'arrival',
-                        false,
+                        ),
                         0,
-                        false,
-                        false,
-                        false,
-                        $timezone,
-                        $to,
-                        'es_CO',
-                        'COL', // $placeCountry,
-                        false, // $placeState,
-                        $arrivalPlace, // $placeCity,
-                        base64_encode($arrivalPlace),
-                        $arrivalPlace, // $stationCurrentName,
-                        'es_CO',
-                        base64_encode($arrivalPlace), // $stationDefaultId,
-                        $arrivalPlace, // $stationDefaultName,
-                        'es_CO',
-                        array($factory::buildPrice($trip->Table->NumeroRodamiento->__toString(), 0))
-                    ),
-                    false, // $busCompanyId,
-                    false, // $busCompanyName,
-                    $trip->Table->NumeroRodamiento->__toString(), // $busId,
-                    $trip->Table->Servicio->__toString(), // $busName,
-                    $trip->Table->Servicio->__toString(),
-                    array(), // array $waypoints,
-                    array(), // array $seatTypes,
-                    array(), // array(),
-                    $trip->Table->PuestosLibres->__toString()
-                )
-            );
+                        $factory::buildWaypoint(
+                            $trip->NumeroRodamiento->__toString(),
+                            'arrival',
+                            false,
+                            0,
+                            false,
+                            false,
+                            false,
+                            $timezone,
+                            $to,
+                            'es_CO',
+                            'COL', // $placeCountry,
+                            false, // $placeState,
+                            $arrivalPlace, // $placeCity,
+                            base64_encode($arrivalPlace),
+                            $arrivalPlace, // $stationCurrentName,
+                            'es_CO',
+                            base64_encode($arrivalPlace), // $stationDefaultId,
+                            $arrivalPlace, // $stationDefaultName,
+                            'es_CO',
+                            array($factory::buildPrice($trip->NumeroRodamiento->__toString(), 0))
+                        ),
+                        false, // $busCompanyId,
+                        false, // $busCompanyName,
+                        $trip->NumeroRodamiento->__toString(), // $busId,
+                        $trip->Servicio->__toString(), // $busName,
+                        $trip->Servicio->__toString(),
+                        array(), // array $waypoints,
+                        array(), // array $seatTypes,
+                        array(), // array(),
+                        $trip->PuestosLibres->__toString()
+                    )
+                );
+
+                $search = $factory::build($from, $to, $parts);
+                $searchDTO->add($search);
+            }
         }
-
-        $search = $factory::build($from, $to, $parts);
-
-        $searchDTO = new searchDTO();
-        $searchDTO->add($search);
 
         $output->setOutput($searchDTO);
     }
