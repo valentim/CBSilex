@@ -9,14 +9,16 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 
 
+use Clickbus\DataTransfer\Request\Request;
 use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\Request\DataBinding;
 use Clickbus\Request\InputInterface;
 
 class InputData implements TransferInterface, InputInterface
 {
     protected $body;
     protected $queryString;
-    protected $method;
+    protected $transferData;
 
     public function setBody(array $contentBody)
     {
@@ -28,23 +30,23 @@ class InputData implements TransferInterface, InputInterface
         $this->queryString = $contetQueryString;
     }
 
+    public function setTransferType(TransferInterface $type)
+    {
+        $this->transferData = new DataBinding($type);
+    }
+
     public function getData()
     {
-        $data = [
-            'body' => $this->body,
-            'queryString' => $this->queryString
-        ];
+        if (!isset($this->queryString['request'])) {
+            $this->queryString['request'] = $this->queryString;
+        }
 
-        return $data;
-    }
+        $data = array_merge(['meta' => null], $this->queryString, $this->body);
+        $this->transferData->bindData($data['request']);
+        $request = new Request;
+        $request->setMeta($data['meta']);
+        $request->setRequest($this->transferData->getObject());
 
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    public function setMethod($method)
-    {
-        $this->method = $method;
+        return $request;
     }
 }
