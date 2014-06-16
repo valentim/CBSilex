@@ -46,7 +46,7 @@ abstract class Template extends HandlerData
 
     protected function setData(TransferInterface $searchTransfer)
     {
-        $this->data = $searchTransfer->getData();
+        $this->data = $searchTransfer;
     }
 
     abstract protected function callBooking(OutputInterface $output);
