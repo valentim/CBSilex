@@ -38,9 +38,9 @@ $app->register(new PaymentDriverServiceProvider());
 /**
  * Doctrine services
  */
-$app->register(new DoctrineServiceProvider(), array(
-    'db.options' => $app['config']['database']
-));
+// $app->register(new DoctrineServiceProvider(), array(
+//     'db.options' => $app['config']['database']
+// ));
 
 $app->register(new DoctrineORMServiceProvider, array(
     'db.orm.proxies_dir' => __DIR__ . '/cache/doctrine/Proxy',
