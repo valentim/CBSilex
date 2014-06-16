@@ -9,7 +9,7 @@
 namespace Clickbus\RestHandler;
 
 use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsMethodException;
-use Clickbus\RestHandler\Dto;
+use Clickbus\RestHandler\DtoInterface;
 use Clickbus\RestHandler\Response;
 
 class OutputData implements OutputInterface
@@ -30,7 +30,7 @@ class OutputData implements OutputInterface
         return call_user_func_array(array($this, $output), []);
     }
 
-    public function setOutput(Dto $data)
+    public function setOutput(DtoInterface $data)
     {
         $this->result = new Response($data);
     }
@@ -58,6 +58,6 @@ class OutputData implements OutputInterface
 
     protected function callSearch()
     {
-        return 'Clickbus\RestHandler\DTO\Search\AbstractSearchFactory';
+        return 'Clickbus\RestHandler\DataTransfer\Response\Search\AbstractSearchFactory';
     }
 }

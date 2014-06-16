@@ -9,7 +9,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->dto = $this->getMock('Clickbus\RestHandler\Dto');
+        $this->dto = $this->getMock('Clickbus\RestHandler\DtoInterface');
         $this->dto->content = array();
     }
 

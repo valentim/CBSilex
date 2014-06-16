@@ -1,13 +1,13 @@
 <?php
 namespace Clickbus\RestHandler;
 
-use Clickbus\RestHandler\Dto;
+use Clickbus\RestHandler\DtoInterface;
 
 class Response implements \JsonSerializable
 {
     private $dto;
 
-    public function __construct(Dto $dto)
+    public function __construct(DtoInterface $dto)
     {
         $this->dto = $dto;
     }

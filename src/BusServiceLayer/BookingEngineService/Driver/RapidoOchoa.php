@@ -12,7 +12,7 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 use Camcima\Soap\Client;
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
 use Clickbus\RestHandler\OutputInterface;
-use Clickbus\RestHandler\DTO\SearchDTO;
+use Clickbus\RestHandler\DataTransfer\Response\SearchDTO;
 
 class RapidoOchoa extends Template
 {
