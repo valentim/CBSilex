@@ -66,9 +66,9 @@ class RapidoOchoa extends Template
 
     protected function callSearch(OutputInterface $output)
     {
-        $from = $this->data['body']['request']['from'];
-        $to = $this->data['body']['request']['to'];
-        $departureDate = str_replace('-', '/', $this->data['body']['request']['departure']);
+        $from = $this->data->getRequest()->getFrom();
+        $to = $this->data->getRequest()->getTo();
+        $departureDate = str_replace('-', '/', $this->data->getRequest()->getDeparture());
 
         $xml = sprintf(
             $this->callTemplate,

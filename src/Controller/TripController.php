@@ -1,7 +1,7 @@
 <?php
 namespace Clickbus\Controller;
 
-use Clickbus\DataTransfer\Request\Trip\PortfolioRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
 use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;

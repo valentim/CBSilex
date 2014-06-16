@@ -1,7 +1,7 @@
 <?php
 namespace Clickbus\Controller;
 
-use Clickbus\DataTransfer\Request\Seat\ReservationRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\ReservationRequest;
 use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
