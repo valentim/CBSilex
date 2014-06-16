@@ -16,10 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractController
 {
-    protected function getData(Request $request, $method)
+    protected function getInput(Request $request)
     {
         $dataTransfer = new InputData;
-        $dataTransfer->setMethod($method);
         $dataTransfer->setQueryString($request->query->all());
         $dataTransfer->setBody($request->request->all());
 

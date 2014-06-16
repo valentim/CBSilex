@@ -10,7 +10,7 @@ search:
 
 trip_portfolio:
     path: /api/v2/trip/portfolio/{from}/{to}/{date}
-    defaults: { _controller: 'Clickbus\Controller\Trip::portfolioAction' }
+    defaults: { _controller: 'Clickbus\Controller\TripController::portfolioAction' }
     methods: [GET]
     requirements:
         from: "[a-zA-Z0-9-]+"

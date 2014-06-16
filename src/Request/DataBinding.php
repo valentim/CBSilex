@@ -66,6 +66,10 @@ class DataBinding
 
             $newValue = $eachData;
             if (class_exists($class)) {
+
+                if (!is_array($eachData)) {
+                    $eachData = [$eachData];
+                }
                 $newValue = new $class;
                 $this->bindData($eachData, $newValue);
 

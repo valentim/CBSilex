@@ -14,6 +14,7 @@ use Clickbus\RestHandler\DataTransfer\TransferInterface;
 use Clickbus\Request\InputInterface;
 use Clickbus\RestHandler\OutputInterface;
 use GuzzleHttp\Client;
+use GuzzleHttp\Query;
 
 class CbConnect extends Template
 {
@@ -29,34 +30,36 @@ class CbConnect extends Template
 
     protected function callBooking(OutputInterface $output)
     {
-        $this->call('/booking', $output, ['body' => json_encode($this->data['body'])]);
+        $this->method = 'put';
+        $this->call('/booking', $output, ['body' => json_encode($this->data)]);
     }
 
     protected function callReserve(OutputInterface $output)
     {
-        $this->call('/seat/block', $output, ['body' => json_encode($this->data['body'])]);
+        $this->method = 'post';
+        $this->call('/seat/block', $output, ['body' => json_encode($this->data)]);
     }
 
     protected function callSeats(OutputInterface $output)
     {
-        $this->call('/trip/portfolio', $output, ['query' => $this->data['queryString']]);
+        $this->method = 'get';
+        $data = new Query();
+        $data->add('from', $this->data->getRequest()->getFrom())
+            ->add('to', $this->data->getRequest()->getTo())
+            ->add('date', $this->data->getRequest()->getDate());
+
+        $this->call('/trip/portfolio', $output, ['query' => $data]);
     }
 
     protected function callSearch(OutputInterface $output)
     {
-        $this->call('/search', $output, ['body' => json_encode($this->data['body'])]);
-    }
-
-    protected function setData(TransferInterface $data)
-    {
-        parent::setData($data);
-        $this->method = $data->getMethod();
+        $this->method = 'post';
+        $this->call('/search', $output, ['body' => json_encode($this->data)]);
     }
 
     private function call($action, OutputInterface $output, $data)
     {
-        $method = $this->method;
-        $response = $this->client->$method($action, $data);
+        $response = $this->client->{$this->method}($action, $data);
         $output->setOutput($response->json());
     }
 }
