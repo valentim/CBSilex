@@ -9,7 +9,6 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 
 
-use Clickbus\RestHandler\DataTransfer\Request\Request;
 use Clickbus\RestHandler\DataTransfer\TransferInterface;
 use Clickbus\Request\DataBinding;
 use Clickbus\Request\InputInterface;
