@@ -9,6 +9,8 @@
 namespace Clickbus\RestHandler;
 
 use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsMethodException;
+use Clickbus\RestHandler\Dto;
+use Clickbus\RestHandler\Response;
 
 class OutputData implements OutputInterface
 {
@@ -28,9 +30,9 @@ class OutputData implements OutputInterface
         return call_user_func_array(array($this, $output), []);
     }
 
-    public function setOutput(array $data)
+    public function setOutput(Dto $data)
     {
-        $this->result = $data;
+        $this->result = new Response($data);
     }
 
     protected function callBooking()

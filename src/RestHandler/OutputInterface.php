@@ -8,10 +8,11 @@
 
 namespace Clickbus\RestHandler;
 
+use Clickbus\RestHandler\Dto;
 
 interface OutputInterface
 {
     public function getResult();
-    public function setOutput(array $output);
+    public function setOutput(Dto $output);
     public function getFactory($type);
 } 
