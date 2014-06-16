@@ -45,4 +45,3 @@ class BlockRequestTest extends \PHPUnit_Framework_TestCase
         $this->object = null;
     }
 }
- 
