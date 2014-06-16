@@ -2,8 +2,8 @@ database:
     driver: pdo_mysql
     host: 127.0.0.1
     port: null
-    name: brazil
-    user: brazil
+    name: colombia
+    user: colombia
     password: rockbus
     charset: 'utf8'
 

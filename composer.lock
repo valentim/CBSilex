@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4ec3c7e9dd420804b00b928ae81caf82",
+    "hash": "66d7f63c7ce779934d0cdd0c90449111",
     "packages": [
         {
             "name": "camcima/camcima-soap-client",
@@ -43,105 +43,6 @@
                 "wsdl"
             ],
             "time": "2014-02-17 09:58:06"
-        },
-        {
-            "name": "clickbus/moip",
-            "version": "1.0.1",
-            "target-dir": "Clickbus/BusServiceLayer/PaymentService/Driver",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:tiagobutzke/moip.git",
-                "reference": "1d645270ba11961f0c91df92aab3b48344c19bf5"
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Clickbus\\BusServiceLayer\\PaymentService\\Driver\\": ""
-                }
-            },
-            "authors": [
-                {
-                    "name": "Tiago Butzke",
-                    "email": "tiago.butzke@clickbus.com.br"
-                },
-                {
-                    "name": "Thiago Valentim",
-                    "email": "thiago.valentim@clickbus.com.br"
-                }
-            ],
-            "description": "A moip pagg payment",
-            "homepage": "http://www.clickbus.com.br",
-            "time": "2014-06-11 15:23:53"
-        },
-        {
-            "name": "clickbus/mundipagg",
-            "version": "1.0.7",
-            "target-dir": "Clickbus/BusServiceLayer/PaymentService/Driver",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:tiagobutzke/mindipagg.git",
-                "reference": "36945c899e807b942a1baebf860adc76cf735581"
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Clickbus\\BusServiceLayer\\PaymentService\\Driver\\": ""
-                }
-            },
-            "authors": [
-                {
-                    "name": "Tiago Butzke",
-                    "email": "tiago.butzke@clickbus.com.br"
-                },
-                {
-                    "name": "Thiago Valentim",
-                    "email": "thiago.valentim@clickbus.com.br"
-                }
-            ],
-            "description": "A mundi pagg payment",
-            "homepage": "http://www.clickbus.com.br",
-            "time": "2014-06-11 15:09:34"
-        },
-        {
-            "name": "clickbus/payment-service",
-            "version": "1.0",
-            "target-dir": "Clickbus/BusServiceLayer/PaymentService/",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:tiagobutzke/paymentservice.git",
-                "reference": "1423d66a30804fa4b2837bd121378c40c345cfb2"
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Clickbus\\BusServiceLayer\\PaymentService\\": ""
-                }
-            },
-            "authors": [
-                {
-                    "name": "Tiago Butzke",
-                    "email": "tiago.butzke@clickbus.com.br"
-                },
-                {
-                    "name": "Thiago Valentim",
-                    "email": "thiago.valentim@clickbus.com.br"
-                }
-            ],
-            "description": "The payment service",
-            "homepage": "http://www.clickbus.com.br",
-            "time": "2014-06-12 14:34:55"
         },
         {
             "name": "deralex/yaml-config-service-provider",
