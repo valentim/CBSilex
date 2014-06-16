@@ -6,12 +6,12 @@
  * Time: 1:34
  */
 
-namespace Clickbus\Response;
+namespace Clickbus\RestHandler;
 
 
 interface OutputInterface
 {
     public function getResult();
     public function setOutput(array $output);
-    public function getTemplate($type);
+    public function getFactory($type);
 } 

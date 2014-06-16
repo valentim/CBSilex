@@ -6,7 +6,7 @@
  * Time: 14:05
  */
 
-namespace Clickbus\DataTransfer;
+namespace Clickbus\RestHandler\DataTransfer;
 
 
 abstract class AbstractTransferBehavior implements TransferInterface

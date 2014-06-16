@@ -9,7 +9,7 @@
 namespace Clickbus\Request;
 
 
-use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\DataTransfer\TransferInterface;
 
 class DataBinding
 {

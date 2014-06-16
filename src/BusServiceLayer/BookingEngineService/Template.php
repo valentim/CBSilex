@@ -9,38 +9,38 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
-use Clickbus\DataTransfer\TransferInterface;
-use Clickbus\Response\OutputInterface;
+use Clickbus\RestHandler\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\OutputInterface;
 
 abstract class Template extends HandlerData
 {
-    protected $template;
+    protected $factory;
 
     public function getSearch(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
-        $this->template = $this->output->getTemplate('callSearch');
+        $this->factory = $this->output->getFactory('callSearch');
         $this->callSearch($this->output);
     }
 
     public function getSeats(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
-        $this->template = $this->output->getTemplate('callSeats');
+        $this->factory = $this->output->getFactory('callSeats');
         $this->callSeats($this->output);
     }
 
     public function reserve(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
-        $this->template = $this->output->getTemplate('callReserve');
+        $this->factory = $this->output->getFactory('callReserve');
         $this->callReserve($this->output);
     }
 
     public function doBooking(TransferInterface $searchTransfer)
     {
         $this->setData($searchTransfer);
-        $this->template = $this->output->getTemplate('callBooking');
+        $this->factory = $this->output->getFactory('callBooking');
         $this->callBooking($this->output);
     }
 

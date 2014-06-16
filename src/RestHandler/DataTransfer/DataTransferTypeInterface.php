@@ -6,7 +6,7 @@
  * Time: 13:24
  */
 
-namespace Clickbus\DataTransfer;
+namespace Clickbus\RestHandler\DataTransfer;
 
 
 class DataTransferTypeInterface

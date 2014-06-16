@@ -9,7 +9,7 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
-use Clickbus\Response\OutputData;
+use Clickbus\RestHandler\OutputData;
 
 abstract class HandlerData implements BookingEngineDriver
 {

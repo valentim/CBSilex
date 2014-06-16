@@ -11,7 +11,7 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 use Camcima\Soap\Client;
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
-use Clickbus\Response\Output;
+use Clickbus\RestHandler\OutputInterface;
 
 class RapidoOchoa extends Template
 {
@@ -22,41 +22,41 @@ class RapidoOchoa extends Template
 
     }
 
-    protected function callBooking(Output $output)
+    protected function callBooking(OutputInterface $output)
     {
         // TODO: Implement callBooking() method.
     }
 
-    protected function callReserve(Output $output)
+    protected function callReserve(OutputInterface $output)
     {
         // TODO: Implement callReserve() method.
     }
 
-    protected function callSeats(Output $output)
+    protected function callSeats(OutputInterface $output)
     {
         // TODO: Implement callSeats() method.
     }
 
-    protected function callSearch(Output $output)
+    protected function callSearch(OutputInterface $output)
     {
         $xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
                     <soapenv:Header>
-                      <tem:CredencialUsuario>
-                         <!--Optional:-->
-                         <tem:UserName>MVM</tem:UserName>
-                         <!--Optional:-->
-                         <tem:Password>Mvm2007mvm!</tem:Password>
-                      </tem:CredencialUsuario>
+                        <tem:CredencialUsuario>
+                            <!--Optional:-->
+                            <tem:UserName>MVM</tem:UserName>
+                            <!--Optional:-->
+                            <tem:Password>Mvm2007mvm!</tem:Password>
+                        </tem:CredencialUsuario>
                     </soapenv:Header>
                     <soapenv:Body>
-                      <tem:ObtenerTarifas>
-                         <!--Optional:-->
-                         <tem:sOrigen>001</tem:sOrigen>
-                         <!--Optional:-->
-                         <tem:sDestino>029</tem:sDestino>
-                         <!--Optional:-->
-                         <tem:sFecha>2014/06/13</tem:sFecha>
-                      </tem:ObtenerTarifas>
+                        <tem:ObtenerTarifas>
+                            <!--Optional:-->
+                            <tem:sOrigen>001</tem:sOrigen>
+                            <!--Optional:-->
+                            <tem:sDestino>029</tem:sDestino>
+                            <!--Optional:-->
+                            <tem:sFecha>2014/06/13</tem:sFecha>
+                        </tem:ObtenerTarifas>
                     </soapenv:Body>
                 </soapenv:Envelope>';
 
@@ -68,8 +68,12 @@ class RapidoOchoa extends Template
 
         $trips = $obtenerTarifasResult->xpath('//NewDataSet');
 
+        $factory = $this->factory;
+        $parts = array();
+
         foreach ($trips as $trip) {
             list($from, $to) = explode("-", $trip->Table->Ruta->__toString());
+
             $set = [
                 'from' => $from,
                 'to' => $to,
@@ -90,7 +94,8 @@ class RapidoOchoa extends Template
             array_push($this->template['items'], $set);
         }
 
-        $output->setOutput($this->template);
+        $factory::build($from, $to, $parts);
 
+        $output->setOutput($this->template);
     }
 }

@@ -9,7 +9,7 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 
 
-use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\DataTransfer\TransferInterface;
 use Clickbus\Request\InputInterface;
 
 class InputData implements TransferInterface, InputInterface

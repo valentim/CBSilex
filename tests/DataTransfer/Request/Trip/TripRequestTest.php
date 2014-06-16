@@ -6,7 +6,7 @@
  * Time: 14:09
  */
 
-use Clickbus\DataTransfer\Request\Trip\TripRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\TripRequest;
 
 class TripRequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class TripRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testTripObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\DataTransfer\\Request\\Trip\\TripRequest", $this->object);
+        $this->assertInstanceOf("Clickbus\\RestHandler\DataTransfer\\Request\\Trip\\TripRequest", $this->object);
     }
 
     public function testGetReflectionClass()
@@ -24,12 +24,12 @@ class TripRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testGetData()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Trip\\TripRequest", $this->object->getData()->name);
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Trip\\TripRequest", $this->object->getData()->name);
     }
 
     public function testNamespaceReturn()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Trip", $this->object->getNamespace());
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Trip", $this->object->getNamespace());
     }
 
     protected function setUp()

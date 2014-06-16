@@ -1,5 +1,5 @@
 <?php
-use Clickbus\DataTransfer\Request\Trip\WaypointRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\WaypointRequest;
 
 /**
  * Created by PhpStorm.
@@ -14,7 +14,7 @@ class WaypointRequestTest extends PHPUnit_Framework_TestCase
 
     public function testWaypointObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\DataTransfer\\Request\\Trip\\WaypointRequest", $this->object);
+        $this->assertInstanceOf("Clickbus\\RestHandler\DataTransfer\\Request\\Trip\\WaypointRequest", $this->object);
     }
 
     public function testGetReflectionClass()
@@ -24,12 +24,12 @@ class WaypointRequestTest extends PHPUnit_Framework_TestCase
 
     public function testGetData()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Trip\\WaypointRequest", $this->object->getData()->name);
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Trip\\WaypointRequest", $this->object->getData()->name);
     }
 
     public function testNamespaceReturn()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Trip", $this->object->getNamespace());
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Trip", $this->object->getNamespace());
     }
 
     protected function setUp()

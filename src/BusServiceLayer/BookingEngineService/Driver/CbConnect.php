@@ -10,9 +10,9 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
-use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\DataTransfer\TransferInterface;
 use Clickbus\Request\InputInterface;
-use Clickbus\Response\OutputInterface;
+use Clickbus\RestHandler\OutputInterface;
 use GuzzleHttp\Client;
 
 class CbConnect extends Template

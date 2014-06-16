@@ -6,8 +6,7 @@
  * Time: 1:37
  */
 
-namespace Clickbus\Response;
-
+namespace Clickbus\RestHandler;
 
 use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsMethodException;
 
@@ -20,7 +19,7 @@ class OutputData implements OutputInterface
         return $this->result;
     }
 
-    public function getTemplate($output)
+    public function getFactory($output)
     {
         if (!method_exists($this, $output)) {
             throw new NotExistsMethodException('Method not exists');
@@ -57,8 +56,6 @@ class OutputData implements OutputInterface
 
     protected function callSearch()
     {
-        return [
-
-        ];
+        return 'Clickbus\RestHandler\DTO\Search\AbstractSearchFactory';
     }
 }

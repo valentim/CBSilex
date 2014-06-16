@@ -9,7 +9,7 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
 
-use Clickbus\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\DataTransfer\TransferInterface;
 
 class ServiceProvider extends AbstractService
 {

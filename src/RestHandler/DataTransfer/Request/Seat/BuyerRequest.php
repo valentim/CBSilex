@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: thiagovalentim
  * Date: 6/13/14
- * Time: 1:27
+ * Time: 1:20
  */
 
-namespace Clickbus\DataTransfer\Request\Seat;
+namespace Clickbus\RestHandler\DataTransfer\Request\Seat;
 
 
-use Clickbus\DataTransfer\AbstractTransferBehavior;
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
-class PassengerRequest extends AbstractTransferBehavior
+class BuyerRequest extends AbstractTransferBehavior
 {
     protected $firstName;
     protected $lastName;

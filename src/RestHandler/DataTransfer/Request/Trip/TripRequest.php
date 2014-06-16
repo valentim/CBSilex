@@ -6,10 +6,10 @@
  * Time: 13:09
  */
 
-namespace Clickbus\DataTransfer\Request\Trip;
+namespace Clickbus\RestHandler\DataTransfer\Request\Trip;
 
 
-use Clickbus\DataTransfer\AbstractTransferBehavior;
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
 class TripRequest extends AbstractTransferBehavior
 {

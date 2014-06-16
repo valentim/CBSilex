@@ -9,7 +9,7 @@
 namespace DataTransfer\Request\Seat;
 
 
-use Clickbus\DataTransfer\Request\Seat\ScheduleRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\ScheduleRequest;
 
 class ScheduleRequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class ScheduleRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testScheduleObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\DataTransfer\\Request\\Seat\\ScheduleRequest", $this->object);
+        $this->assertInstanceOf("Clickbus\\RestHandler\DataTransfer\\Request\\Seat\\ScheduleRequest", $this->object);
     }
 
     public function testGetReflectionClass()
@@ -27,12 +27,12 @@ class ScheduleRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testNamespaceReturn()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Seat", $this->object->getNamespace());
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Seat", $this->object->getNamespace());
     }
 
     public function testGetData()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Seat\\ScheduleRequest", $this->object->getData()->name);
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Seat\\ScheduleRequest", $this->object->getData()->name);
     }
 
     protected function setUp()

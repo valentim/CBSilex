@@ -9,7 +9,7 @@
 namespace DataTransfer\Request\Seat;
 
 
-use Clickbus\DataTransfer\Request\Seat\BlockRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\BlockRequest;
 
 class BlockRequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class BlockRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testBlockObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\DataTransfer\\Request\\Seat\\BlockRequest", $this->object);
+        $this->assertInstanceOf("Clickbus\\RestHandler\DataTransfer\\Request\\Seat\\BlockRequest", $this->object);
     }
 
     public function testGetReflectionClass()
@@ -27,12 +27,12 @@ class BlockRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testGetData()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Seat\\BlockRequest", $this->object->getData()->name);
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Seat\\BlockRequest", $this->object->getData()->name);
     }
 
     public function testNamespaceReturn()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Seat", $this->object->getNamespace());
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Seat", $this->object->getNamespace());
     }
 
     protected function setUp()

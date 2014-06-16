@@ -9,7 +9,7 @@
 namespace DataTransfer\Request\Seat;
 
 
-use Clickbus\DataTransfer\Request\Seat\PassengerRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\PassengerRequest;
 
 class PassengerRequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class PassengerRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testPassengerObjectExists()
     {
-        $this->assertInstanceOf("Clickbus\\DataTransfer\\Request\\Seat\\PassengerRequest", $this->object);
+        $this->assertInstanceOf("Clickbus\\RestHandler\DataTransfer\\Request\\Seat\\PassengerRequest", $this->object);
     }
 
     public function testGetReflectionClass()
@@ -27,12 +27,12 @@ class PassengerRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testGetData()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Seat\\PassengerRequest", $this->object->getData()->name);
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Seat\\PassengerRequest", $this->object->getData()->name);
     }
 
     public function testNamespaceReturn()
     {
-        $this->assertSame("Clickbus\\DataTransfer\\Request\\Seat", $this->object->getNamespace());
+        $this->assertSame("Clickbus\\RestHandler\DataTransfer\\Request\\Seat", $this->object->getNamespace());
     }
 
     protected function setUp()

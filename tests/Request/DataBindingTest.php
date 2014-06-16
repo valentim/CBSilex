@@ -9,14 +9,14 @@
 namespace Request;
 
 
-use Clickbus\DataTransfer\Request\Seat\BlockRequest;
-use Clickbus\DataTransfer\Request\Seat\BuyerRequest;
-use Clickbus\DataTransfer\Request\Seat\OrderItemRequest;
-use Clickbus\DataTransfer\Request\Seat\PassengerRequest;
-use Clickbus\DataTransfer\Request\Seat\ReservationRequest;
-use Clickbus\DataTransfer\Request\Seat\ScheduleRequest;
-use Clickbus\DataTransfer\Request\Trip\TripRequest;
-use Clickbus\DataTransfer\Request\Trip\WaypointRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\BlockRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\BuyerRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\OrderItemRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\PassengerRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\ReservationRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\ScheduleRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\TripRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\WaypointRequest;
 use Clickbus\Request\DataBinding;
 
 class DataBindingTest extends \PHPUnit_Framework_TestCase

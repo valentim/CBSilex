@@ -6,10 +6,10 @@
  * Time: 1:18
  */
 
-namespace Clickbus\DataTransfer\Request\Seat;
+namespace Clickbus\RestHandler\DataTransfer\Request\Seat;
 
 
-use Clickbus\DataTransfer\AbstractTransferBehavior;
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
 class ReservationRequest  extends AbstractTransferBehavior
 {

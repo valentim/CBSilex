@@ -29,6 +29,7 @@ abstract class AbstractController
     protected function getBookingEngine(Application $app, Request $request)
     {
         $meta = $request->get('meta');
+
         if (isset($meta['bookingengine']) && isset($app[$meta['bookingengine']])) {
             $bookingEngine = $app[$meta['bookingengine']];
 
