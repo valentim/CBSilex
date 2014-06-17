@@ -9,12 +9,12 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
-use Clickbus\BusServiceLayer\BookingEngineService\Template;
+use Clickbus\BusServiceLayer\BookingEngineService\AbstractDriverTemplate;
 use Clickbus\HandlerData\OutputInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Query;
 
-class CbConnect extends Template
+class CbConnect extends AbstractDriverTemplate
 {
     protected $host = 'http://33.33.33.94';
     protected $client;
