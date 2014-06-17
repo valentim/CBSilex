@@ -11,7 +11,10 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
 use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineDriver;
 use Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsMethodException;
-use Clickbus\RestHandler\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
 use Clickbus\BusServiceLayer\BookingEngineService\Driver\Exception\ServerException as ServerExceptionCallBack;
 use GuzzleHttp\Exception\ServerException;
 
@@ -47,8 +50,8 @@ abstract class AbstractService
         return $this->adapter->getResult();
     }
 
-    abstract protected function getSearch(TransferInterface $dataTransfer);
-    abstract protected function getSeats(TransferInterface $dataTransfer);
-    abstract protected function reserve(TransferInterface $dataTransfer);
-    abstract protected function doBooking(TransferInterface $dataTransfer);
+    abstract protected function getSearch(SearchRequest $dataTransfer);
+    abstract protected function getSeats(PortfolioRequest $dataTransfer);
+    abstract protected function seatBlock(SeatBlockRequest $dataTransfer);
+    abstract protected function doBooking(BookingRequest $dataTransfer);
 } 
