@@ -28,16 +28,19 @@ payments_config:
 
 booking_engines: [CbConnect, RapidoOchoa]
 
-booking_engines_config:
-    RapidoOchoa:
-        departure_url: http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx
-        departure_wsdl: http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx?wsdl
-        arrival_url: http://190.145.82.98/SATServicesclickbus/Service/WSVentaOnline.svc
-        arrival_wsdl: http://190.145.82.98/SATServicesclickbus/Service/WSVentaOnline.svc/basic?wsdl
-        user: MVM
-        password: Mvm2007mvm!
-        locale: es_CO
-        placeCountry: COL
+CbConnect:
+    host: http://33.33.33.94
+
+RapidoOchoa:
+    departure_url: http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx
+    departure_wsdl: http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx?wsdl
+    arrival_url: http://190.145.82.98/SATServicesclickbus/Service/WSVentaOnline.svc
+    arrival_wsdl: http://190.145.82.98/SATServicesclickbus/Service/WSVentaOnline.svc/basic?wsdl
+    user: MVM
+    password: Mvm2007mvm!
+    locale: es_CO
+    place_country: COL
+    bus_company_name: RapidoOchoa
 
 # payment:
 #     payu_latam:
