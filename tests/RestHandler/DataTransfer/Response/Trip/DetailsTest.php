@@ -19,11 +19,12 @@ class DetailsTest extends \PHPUnit_Framework_TestCase
 
         $this->details->setPrice(1100);
         $this->details->setCurrency('BRL');
-        $this->details->addSeatType($seatType);
+        $this->details->setSeatType($seatType);
 
+        $this->details->seatTypes->rewind();
         $this->assertInternalType('int', $this->details->price);
         $this->assertInternalType('string', $this->details->currency);
-        $this->assertInternalType('array', $this->details->seatTypes);
-        $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Trip\SeatType', $this->details->seatTypes[0]);
+        $this->assertInstanceOf('SplObjectStorage', $this->details->seatTypes);
+        $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Trip\SeatType', $this->details->seatTypes->current());
     }
 }

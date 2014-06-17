@@ -21,15 +21,16 @@ class TripTest extends \PHPUnit_Framework_TestCase
         $bus = new Bus();
         $seat = new Seat();
 
-        $this->trip->setTripId(40123);
+        $this->trip->setTrip_id(40123);
         $this->trip->setBusCompany($busCompany);
         $this->trip->setBus($bus);
-        $this->trip->addSeat($seat);
+        $this->trip->setSeats($seat);
 
+        $this->trip->seats->rewind();
         $this->assertInternalType('int', $this->trip->trip_id);
         $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Trip\BusCompany', $this->trip->busCompany);
         $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Trip\Bus', $this->trip->bus);
-        $this->assertInternalType('array', $this->trip->seats);
-        $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Trip\Seat', $this->trip->seats[0]);
+        $this->assertInstanceOf('SplObjectStorage', $this->trip->seats);
+        $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Trip\Seat', $this->trip->seats->current());
     }
 }

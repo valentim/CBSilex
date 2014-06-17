@@ -21,7 +21,7 @@ class SeatBlockDtoTest extends \PHPUnit_Framework_TestCase
                 "timezone" => "America/Sao_Paulo"
             ),
             "status" => "blocked",
-            "sessionId" => "DDFF999-AAACCC-DDDFFF@113-AFAFDD",
+            "seatReservation" => "DDFF999-AAACCC-DDDFFF@113-AFAFDD",
             "expireAt" => "2014-10-10 20:35"
         )
     );
@@ -38,7 +38,7 @@ class SeatBlockDtoTest extends \PHPUnit_Framework_TestCase
         $seatBlock->setSeat('12A');
         $seatBlock->setSchedule($schedule);
         $seatBlock->setStatus('blocked');
-        $seatBlock->setSessionId('DDFF999-AAACCC-DDDFFF@113-AFAFDD');
+        $seatBlock->setSeatReservation('DDFF999-AAACCC-DDDFFF@113-AFAFDD');
         $seatBlock->setExpireAt('2014-10-10 20:35');
 
         $this->seatBlockDto = new SeatBlockDto($seatBlock);
