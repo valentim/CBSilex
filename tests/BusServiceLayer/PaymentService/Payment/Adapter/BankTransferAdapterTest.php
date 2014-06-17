@@ -22,7 +22,7 @@ class BankTransferAdapterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $driver = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\BankTransferDriver');
+        $driver = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\BankTransferDriverInterface');
         $this->object = new BankTransferAdapter($driver);
     }
 

@@ -21,7 +21,7 @@ class PaymentContextTest extends PHPUnit_Framework_TestCase {
 
     protected function setUp()
     {
-        $driver = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\CreditCardDriver');
+        $driver = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\CreditCardDriverInterface');
         $adapter = new CreditCardAdapter($driver);
 
         $this->object = new PaymentContext($adapter);

@@ -22,7 +22,7 @@ class CreditCardAdapterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $driver = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\CreditCardDriver');
+        $driver = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\CreditCardDriverInterface');
         $this->object = new CreditCardAdapter($driver);
     }
 

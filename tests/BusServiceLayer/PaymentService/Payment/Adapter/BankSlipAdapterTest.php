@@ -21,7 +21,7 @@ class BankSlipAdapterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $driver  = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\BankSlipDriver');
+        $driver  = $this->getMock('Clickbus\\BusServiceLayer\\PaymentService\\Driver\\BankSlipDriverInterface');
         $this->object = new BankSlipAdapter($driver);
     }
 
