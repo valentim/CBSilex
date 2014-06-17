@@ -74,30 +74,28 @@ class RapidoOchoa extends AbstractDriverTemplate
         return new Client($wsdl);
     }
 
-    protected function callBooking(OutputInterface $output, BookingRequest $bookingTransfer)
+    protected function callBooking(BookingRequest $bookingTransfer, $factory)
     {
         // TODO: Implement callBooking() method.
     }
 
-    protected function callSeatBlock(OutputInterface $output, SeatBlockRequest $seatBlockTransfer)
+    protected function callSeatBlock(SeatBlockRequest $seatBlockTransfer, $factory)
     {
         // TODO: Implement callReserve() method.
     }
 
-    protected function callSeats(OutputInterface $output, PortfolioRequest $portfolioTransfer)
+    protected function callSeats(PortfolioRequest $portfolioTransfer, $factory)
     {
         // TODO: Implement callSeats() method.
     }
 
-    protected function callSearch(OutputInterface $output, SearchRequest $searchTransfer)
+    protected function callSearch(SearchRequest $searchTransfer, $factory)
     {
         $from = $searchTransfer->getRequest()->getFrom();
         $to = $searchTransfer->getRequest()->getTo();
-        $departureDate = $this->formatDateToCall($searchTransfer->getRequest()->getDeparture());
 
-        $factory = $this->factory;
         $searchDTO = new searchDTO();
-        $trips = $this->loadSoapResult($this->callSoapSearch());
+        $trips = $this->loadSoapResult($this->callSoapSearch($searchTransfer));
 
         foreach ($trips as $trip) {
             $tripTime = $trip->Fecha->__toString();
@@ -197,9 +195,9 @@ class RapidoOchoa extends AbstractDriverTemplate
         return $obtenerTarifasResult->xpath('//NewDataSet')[0];
     }
 
-    private function callSoapSearch()
+    private function callSoapSearch(SearchRequest $searchTransfer)
     {
-        $request = $this->data->getRequest();
+        $request = $searchTransfer->getRequest();
         $client = $this->getClient($this->config['departure_wsdl']);
         $xml = $this->getXmlSearchDeparture(
             $request->getFrom(),
