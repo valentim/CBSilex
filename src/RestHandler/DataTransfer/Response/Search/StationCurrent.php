@@ -1,13 +1,9 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
-<<<<<<< HEAD
-class StationCurrent
-=======
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
 class StationCurrent extends AbstractTransferBehavior
->>>>>>> added response objects
 {
     public $id;
 

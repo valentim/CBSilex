@@ -1,16 +1,10 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
-<<<<<<< HEAD
 use Clickbus\RestHandler\DataTransfer\Response\Search\Waypoint;
-
-class Arrival
-=======
-
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
 class Arrival extends AbstractTransferBehavior
->>>>>>> added response objects
 {
     public $price;
 
