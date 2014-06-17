@@ -9,8 +9,8 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
+use Clickbus\HandlerData\OutputInterface;
 use Clickbus\RestHandler\DataTransfer\TransferInterface;
-use Clickbus\RestHandler\OutputInterface;
 
 abstract class Template extends HandlerData
 {
