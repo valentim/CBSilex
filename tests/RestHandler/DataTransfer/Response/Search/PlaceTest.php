@@ -1,6 +1,10 @@
 <?php
 namespace RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> added data transfer tests
 use Clickbus\RestHandler\DataTransfer\Response\Search\Place;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Station;
 

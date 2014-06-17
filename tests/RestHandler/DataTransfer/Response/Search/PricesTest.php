@@ -1,7 +1,11 @@
 <?php
 namespace RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
 use Clickbus\RestHandler\DataTransfer\Response\Search\Prices;
+=======
+use Clickbus\RestHandler\DataTransfer\Response\Search\Price;
+>>>>>>> added data transfer tests
 
 class PricesTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,7 +13,11 @@ class PricesTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+<<<<<<< HEAD
         $this->prices = new Prices();
+=======
+        $this->prices = new Price();
+>>>>>>> added data transfer tests
     }
 
     public function testIntegrity()
