@@ -1,6 +1,6 @@
 <?php
 
-use Clickbus\BusServiceLayer\Exception\ProcessCallbackException;
+use Clickbus\Exception\ProcessCallbackException;
 
 $app->error(function (\Exception $e, $code) {
 
