@@ -2,20 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: thiagovalentim
- * Date: 6/13/14
- * Time: 1:39
+ * Date: 6/12/14
+ * Time: 23:36
  */
 
 namespace RestHandler\DataTransfer\Request\Seat;
 
 
 use Clickbus\RestHandler\DataTransfer\Request\Seat\Reservation;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\Seat;
 
 class ReservationTest extends \PHPUnit_Framework_TestCase
 {
     protected $object;
 
-    public function testPassengerObjectExists()
+    public function testBlockObjectExists()
     {
         $this->assertInstanceOf("Clickbus\\RestHandler\DataTransfer\\Request\\Seat\\Reservation", $this->object);
     }
