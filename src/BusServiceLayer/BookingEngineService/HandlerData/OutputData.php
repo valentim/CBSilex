@@ -8,7 +8,7 @@
 
 namespace Clickbus\BusServiceLayer\BookingEngineService\HandlerData;
 
-use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsMethodException;
+use Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsMethodException;
 use Clickbus\HandlerData\OutputInterface;
 
 class OutputData implements OutputInterface
