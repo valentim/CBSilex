@@ -12,4 +12,4 @@ namespace Clickbus\RestHandler\DataTransfer;
 interface TransferInterface
 {
     public function getData();
-} 
+}
