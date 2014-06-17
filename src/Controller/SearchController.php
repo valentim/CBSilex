@@ -1,7 +1,7 @@
 <?php
 namespace Clickbus\Controller;
 
-use Clickbus\RestHandler\DataTransfer\Request\Trip\TripRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\Trip;
 use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
@@ -12,7 +12,7 @@ class SearchController extends AbstractController
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
         $dataTransfer = $this->getInput($request);
-        $dataTransfer->setTransferType(new TripRequest);
+        $dataTransfer->setTransferType(new Trip);
 
         $response = $bookingEngine->getSearch($dataTransfer->getData());
 
