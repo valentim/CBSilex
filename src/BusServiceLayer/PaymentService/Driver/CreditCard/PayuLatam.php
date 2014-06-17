@@ -27,6 +27,16 @@ class PayuLatam implements CreditCardDriver
     /**
      * @var string
      */
+    protected $merchantId;
+
+    /**
+     * @var string
+     */
+    protected $accountId;
+
+    /**
+     * @var string
+     */
     protected $transactionUrl;
 
     /**
@@ -63,6 +73,23 @@ class PayuLatam implements CreditCardDriver
      * @var bool
      */
     protected $test;
+
+    /**
+     * Constructor
+     * 
+     * @param array $config
+     */
+    public function __construct(array $config)
+    {
+        $this->apiKey = $config['api_key'];
+        $this->apiLogin = $config['api_login'];
+        $this->merchantId = $config['merchant_id'];
+        $this->accountId = $config['account_id'];
+        $this->txValue = $config['tx_value'];
+        $this->currency = $config['currency'];
+        $this->responseUrl = $config['response_url'];
+        $this->language = $config['language'];
+    }
 
     /**
      * Verify Payment

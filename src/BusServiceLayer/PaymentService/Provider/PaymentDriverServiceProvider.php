@@ -22,7 +22,7 @@ class PaymentDriverServiceProvider implements ServiceProviderInterface
         $payments = $app['config']['payments'];
 
         foreach ($payments as $paymentType => $drivers) {
-            $this->registerDrivers($paymentType, $drivers);
+            $this->registerDrivers($paymentType, $drivers, $app['config']);
         }
     }
 
@@ -32,7 +32,7 @@ class PaymentDriverServiceProvider implements ServiceProviderInterface
      * @param string $paymentType
      * @param array $drivers
      */
-    private function registerDrivers($paymentType, array $drivers)
+    private function registerDrivers($paymentType, array $drivers, $parameters)
     {
         foreach ($drivers as $driver) {
             $driverName = self::DRIVER_NAMESPACE . "{$paymentType}\\{$driver}";
@@ -41,7 +41,12 @@ class PaymentDriverServiceProvider implements ServiceProviderInterface
             $adapterName = self::ADAPTER_NAMESPACE . "{$paymentType}Adapter";
             $this->verifyExistence($adapterName);
 
-            $driverObject = new $driverName();
+            $config = array();
+            if (isset($parameters[$driver])) {
+                $config = $parameters[$driver];
+            }
+
+            $driverObject = new $driverName($config);
             $adapter = new $adapterName($driverObject);
 
             $app["payment_gateway_driver_{$paymentType}_{$driver}"] = new PaymentContext($adapter);
