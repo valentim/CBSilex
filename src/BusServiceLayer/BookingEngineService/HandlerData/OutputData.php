@@ -36,21 +36,17 @@ class OutputData implements OutputInterface
 
     protected function callBooking()
     {
-
+        return 'Clickbus\RestHandler\DataTransfer\Response\Booking\AbstractBookingFactory';
     }
 
     protected function callReserve()
     {
-        return [
-
-        ];
+        return 'Clickbus\RestHandler\DataTransfer\Response\SeatBlock\AbstractSeatBlockFactory';
     }
 
     protected function callSeats()
     {
-        return [
-
-        ];
+        return 'Clickbus\RestHandler\DataTransfer\Response\Trip\AbstractTripFactory';
     }
 
     protected function callSearch()
