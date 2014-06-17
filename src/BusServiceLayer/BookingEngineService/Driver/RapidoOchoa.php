@@ -12,6 +12,10 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 use Camcima\Soap\Client;
 use Clickbus\BusServiceLayer\BookingEngineService\AbstractDriverTemplate;
 use Clickbus\HandlerData\OutputInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
 use Clickbus\RestHandler\DataTransfer\Response\SearchDTO;
 
 class RapidoOchoa extends AbstractDriverTemplate
@@ -49,26 +53,26 @@ class RapidoOchoa extends AbstractDriverTemplate
 
     }
 
-    protected function callBooking(OutputInterface $output)
+    protected function callBooking(OutputInterface $output, BookingRequest $bookingTransfer)
     {
         // TODO: Implement callBooking() method.
     }
 
-    protected function callReserve(OutputInterface $output)
+    protected function callSeatBlock(OutputInterface $output, SeatBlockRequest $seatBlockTransfer)
     {
         // TODO: Implement callReserve() method.
     }
 
-    protected function callSeats(OutputInterface $output)
+    protected function callSeats(OutputInterface $output, PortfolioRequest $portfolioTransfer)
     {
         // TODO: Implement callSeats() method.
     }
 
-    protected function callSearch(OutputInterface $output)
+    protected function callSearch(OutputInterface $output, SearchRequest $searchTransfer)
     {
-        $from = $this->data->getRequest()->getFrom();
-        $to = $this->data->getRequest()->getTo();
-        $departureDate = str_replace('-', '/', $this->data->getRequest()->getDeparture());
+        $from = $searchTransfer->getRequest()->getFrom();
+        $to = $searchTransfer->getRequest()->getTo();
+        $departureDate = str_replace('-', '/', $searchTransfer->getRequest()->getDeparture());
 
         $xml = sprintf(
             $this->callTemplate,
