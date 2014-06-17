@@ -1,10 +1,10 @@
 <?php
 namespace Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard;
 
-use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCardDriver;
-use Clickbus\BusServiceLayer\PaymentService\PaymentTransfer;
+use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCardDriverInterface;
+use Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface;
 
-class PayuLatam implements CreditCardDriver
+class PayuLatam implements CreditCardDriverInterface
 {
     const TRANSACTION_TYPE_CANCELATION = 'VOID';
 
@@ -94,11 +94,11 @@ class PayuLatam implements CreditCardDriver
     /**
      * Verify Payment
      * 
-     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransfer $dataTransfer
+     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
      * 
      * @return array
      */
-    public function verifyPayment(PaymentTransfer $dataTransfer)
+    public function verifyPayment(PaymentTransferInterface $dataTransfer)
     {
         $merchant = array(
             'apiLogin' => $this->apiLogin,
@@ -125,11 +125,11 @@ class PayuLatam implements CreditCardDriver
     /**
      * Make payment call
      * 
-     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransfer $dataTransfer
+     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
      * 
      * @return array
      */
-    public function doPayment(PaymentTransfer $dataTransfer)
+    public function doPayment(PaymentTransferInterface $dataTransfer)
     {
         $merchant = array(
             'apiLogin' => $this->apiLogin,
@@ -214,11 +214,11 @@ class PayuLatam implements CreditCardDriver
     /**
      * Cancel a payment
      * 
-     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransfer $dataTransfer
+     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
      * 
      * @return array
      */
-    public function doCancelation(PaymentTransfer $dataTransfer)
+    public function doCancelation(PaymentTransferInterface $dataTransfer)
     {
         $merchant = array(
             'apiLogin' => $this->apiLogin,
