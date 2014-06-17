@@ -9,12 +9,25 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
+use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\OutputData;
 use Clickbus\HandlerData\OutputInterface;
 use Clickbus\RestHandler\DataTransfer\TransferInterface;
 
-abstract class Template extends HandlerData
+abstract class AbstractDriverTemplate implements BookingEngineDriver
 {
+    protected $output;
+    protected $data;
     protected $factory;
+
+    public function __construct()
+    {
+        $this->output = new OutputData;
+    }
+
+    public function getResult()
+    {
+        return $this->output->getResult();
+    }
 
     public function getSearch(TransferInterface $searchTransfer)
     {
