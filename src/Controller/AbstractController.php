@@ -11,18 +11,19 @@ namespace Clickbus\Controller;
 
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\InputData;
 use Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsServiceException;
+use Clickbus\HandlerData\DataBinding;
+use Clickbus\RestHandler\DataTransfer\TransferInterface;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractController
 {
-    protected function getInput(Request $request)
+    protected function getTransfer(TransferInterface $dataTransfer, $data)
     {
-        $dataTransfer = new InputData;
-        $dataTransfer->setQueryString($request->query->all());
-        $dataTransfer->setBody($request->request->all());
+        $binding = new DataBinding($dataTransfer);
+        $binding->bindData($data);
 
-        return $dataTransfer;
+        return $binding->getObject();
     }
 
     protected function getBookingEngine(Application $app, Request $request)
