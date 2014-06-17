@@ -13,7 +13,7 @@ use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\OutputData;
 use Clickbus\HandlerData\OutputInterface;
 use Clickbus\RestHandler\DataTransfer\TransferInterface;
 
-abstract class AbstractDriverTemplate implements BookingEngineDriver
+abstract class AbstractDriverTemplate implements BookingEngineDriverInterface
 {
     protected $output;
     protected $data;
