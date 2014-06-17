@@ -11,16 +11,14 @@ namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\OutputData;
 use Clickbus\HandlerData\OutputInterface;
-use Clickbus\RestHandler\DataTransfer\Request\Seat\Booking;
-use Clickbus\RestHandler\DataTransfer\Request\Seat\Reservation;
-use Clickbus\RestHandler\DataTransfer\Request\Trip\Search;
-use Clickbus\RestHandler\DataTransfer\Request\Trip\Seat;
-use Clickbus\RestHandler\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
 
 abstract class AbstractDriverTemplate implements BookingEngineDriver
 {
     protected $output;
-    protected $data;
     protected $factory;
 
     public function __construct()
@@ -33,41 +31,32 @@ abstract class AbstractDriverTemplate implements BookingEngineDriver
         return $this->output->getResult();
     }
 
-    public function getSearch(Search $searchTransfer)
+    public function getSearch(SearchRequest $searchTransfer)
     {
-        $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callSearch');
-        $this->callSearch($this->output);
+        $this->callSearch($this->output, $searchTransfer);
     }
 
-    public function getSeats(Seat $searchTransfer)
+    public function getSeats(PortfolioRequest $portfolioTransfer)
     {
-        $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callSeats');
-        $this->callSeats($this->output);
+        $this->callSeats($this->output, $portfolioTransfer);
     }
 
-    public function reserve(Reservation $searchTransfer)
+    public function seatBlock(SeatBlockRequest $seatBlockTransfer)
     {
-        $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callReserve');
-        $this->callReserve($this->output);
+        $this->callSeatBlock($this->output, $seatBlockTransfer);
     }
 
-    public function doBooking(Booking $searchTransfer)
+    public function doBooking(BookingRequest $bookingTransfer)
     {
-        $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callBooking');
-        $this->callBooking($this->output);
+        $this->callBooking($this->output, $bookingTransfer);
     }
 
-    protected function setData(TransferInterface $searchTransfer)
-    {
-        $this->data = $searchTransfer;
-    }
-
-    abstract protected function callBooking(OutputInterface $output);
-    abstract protected function callReserve(OutputInterface $output);
-    abstract protected function callSeats(OutputInterface $output);
-    abstract protected function callSearch(OutputInterface $output);
+    abstract protected function callBooking(OutputInterface $output, BookingRequest $bookingTransfer);
+    abstract protected function callSeatBlock(OutputInterface $output, SeatBlockRequest $seatBlockTransfer);
+    abstract protected function callSeats(OutputInterface $output, PortfolioRequest $portfolioTransfer);
+    abstract protected function callSearch(OutputInterface $output, SearchRequest $searchTransfer);
 }
