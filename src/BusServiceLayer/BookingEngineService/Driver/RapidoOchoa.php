@@ -95,7 +95,6 @@ class RapidoOchoa extends Template
         $factory = $this->factory;
 
         $searchDTO = new searchDTO();
-        $parts = array();
 
         foreach ($trips as $tripTables) {
             foreach ($tripTables->Table as $trip) {
