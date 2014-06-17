@@ -1,9 +1,9 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\SeatBlock;
 
-use Clickbus\RestHandler\DataTransfer\Response\SeatBlock\Schedule;
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
-class SeatBlock
+class SeatBlock extends AbstractTransferBehavior
 {
     public $seat;
 
@@ -11,7 +11,7 @@ class SeatBlock
 
     public $status;
 
-    public $sessionId;
+    public $seatReservation;
 
     public $expireAt;
 
@@ -30,9 +30,9 @@ class SeatBlock
         $this->status = $status;
     }
 
-    public function setSessionId($sessionId)
+    public function setSeatReservation($seatReservation)
     {
-        $this->sessionId = $sessionId;
+        $this->seatReservation = $seatReservation;
     }
 
     public function setExpireAt($expireAt)

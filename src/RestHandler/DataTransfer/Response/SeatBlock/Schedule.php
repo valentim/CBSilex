@@ -1,7 +1,9 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\SeatBlock;
 
-class Schedule
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class Schedule extends AbstractTransferBehavior
 {
     public $id;
 
