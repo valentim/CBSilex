@@ -1,8 +1,6 @@
 <?php
-use Clickbus\BusServiceLayer\BookingEngineService\Driver\CbConnect;
-use Clickbus\BusServiceLayer\BookingEngineService\Driver\RapidoOchoa;
-use Clickbus\BusServiceLayer\BookingEngineService\Service\ServiceProvider;
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\Intersection;
+use Clickbus\BusServiceLayer\BookingEngineService\Service\DriverServiceProvider;
 use Clickbus\BusServiceLayer\PaymentService\Provider\PaymentDriverServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,28 +17,12 @@ $app->register(new YamlConfigServiceProvider(__DIR__ . '/parameters.yml'));
 /**
  * Drivers of Booking Engine
  */
-$app['booking_engine_driver_cbconnect'] = $app->share(function () use ($app) {
-    $config = array();
-    if (isset($app['config']['CbConnect'])) {
-        $config = $app['config']['CbConnect'];
-    }
-    $bookingEngine = new CbConnect($config);
-    return new ServiceProvider($bookingEngine);
-});
-
-$app['booking_engine_driver_rapidoochoa'] = $app->share(function () use ($app) {
-    $config = array();
-    if (isset($app['config']['RapidoOchoa'])) {
-        $config = $app['config']['RapidoOchoa'];
-    }
-    $bookingEngine = new RapidoOchoa($config);
-    return new ServiceProvider($bookingEngine);
-});
+$app->register(new DriverServiceProvider);
 
 /**
  * Drivers of PaymentService
  */
-$app->register(new PaymentDriverServiceProvider());
+$app->register(new PaymentDriverServiceProvider);
 
 /**
  * Doctrine services

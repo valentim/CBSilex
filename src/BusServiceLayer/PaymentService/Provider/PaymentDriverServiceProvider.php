@@ -1,8 +1,8 @@
 <?php
 namespace Clickbus\BusServiceLayer\PaymentService\Provider;
 
-use \Silex\Application;
-use \Silex\ServiceProviderInterface;
+use Silex\Application;
+use Silex\ServiceProviderInterface;
 
 use Clickbus\BusServiceLayer\PaymentService\PaymentContext;
 use Clickbus\BusServiceLayer\PaymentService\Provider\NotExistsServiceException;
