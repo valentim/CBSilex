@@ -24,26 +24,6 @@ $app->register(new DriverServiceProvider);
  */
 $app->register(new PaymentDriverServiceProvider);
 
-/**
- * Doctrine services
- */
-// $app->register(new DoctrineServiceProvider(), array(
-//     'db.options' => $app['config']['database']
-// ));
-
-// $app->register(new DoctrineORMServiceProvider, array(
-//     'db.orm.proxies_dir' => __DIR__ . '/cache/doctrine/Proxy',
-//     'db.orm.proxies_namespace' => 'DoctrineProxy',
-//     'db.orm.auto_generate_proxies' => true,
-
-//     'db.orm.entities' => array(
-//         array(
-//             'type' => 'annotation',
-//             'path' => __DIR__ . '/../src',
-//             'namespace' => 'Clickbus\\Entity'
-//         )
-//     )
-// ));
 
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
