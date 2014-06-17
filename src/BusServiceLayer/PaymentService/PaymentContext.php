@@ -8,26 +8,26 @@
 
 namespace Clickbus\BusServiceLayer\PaymentService;
 
-class PaymentContext implements Payment
+class PaymentContext implements PaymentInterface
 {
     protected $paymentAdapter;
 
-    public function __construct(Gateway $paymentAdapter)
+    public function __construct(GatewayInterface $paymentAdapter)
     {
         $this->paymentAdapter = $paymentAdapter;
     }
 
-    public function verifyPayment(PaymentTransfer $dataTransfer)
+    public function verifyPayment(PaymentTransferInterface $dataTransfer)
     {
         $this->paymentAdapter->verifyPayment($dataTransfer);
     }
 
-    public function doPayment(PaymentTransfer $dataTransfer)
+    public function doPayment(PaymentTransferInterface $dataTransfer)
     {
         $this->paymentAdapter->doPayment($dataTransfer);
     }
 
-    public function doCancelation(PaymentTransfer $dataTransfer)
+    public function doCancelation(PaymentTransferInterface $dataTransfer)
     {
         $this->paymentAdapter->doCancelation($dataTransfer);
     }
