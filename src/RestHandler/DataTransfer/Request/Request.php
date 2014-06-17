@@ -8,6 +8,7 @@
 
 namespace Clickbus\RestHandler\DataTransfer\Request;
 
+
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 use Clickbus\RestHandler\DataTransfer\TransferInterface;
 
