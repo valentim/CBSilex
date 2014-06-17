@@ -11,7 +11,7 @@ namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\OutputData;
 
-abstract class HandlerData implements BookingEngineDriver
+abstract class HandlerData implements BookingEngineDriverInterface
 {
     protected $output;
     protected $data;

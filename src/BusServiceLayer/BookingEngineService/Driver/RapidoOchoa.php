@@ -104,7 +104,7 @@ class RapidoOchoa extends Template
                 $scheduleIdString = $trip->NumeroRodamiento->__toString() . $tripTime;
                 $scheduleId = base64_encode($scheduleIdString);
 
-                // the method $dateTime->getTimezone()->getName() is retorning -05:00 and we need of string
+                // the $dateTime->getTimezone()->getName() method is retorning -05:00 and we need of a string
                 $timezone = timezone_name_from_abbr('', $dateTime->getOffset(), 0);
 
                 list($departurePlace, $arrivalPlace) = explode('-', $trip->Ruta->__toString());
