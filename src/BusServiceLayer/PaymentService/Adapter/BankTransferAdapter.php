@@ -9,30 +9,30 @@
 namespace Clickbus\BusServiceLayer\PaymentService\Adapter;
 
 
-use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransferDriver;
-use Clickbus\BusServiceLayer\PaymentService\Gateway;
-use Clickbus\BusServiceLayer\PaymentService\PaymentTransfer;
+use Clickbus\BusServiceLayer\PaymentService\Driver\BankTransferDriverInterface;
+use Clickbus\BusServiceLayer\PaymentService\GatewayInterface;
+use Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface;
 
-class BankTransferAdapter implements Gateway
+class BankTransferAdapter implements GatewayInterface
 {
     protected $driver;
 
-    public function __construct(BankTransferDriver $driver)
+    public function __construct(BankTransferDriverInterface $driver)
     {
         $this->driver = $driver;
     }
 
-    public function verifyPayment(PaymentTransfer $dataTransfer)
+    public function verifyPayment(PaymentTransferInterface $dataTransfer)
     {
         $this->driver->verifyPayment($dataTransfer);
     }
 
-    public function doPayment(PaymentTransfer $dataTransfer)
+    public function doPayment(PaymentTransferInterface $dataTransfer)
     {
         $this->driver->doPayment($dataTransfer);
     }
 
-    public function doCancelation(PaymentTransfer $dataTransfer)
+    public function doCancelation(PaymentTransferInterface $dataTransfer)
     {
         $this->driver->doCancelation($dataTransfer);
     }
