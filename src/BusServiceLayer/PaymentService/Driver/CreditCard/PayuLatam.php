@@ -7,7 +7,10 @@ use Clickbus\BusServiceLayer\PaymentService\PaymentTransfer;
 class PayuLatam implements CreditCardDriver
 {
     const TRANSACTION_TYPE_CANCELATION = 'VOID';
+
     const COMMAND_SUBMIT = 'SUBMIT_TRANSACTION';
+    const COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE = 'ORDER_DETAIL_BY_REFERENCE_CODE';
+
     const AUTHORIZATION_AND_CAPTURE = 'AUTHORIZATION_AND_CAPTURE';
     const PAYMENT_METHOD_VISA = 'VISA';
 
@@ -25,6 +28,11 @@ class PayuLatam implements CreditCardDriver
      * @var string
      */
     protected $transactionUrl;
+
+    /**
+     * @var string
+     */
+    protected $reportsUrl;
 
     /**
      * @var string
@@ -65,7 +73,26 @@ class PayuLatam implements CreditCardDriver
      */
     public function verifyPayment(PaymentTransfer $dataTransfer)
     {
+        $merchant = array(
+            'apiLogin' => $this->apiLogin,
+            'apiKey' => $this->apiKey
+        );
 
+        $details = array(
+            'referenceCode' => 'TestPayU'
+        );
+
+        $submit = array(
+            'merchant' => $merchant,
+            'command' => self::COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE,
+            'details' => $details,
+            'language' => $this->language,
+            'test' => $this->test
+        );
+
+        $response = $this->post($this->reportsUrl, $submit);
+
+        return $response;
     }
 
     /**
@@ -152,9 +179,7 @@ class PayuLatam implements CreditCardDriver
             'test' => $this->test
         );
 
-        $data = new SubmitTransactionDTO($submitTransaction);
-
-        $response = $this->post($this->transactionUrl, $data);
+        $response = $this->post($this->transactionUrl, $submitTransaction);
 
         return $response;
     }
@@ -188,7 +213,7 @@ class PayuLatam implements CreditCardDriver
             'test' => $this->test
         );
 
-        $response = $this->post($this->transactionUrl, $data);
+        $response = $this->post($this->transactionUrl, $submitTransaction);
 
         return $response;
     }

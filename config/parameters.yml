@@ -23,7 +23,8 @@ payments_config:
         tx_value: 3
         currency: USD
         responseUrl: http://www.api.dev/
-        language: es
+        language: en
+        test: true
 
 booking_engines: [CbConnect, RapidoOchoa]
 
