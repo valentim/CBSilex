@@ -18,19 +18,19 @@ trip_portfolio:
 
 seat_block_session:
     path: /api/v2/seat/block/{sessionId}
-    defaults: { _controller: 'Clickbus\Controller\SeatblockController::sessionAction' }
+    defaults: { _controller: 'Clickbus\Controller\SeatBlockController::sessionAction' }
     methods: [GET]
     requirements:
         sessionId: "[a-zA-Z0-9]"
 
 seat_block:
     path: /api/v2/seat/block/
-    defaults: { _controller: 'Clickbus\Controller\SeatblockController::blockAction' }
+    defaults: { _controller: 'Clickbus\Controller\SeatBlockController::blockAction' }
     methods: [PUT]
 
 seat_block_delete:
     path: /api/v2/seat/block/
-    defaults: { _controller: 'Clickbus\Controller\SeatblockController::deleteAction' }
+    defaults: { _controller: 'Clickbus\Controller\SeatBlockController::deleteAction' }
     methods: [DELETE]
 
 booking_put:

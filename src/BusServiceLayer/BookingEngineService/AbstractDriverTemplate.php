@@ -11,6 +11,10 @@ namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\OutputData;
 use Clickbus\HandlerData\OutputInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Booking;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Reservation;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\Search;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\Seat;
 use Clickbus\RestHandler\DataTransfer\TransferInterface;
 
 abstract class AbstractDriverTemplate implements BookingEngineDriver
@@ -29,28 +33,28 @@ abstract class AbstractDriverTemplate implements BookingEngineDriver
         return $this->output->getResult();
     }
 
-    public function getSearch(TransferInterface $searchTransfer)
+    public function getSearch(Search $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callSearch');
         $this->callSearch($this->output);
     }
 
-    public function getSeats(TransferInterface $searchTransfer)
+    public function getSeats(Seat $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callSeats');
         $this->callSeats($this->output);
     }
 
-    public function reserve(TransferInterface $searchTransfer)
+    public function reserve(Reservation $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callReserve');
         $this->callReserve($this->output);
     }
 
-    public function doBooking(TransferInterface $searchTransfer)
+    public function doBooking(Booking $searchTransfer)
     {
         $this->setData($searchTransfer);
         $this->factory = $this->output->getFactory('callBooking');
