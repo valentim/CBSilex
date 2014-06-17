@@ -10,9 +10,10 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineDriver;
+use Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsMethodException;
 use Clickbus\RestHandler\DataTransfer\TransferInterface;
+use Clickbus\BusServiceLayer\BookingEngineService\Driver\Exception\ServerException as ServerExceptionCallBack;
 use GuzzleHttp\Exception\ServerException;
-use Clickbus\BusServiceLayer\BookingEngineService\Driver\ServerException as ServerExceptionCallBack;
 
 abstract class AbstractService
 {
