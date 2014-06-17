@@ -1,7 +1,7 @@
 <?php
 namespace Clickbus\Controller;
 
-use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\Portfolio;
 use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
@@ -12,7 +12,7 @@ class TripController extends AbstractController
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
         $dataTransfer = $this->getInput($request);
-        $dataTransfer->setTransferType(new PortfolioRequest);
+        $dataTransfer->setTransferType(new Portfolio);
         $dataTransfer->setQueryString([
             'from' => $from,
             'to' => $to,
