@@ -1,15 +1,9 @@
 <?php
 namespace RestHandler\DataTransfer\Response\Search;
 
-<<<<<<< HEAD
 use Clickbus\RestHandler\Response;
 use Clickbus\RestHandler\DataTransfer\Response\SearchDto;
 use Clickbus\RestHandler\DataTransfer\Response\Search\AbstractSearchFactory;
-=======
-use Clickbus\RestHandler\DataTransfer\Response\Search\AbstractSearchFactory;
-use Clickbus\RestHandler\DTO\SearchDTO;
-use Clickbus\RestHandler\Response;
->>>>>>> added data transfer tests
 
 class AbstractSearchFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,11 +12,7 @@ class AbstractSearchFactoryTest extends \PHPUnit_Framework_TestCase
         "to" => "Rio de Janeiro, RJ",
         "parts" => [
             array(
-<<<<<<< HEAD
-                "trip_id" => 333,
-=======
                 "tripId" => 333,
->>>>>>> added data transfer tests
                 "departure" => array(
                     "price" => 9000,
                     "waypoint" => array(
@@ -272,17 +262,11 @@ class AbstractSearchFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Search\Search', $search);
 
-<<<<<<< HEAD
         $searchDto = new SearchDto();
         $searchDto->add($search);
 
         $response = new Response($searchDto);
-=======
-        $searchDTO = new SearchDTO();
-        $searchDTO->add($search);
 
-        $response = new Response($searchDTO);
->>>>>>> added data transfer tests
 
         $responseExpected = [
             'meta' => null,

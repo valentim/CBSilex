@@ -1,10 +1,6 @@
 <?php
 namespace RestHandler\DataTransfer\Response\Search;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> added data transfer tests
 use Clickbus\RestHandler\DataTransfer\Response\Search\BusCompany;
 
 class BusCompanyTest extends \PHPUnit_Framework_TestCase

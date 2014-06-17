@@ -1,14 +1,9 @@
 <?php
 namespace RestHandler\DataTransfer\Response\Search;
 
-<<<<<<< HEAD
-use Clickbus\RestHandler\DataTransfer\Response\Search\Search;
-use Clickbus\RestHandler\DataTransfer\Response\Search\Parts;
-=======
 
 use Clickbus\RestHandler\DataTransfer\Response\Search\Parts;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Search;
->>>>>>> added data transfer tests
 
 class SearchTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,14 +20,6 @@ class SearchTest extends \PHPUnit_Framework_TestCase
 
         $this->search->setFrom('São Paulo, SP');
         $this->search->setTo('Rio de Janeiro, RJ');
-<<<<<<< HEAD
-        $this->search->addParts($parts);
-
-        $this->assertInternalType('string', $this->search->from);
-        $this->assertInternalType('string', $this->search->to);
-        $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Search\Parts', $this->search->parts[0]);
-        $this->assertInternalType('array', $this->search->parts);
-=======
         $this->search->setParts($parts);
 
         $this->assertInternalType('string', $this->search->from);
@@ -40,6 +27,5 @@ class SearchTest extends \PHPUnit_Framework_TestCase
         $this->search->parts->rewind();
         $this->assertInstanceOf('Clickbus\RestHandler\DataTransfer\Response\Search\Parts', $this->search->parts->current());
         $this->assertInstanceOf('SplObjectStorage', $this->search->parts);
->>>>>>> added data transfer tests
     }
 }
