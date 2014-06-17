@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: thiagovalentim
- * Date: 6/13/14
- * Time: 1:18
+ * Date: 6/12/14
+ * Time: 23:27
  */
 
 namespace Clickbus\RestHandler\DataTransfer\Request\Seat;
@@ -11,23 +11,20 @@ namespace Clickbus\RestHandler\DataTransfer\Request\Seat;
 
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
-class Reservation  extends AbstractTransferBehavior
+class Reservation extends AbstractTransferBehavior
 {
+    protected $from;
+    protected $to;
+    protected $seat;
+    protected $schedule;
     protected $sessionId;
-    protected $buyer;
-    protected $orderItems;
-
-    public function __construct()
-    {
-        $this->orderItems = new \SplObjectStorage;
-    }
 
     /**
-     * @param mixed $buyer
+     * @param mixed $from
      */
-    public function setBuyer(Buyer $buyer)
+    public function setFrom($from)
     {
-        $this->buyer = $buyer;
+        $this->from = $from;
 
         return $this;
     }
@@ -35,17 +32,17 @@ class Reservation  extends AbstractTransferBehavior
     /**
      * @return mixed
      */
-    public function getBuyer()
+    public function getFrom()
     {
-        return $this->buyer;
+        return $this->from;
     }
 
     /**
-     * @param mixed $orderItems
+     * @param mixed $schedule
      */
-    public function setOrderItems(OrderItem $orderItem)
+    public function setSchedule(Schedule $schedule)
     {
-        $this->orderItems->attach($orderItem);
+        $this->schedule = $schedule;
 
         return $this;
     }
@@ -53,9 +50,27 @@ class Reservation  extends AbstractTransferBehavior
     /**
      * @return mixed
      */
-    public function getOrderItems()
+    public function getSchedule()
     {
-        return $this->orderItems;
+        return $this->schedule;
+    }
+
+    /**
+     * @param mixed $seat
+     */
+    public function setSeat($seat)
+    {
+        $this->seat = $seat;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeat()
+    {
+        return $this->seat;
     }
 
     /**
@@ -74,5 +89,23 @@ class Reservation  extends AbstractTransferBehavior
     public function getSessionId()
     {
         return $this->sessionId;
+    }
+
+    /**
+     * @param mixed $to
+     */
+    public function setTo($to)
+    {
+        $this->to = $to;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTo()
+    {
+        return $this->to;
     }
 } 
