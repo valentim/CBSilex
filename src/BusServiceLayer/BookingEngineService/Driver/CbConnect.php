@@ -11,6 +11,10 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 use Clickbus\BusServiceLayer\BookingEngineService\AbstractDriverTemplate;
 use Clickbus\HandlerData\OutputInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Query;
 
@@ -26,33 +30,34 @@ class CbConnect extends AbstractDriverTemplate
         $this->client = new Client(['base_url' => $this->host]);
     }
 
-    protected function callBooking(OutputInterface $output)
+    protected function callBooking(OutputInterface $output, BookingRequest $bookingTransfer)
     {
         $this->method = 'put';
-        $this->call('/booking', $output, ['body' => json_encode($this->data)]);
+        $this->call('/booking', ['body' => json_encode($bookingTransfer)]);
     }
 
-    protected function callReserve(OutputInterface $output)
+    protected function callSeatBlock(OutputInterface $output, SeatBlockRequest $seatBlockTransfer)
     {
         $this->method = 'post';
-        $this->call('/seat/block', $output, ['body' => json_encode($this->data)]);
+        $this->call('/seat/block', ['body' => json_encode($seatBlockTransfer)]);
     }
 
-    protected function callSeats(OutputInterface $output)
+    protected function callSeats(OutputInterface $output, PortfolioRequest $portfolioTransfer)
     {
         $this->method = 'get';
-        $data = new Query();
-        $data->add('from', $this->data->getRequest()->getFrom())
-            ->add('to', $this->data->getRequest()->getTo())
-            ->add('date', $this->data->getRequest()->getDate());
 
-        $this->call('/trip/portfolio', $output, ['query' => $data]);
+        $data = new Query();
+        $data->add('from', $portfolioTransfer->getFrom())
+            ->add('to', $portfolioTransfer->getTo())
+            ->add('date', $portfolioTransfer->getDate());
+
+        $this->call('/trip/portfolio', ['query' => $data]);
     }
 
-    protected function callSearch(OutputInterface $output)
+    protected function callSearch(OutputInterface $output, SearchRequest $searchTransfer)
     {
         $this->method = 'post';
-        $data = $this->call('/search', ['body' => json_encode($this->data)]);
+        $data = $this->call('/search', ['body' => json_encode($searchTransfer)]);
 
         $factory = $this->factory;
         $output->setOutput($factory::bindData($data));
