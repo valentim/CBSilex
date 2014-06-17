@@ -10,9 +10,7 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\Template;
-use Clickbus\RestHandler\DataTransfer\TransferInterface;
-use Clickbus\Request\InputInterface;
-use Clickbus\RestHandler\OutputInterface;
+use Clickbus\HandlerData\OutputInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Query;
 
@@ -54,12 +52,16 @@ class CbConnect extends Template
     protected function callSearch(OutputInterface $output)
     {
         $this->method = 'post';
-        $this->call('/search', $output, ['body' => json_encode($this->data)]);
+        $data = $this->call('/search', ['body' => json_encode($this->data)]);
+
+        $factory = $this->factory;
+        $output->setOutput($factory::bindData($data));
     }
 
-    private function call($action, OutputInterface $output, $data)
+    private function call($action, $data)
     {
         $response = $this->client->{$this->method}($action, $data);
-        $output->setOutput($response->json());
+
+        return $response->json();
     }
 }
