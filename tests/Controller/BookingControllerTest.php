@@ -44,10 +44,10 @@ class BookingControllerTest extends AbstractWebTest
                 ]
                }
              }';
-        $client = $this->createClient();
-        $client->request('PUT','/api/v2/booking/?meta[bookingengine]=booking_engine_driver_cbconnect', json_decode($data, true));
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+//        $client = $this->createClient();
+//        $client->request('PUT','/api/v2/booking/?meta[bookingengine]=booking_engine_driver_cbconnect', json_decode($data, true));
+//
+//        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }
  

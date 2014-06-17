@@ -8,7 +8,7 @@ use Clickbus\RestHandler\DataTransfer\Response\Search\Parts;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Departure;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Arrival;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Waypoint;
-use Clickbus\RestHandler\DataTransfer\Response\Search\Prices;
+use Clickbus\RestHandler\DataTransfer\Response\Search\Price;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Schedule;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Place;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Station;
@@ -28,7 +28,7 @@ class SearchDtoTest extends \PHPUnit_Framework_TestCase
         "to" => "Rio de Janeiro, RJ",
         "parts" => [
             array(
-                "trip_id" => 333,
+                "tripId" => 333,
                 "departure" => array(
                     "price" => 9000,
                     "waypoint" => array(
@@ -175,7 +175,7 @@ class SearchDtoTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $prices = new Prices();
+        $prices = new Price();
         $prices->setWaypoint(123);
         $prices->setPrice(9000);
 
@@ -209,7 +209,7 @@ class SearchDtoTest extends \PHPUnit_Framework_TestCase
 
         $waypoint = new Waypoint();
         $waypoint->setId(113);
-        $waypoint->addPrices($prices);
+        $waypoint->setPrices($prices);
         $waypoint->setSchedule($schedule);
         $waypoint->setContext('departure');
         $waypoint->setPlace($place);
@@ -275,7 +275,7 @@ class SearchDtoTest extends \PHPUnit_Framework_TestCase
         $partWaypointSchedule->setTime('11:00');
         $partWaypointSchedule->setTimezone('America/Sao_Paulo');
 
-        $partWaypointPrices = new Prices();
+        $partWaypointPrices = new Price();
         $partWaypointPrices->setWaypoint(123);
         $partWaypointPrices->setPrice(9000);
 
@@ -303,7 +303,7 @@ class SearchDtoTest extends \PHPUnit_Framework_TestCase
 
         $partWaypoint = new Waypoint();
         $partWaypoint->setId(113);
-        $partWaypoint->addPrices($partWaypointPrices);
+        $partWaypoint->setPrices($partWaypointPrices);
         $partWaypoint->setSchedule($partWaypointSchedule);
         $partWaypoint->setContext('departure');
         $partWaypoint->setPlace($partWaypointPlace);
@@ -328,15 +328,15 @@ class SearchDtoTest extends \PHPUnit_Framework_TestCase
         $parts->setArrival($arrival);
         $parts->setBuscompany($busCompany);
         $parts->setBus($bus);
-        $parts->addWaypoint($partWaypoint);
-        $parts->addSeatType($seatType);
-        $parts->addProduct($product);
+        $parts->setWaypoints($partWaypoint);
+        $parts->setSeatTypes($seatType);
+        $parts->setProducts($product);
         $parts->setAvailableSeats(10);
 
         $search = new Search();
         $search->setFrom('São Paulo, SP');
         $search->setTo('Rio de Janeiro, RJ');
-        $search->addParts($parts);
+        $search->setParts($parts);
 
         $this->searchDTO = new SearchDto();
         $this->searchDTO->add($search);
@@ -345,7 +345,6 @@ class SearchDtoTest extends \PHPUnit_Framework_TestCase
     public function testResponseFormat()
     {
         $response = new Response($this->searchDTO);
-
         $responseExpected = [
             'meta' => null,
             'items' => array($this->expected)
