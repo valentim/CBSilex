@@ -10,11 +10,11 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 
 use Camcima\Soap\Client;
-use Clickbus\BusServiceLayer\BookingEngineService\Template;
-use Clickbus\RestHandler\OutputInterface;
+use Clickbus\BusServiceLayer\BookingEngineService\AbstractDriverTemplate;
+use Clickbus\HandlerData\OutputInterface;
 use Clickbus\RestHandler\DataTransfer\Response\SearchDTO;
 
-class RapidoOchoa extends Template
+class RapidoOchoa extends AbstractDriverTemplate
 {
     protected $callTemplate = '
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
