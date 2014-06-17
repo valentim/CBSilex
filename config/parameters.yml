@@ -8,9 +8,7 @@ database:
     charset: 'utf8'
 
 payments:
-    BankSlip: [MundiPagg]
-    CreditCard: [MundiPagg, PayuLatam]
-    BankTransfer: [Moip]
+    CreditCard: [PayuLatam]
 
 PayuLatam:
     transaction_url: http://stg.api.payulatam.com/payments-api/4.0/service.cgi
