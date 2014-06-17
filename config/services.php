@@ -12,23 +12,30 @@ use Clickbus\Provider\DoctrineORMServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 
 /**
- * Drivers of Booking Engine
- */
-$app['booking_engine_driver_cbconnect'] = $app->share(function () {
-    $bookingEngine = new CbConnect;
-    return new ServiceProvider($bookingEngine);
-});
-
-$app['booking_engine_driver_rapidoochoa'] = $app->share(function () {
-
-    $bookingEngine = new RapidoOchoa;
-    return new ServiceProvider($bookingEngine);
-});
-
-/**
  * Registering Yaml service provider
  */
 $app->register(new YamlConfigServiceProvider(__DIR__ . '/parameters.yml'));
+
+/**
+ * Drivers of Booking Engine
+ */
+$app['booking_engine_driver_cbconnect'] = $app->share(function () use ($app) {
+    $config = array();
+    if (isset($app['config']['CbConnect'])) {
+        $config = $app['config']['CbConnect'];
+    }
+    $bookingEngine = new CbConnect($config);
+    return new ServiceProvider($bookingEngine);
+});
+
+$app['booking_engine_driver_rapidoochoa'] = $app->share(function () use ($app) {
+    $config = array();
+    if (isset($app['config']['RapidoOchoa'])) {
+        $config = $app['config']['RapidoOchoa'];
+    }
+    $bookingEngine = new RapidoOchoa($config);
+    return new ServiceProvider($bookingEngine);
+});
 
 /**
  * Drivers of PaymentService

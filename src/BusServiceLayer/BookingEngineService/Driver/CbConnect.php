@@ -16,13 +16,15 @@ use GuzzleHttp\Query;
 
 class CbConnect extends AbstractDriverTemplate
 {
-    protected $host = 'http://33.33.33.94';
+    protected $host;
     protected $client;
     protected $method;
+    protected $config;
 
-    public function __construct()
+    public function __construct(array $config)
     {
         parent::__construct();
+        $this->host = $config['host'];
         $this->client = new Client(['base_url' => $this->host]);
     }
 

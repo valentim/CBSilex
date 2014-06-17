@@ -16,6 +16,14 @@ use Clickbus\RestHandler\DataTransfer\Response\SearchDTO;
 
 class RapidoOchoa extends AbstractDriverTemplate
 {
+    /**
+     * @var array
+     */
+    protected $config;
+
+    /**
+     * @var string
+     */
     protected $callTemplate = '
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
             <soapenv:Header>
@@ -29,9 +37,11 @@ class RapidoOchoa extends AbstractDriverTemplate
             <soapenv:Body>
             %s
             </soapenv:Body>
-        </soapenv:Envelope>
-    ';
+        </soapenv:Envelope>';
 
+    /**
+     * @var string
+     */
     protected $searchTemplate = '
         <tem:ObtenerTarifas>
             <!--Optional:-->
@@ -42,11 +52,22 @@ class RapidoOchoa extends AbstractDriverTemplate
             <tem:sFecha>%s</tem:sFecha>
         </tem:ObtenerTarifas>';
 
-    public function __construct()
+    public function __construct(array $config)
     {
         parent::__construct();
-        $this->client = new Client('http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx?wsdl');
+        $this->config = $config;
+    }
 
+    /**
+     * Get Soap Client
+     * 
+     * @param  string $wsdl
+     * 
+     * @return Camcima\Soap\Client
+     */
+    private function getClient($wsdl)
+    {
+        return new Client($wsdl);
     }
 
     protected function callBooking(OutputInterface $output)
@@ -66,11 +87,155 @@ class RapidoOchoa extends AbstractDriverTemplate
 
     protected function callSearch(OutputInterface $output)
     {
-        $from = $this->data->getRequest()->getFrom();
-        $to = $this->data->getRequest()->getTo();
-        $departureDate = str_replace('-', '/', $this->data->getRequest()->getDeparture());
+        $request = $this->data->getRequest();
+        $from = $request->getFrom();
+        $to = $request->getTo();
+        $departureDate = $this->formatDateToCall($request->getDeparture());
 
-        $xml = sprintf(
+        $factory = $this->factory;
+        $searchDTO = new searchDTO();
+        $trips = $this->loadSoapResult($this->callSoapSearch());
+
+        foreach ($trips as $trip) {
+            $tripTime = $trip->Fecha->__toString();
+            $dateTime = \DateTime::createFromFormat(\DateTime::ISO8601, $tripTime);
+            $scheduleIdString = $trip->NumeroRodamiento->__toString() . $tripTime;
+            $scheduleId = base64_encode($scheduleIdString);
+            // the $dateTime->getTimezone()->getName() method is retorning -05:00 and we need a string
+            $timezone = timezone_name_from_abbr('', $dateTime->getOffset(), 0);
+            list($departurePlace, $arrivalPlace) = explode('-', $trip->Ruta->__toString());
+
+            $parts = array(
+                $factory::buildPart(
+                    $trip->IdRuta->__toString(),
+                    $trip->Tarifa->__toString(),
+                    $factory::buildWaypoint(
+                        $trip->NumeroRodamiento->__toString(),
+                        'departure',
+                        true,
+                        0,
+                        $scheduleId,
+                        $dateTime->format('Y-m-d'),
+                        $dateTime->format('H:i:s'),
+                        $timezone,
+                        $from,
+                        $this->config['locale'],
+                        $this->config['place_country'],
+                        false, // $placeState,
+                        $departurePlace,
+                        base64_encode($departurePlace),
+                        $departurePlace, // $stationCurrentName,
+                        $this->config['locale'],
+                        base64_encode($departurePlace), // $stationDefaultId,
+                        $departurePlace, // $stationDefaultName,
+                        $this->config['locale'],
+                        array(
+                            $factory::buildPrice(
+                                $trip->NumeroRodamiento->__toString(),
+                                $trip->Tarifa->__toString()
+                            )
+                        )
+                    ),
+                    0,
+                    $factory::buildWaypoint(
+                        $trip->NumeroRodamiento->__toString(),
+                        'arrival',
+                        false,
+                        0,
+                        false,
+                        false,
+                        false,
+                        $timezone,
+                        $to,
+                        $this->config['locale'],
+                        $this->config['place_country'],
+                        false, // $placeState,
+                        $arrivalPlace,
+                        base64_encode($arrivalPlace),
+                        $arrivalPlace, // $stationCurrentName,
+                        $this->config['locale'],
+                        base64_encode($arrivalPlace), // $stationDefaultId,
+                        $arrivalPlace, // $stationDefaultName,
+                        $this->config['locale'],
+                        array($factory::buildPrice($trip->NumeroRodamiento->__toString(), 0))
+                    ),
+                    base64_encode($this->config['bus_company_name']), // $busCompanyId,
+                    $this->config['bus_company_name'], // $busCompanyName,
+                    $trip->NumeroRodamiento->__toString(),
+                    $trip->Servicio->__toString(),
+                    $trip->Servicio->__toString(),
+                    array(), // array $waypoints,
+                    array(), // array $seatTypes,
+                    array(),
+                    $trip->PuestosLibres->__toString()
+                )
+            );
+
+            $search = $factory::build($from, $to, $parts);
+            $searchDTO->add($search);
+        }
+
+        $output->setOutput($searchDTO);
+    }
+
+    /**
+     * Load Soap Result
+     * 
+     * @param  mixed $result
+     * 
+     * @return array
+     */
+    private function loadSoapResult($result)
+    {
+        $loadResponse = new \SimpleXMLElement($result);
+        $obtenerTarifasResponse = current($loadResponse->xpath('child::node()'));
+        $obtenerTarifasResult = current($obtenerTarifasResponse->xpath('child::node()'));
+
+        return $obtenerTarifasResult->xpath('//NewDataSet')[0];
+    }
+
+    private function callSoapSearch()
+    {
+        $request = $this->data->getRequest();
+        $client = $this->getClient($this->config['departure_wsdl']);
+        $xml = $this->getXmlSearchDeparture(
+            $request->getFrom(),
+            $request->getTo(),
+            $this->formatDateToCall($request->getDeparture())
+        );
+
+        return $client->__doRequest(
+            $xml,
+            $this->config['departure_url'],
+            'http://tempuri.org/ObtenerTarifas',
+            SOAP_1_2
+        );
+    }
+
+    /**
+     * Format Date to call format
+     * 
+     * @param  string $date
+     * 
+     * @return string
+     */
+    private function formatDateToCall($date)
+    {
+        return str_replace('-', '/', $date);
+    }
+
+    /**
+     * Build XML to search call
+     * 
+     * @param  int $from
+     * @param  int $to
+     * @param  string $departureDate
+     * 
+     * @return string
+     */
+    private function getXmlSearchDeparture($from, $to, $departureDate)
+    {
+        return sprintf(
             $this->callTemplate,
             sprintf(
                 $this->searchTemplate,
@@ -79,107 +244,5 @@ class RapidoOchoa extends AbstractDriverTemplate
                 $departureDate
             )
         );
-        $result = $this->client->__doRequest(
-            $xml,
-            'http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx',
-            'http://tempuri.org/ObtenerTarifas',
-            SOAP_1_2
-        );
-
-        $loadResponse = new \SimpleXMLElement($result);
-        $obtenerTarifasResponse = current($loadResponse->xpath('child::node()'));
-        $obtenerTarifasResult = current($obtenerTarifasResponse->xpath('child::node()'));
-
-        $trips = $obtenerTarifasResult->xpath('//NewDataSet');
-
-        $factory = $this->factory;
-
-        $searchDTO = new searchDTO();
-
-        foreach ($trips as $tripTables) {
-            foreach ($tripTables->Table as $trip) {
-                $tripTime = $trip->Fecha->__toString();
-                $dateTime = \DateTime::createFromFormat(\DateTime::ISO8601, $tripTime);
-
-                $scheduleIdString = $trip->NumeroRodamiento->__toString() . $tripTime;
-                $scheduleId = base64_encode($scheduleIdString);
-
-                // the $dateTime->getTimezone()->getName() method is retorning -05:00 and we need of a string
-                $timezone = timezone_name_from_abbr('', $dateTime->getOffset(), 0);
-
-                list($departurePlace, $arrivalPlace) = explode('-', $trip->Ruta->__toString());
-
-                $parts = array(
-                    $factory::buildPart(
-                        $trip->IdRuta->__toString(),
-                        $trip->Tarifa->__toString(),
-                        $factory::buildWaypoint(
-                            $trip->NumeroRodamiento->__toString(),
-                            'departure',
-                            true,
-                            0,
-                            $scheduleId,
-                            $dateTime->format('Y-m-d'),
-                            $dateTime->format('H:i:s'),
-                            $timezone,
-                            $from,
-                            'es_CO',
-                            'COL', // $placeCountry,
-                            false, // $placeState,
-                            $departurePlace, // $placeCity,
-                            base64_encode($departurePlace),
-                            $departurePlace, // $stationCurrentName,
-                            'es_CO',
-                            base64_encode($departurePlace), // $stationDefaultId,
-                            $departurePlace, // $stationDefaultName,
-                            'es_CO',
-                            array(
-                                $factory::buildPrice(
-                                    $trip->NumeroRodamiento->__toString(),
-                                    $trip->Tarifa->__toString()
-                                )
-                            )
-                        ),
-                        0,
-                        $factory::buildWaypoint(
-                            $trip->NumeroRodamiento->__toString(),
-                            'arrival',
-                            false,
-                            0,
-                            false,
-                            false,
-                            false,
-                            $timezone,
-                            $to,
-                            'es_CO',
-                            'COL', // $placeCountry,
-                            false, // $placeState,
-                            $arrivalPlace, // $placeCity,
-                            base64_encode($arrivalPlace),
-                            $arrivalPlace, // $stationCurrentName,
-                            'es_CO',
-                            base64_encode($arrivalPlace), // $stationDefaultId,
-                            $arrivalPlace, // $stationDefaultName,
-                            'es_CO',
-                            array($factory::buildPrice($trip->NumeroRodamiento->__toString(), 0))
-                        ),
-                        false, // $busCompanyId,
-                        false, // $busCompanyName,
-                        $trip->NumeroRodamiento->__toString(), // $busId,
-                        $trip->Servicio->__toString(), // $busName,
-                        $trip->Servicio->__toString(),
-                        array(), // array $waypoints,
-                        array(), // array $seatTypes,
-                        array(), // array(),
-                        $trip->PuestosLibres->__toString()
-                    )
-                );
-
-                $search = $factory::build($from, $to, $parts);
-                $searchDTO->add($search);
-            }
-        }
-
-        $output->setOutput($searchDTO);
     }
 }
