@@ -9,10 +9,34 @@ database:
 
 payments:
     BankSlip: [MundiPagg]
-    CreditCard: [MundiPagg]
+    CreditCard: [MundiPagg, PayuLatam]
     BankTransfer: [Moip]
 
+payments_config:
+    PayuLatam:
+        transaction_url: http://stg.api.payulatam.com/payments-api/4.0/service.cgi
+        reports_url: https://stg.api.payulatam.com/reports-api/4.0/service.cgi
+        api_key: 6u39nqhq8ftd0hlvnjfs66eh8c
+        api_login: 11959c415b33d0c
+        merchant_id: 500238
+        account_id: 500538
+        tx_value: 3
+        currency: USD
+        responseUrl: http://www.api.dev/
+        language: es
+
 booking_engines: [CbConnect, RapidoOchoa]
+
+booking_engines_config:
+    RapidoOchoa:
+        departure_url: http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx
+        departure_wsdl: http://190.85.56.76/wsTarifasROpruebas/ServicioTarifas.asmx?wsdl
+        arrival_url: http://190.145.82.98/SATServicesclickbus/Service/WSVentaOnline.svc
+        arrival_wsdl: http://190.145.82.98/SATServicesclickbus/Service/WSVentaOnline.svc/basic?wsdl
+        user: MVM
+        password: Mvm2007mvm!
+        locale: es_CO
+        placeCountry: COL
 
 # payment:
 #     payu_latam:

@@ -24,6 +24,11 @@ class PayuLatam implements CreditCardDriver
     /**
      * @var string
      */
+    protected $transactionUrl;
+
+    /**
+     * @var string
+     */
     protected $notifyUrl;
 
     /**
@@ -60,7 +65,7 @@ class PayuLatam implements CreditCardDriver
      */
     public function verifyPayment(PaymentTransfer $dataTransfer)
     {
-        
+
     }
 
     /**
@@ -149,7 +154,7 @@ class PayuLatam implements CreditCardDriver
 
         $data = new SubmitTransactionDTO($submitTransaction);
 
-        $response = $this->post($data);
+        $response = $this->post($this->transactionUrl, $data);
 
         return $response;
     }
@@ -183,7 +188,7 @@ class PayuLatam implements CreditCardDriver
             'test' => $this->test
         );
 
-        $response = $this->post($data);
+        $response = $this->post($this->transactionUrl, $data);
 
         return $response;
     }
@@ -205,11 +210,11 @@ class PayuLatam implements CreditCardDriver
      * 
      * @return string
      */
-    private function post(array $data)
+    private function post($url, array $data)
     {
         $data = json_encode($data);
 
-        $ch = curl_init('http://stg.api.payulatam.com/payments-api/4.0/service.cgi');
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
