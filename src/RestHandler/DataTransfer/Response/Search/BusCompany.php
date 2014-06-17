@@ -1,7 +1,13 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
 class BusCompany
+=======
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class BusCompany extends AbstractTransferBehavior
+>>>>>>> added response objects
 {
     public $name;
 

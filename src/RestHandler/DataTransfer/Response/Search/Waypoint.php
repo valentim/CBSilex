@@ -1,6 +1,7 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
 use Clickbus\RestHandler\DataTransfer\Response\Search\Prices;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Schedule;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Place;
@@ -10,6 +11,15 @@ class Waypoint
     public $id;
 
     public $prices = array();
+=======
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class Waypoint extends AbstractTransferBehavior
+{
+    public $id;
+
+    public $prices;
+>>>>>>> added response objects
 
     public $schedule;
 
@@ -21,14 +31,28 @@ class Waypoint
 
     public $position;
 
+<<<<<<< HEAD
+=======
+    public function __construct()
+    {
+        $this->prices = new \SplObjectStorage;
+    }
+
+>>>>>>> added response objects
     public function setId($id)
     {
         $this->id = $id;
     }
 
+<<<<<<< HEAD
     public function addPrices(Prices $prices)
     {
         $this->prices[] = $prices;
+=======
+    public function setPrices(Price $price)
+    {
+        $this->prices->attach($price);
+>>>>>>> added response objects
     }
 
     public function setSchedule(Schedule $schedule)

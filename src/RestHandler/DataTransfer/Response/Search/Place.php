@@ -1,9 +1,15 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
 use Clickbus\RestHandler\DataTransfer\Response\Search\Station;
 
 class Place
+=======
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class Place extends AbstractTransferBehavior
+>>>>>>> added response objects
 {
     public $country;
 

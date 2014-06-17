@@ -1,7 +1,13 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
 class Product
+=======
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class Product extends AbstractTransferBehavior
+>>>>>>> added response objects
 {
     public $uuid;
 

@@ -1,7 +1,13 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
 class SeatType
+=======
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class SeatType extends AbstractTransferBehavior
+>>>>>>> added response objects
 {
     public $name;
 

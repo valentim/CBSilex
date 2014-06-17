@@ -1,6 +1,7 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
+<<<<<<< HEAD
 use Clickbus\RestHandler\DataTransfer\Response\Search\Prices;
 use Clickbus\RestHandler\DataTransfer\Response\Search\Product;
 use Clickbus\RestHandler\DataTransfer\Response\Search\SeatType;
@@ -20,6 +21,20 @@ use Clickbus\RestHandler\DataTransfer\Response\Search\Search;
 
 abstract class AbstractSearchFactory
 {
+=======
+use Clickbus\HandlerData\DataBinding;
+
+abstract class AbstractSearchFactory
+{
+    public static function bindData($data)
+    {
+        $transform = new DataBinding(new SearchContainer);
+        $transform->bindData($data);
+
+        return $transform->getObject();
+    }
+
+>>>>>>> added response objects
     public static function build($from, $to, array $parts)
     {
         $search = new Search();
@@ -28,7 +43,11 @@ abstract class AbstractSearchFactory
 
         if (count($parts) > 0) {
             foreach ($parts as $part) {
+<<<<<<< HEAD
                 $search->addParts($part);
+=======
+                $search->setParts($part);
+>>>>>>> added response objects
             }
         }
 
@@ -77,19 +96,31 @@ abstract class AbstractSearchFactory
 
         if (count($waypoints) > 0) {
             foreach ($waypoints as $waypoint) {
+<<<<<<< HEAD
                 $part->addWaypoint($waypoint);
+=======
+                $part->setWaypoints($waypoint);
+>>>>>>> added response objects
             }
         }
 
         if (count($seatTypes) > 0) {
             foreach ($seatTypes as $seatType) {
+<<<<<<< HEAD
                 $part->addSeatType($seatType);
+=======
+                $part->setSeatTypes($seatType);
+>>>>>>> added response objects
             }
         }
 
         if (count($products) > 0) {
             foreach ($products as $product) {
+<<<<<<< HEAD
                 $part->addProduct($product);
+=======
+                $part->setProducts($product);
+>>>>>>> added response objects
             }
         }
 
@@ -158,7 +189,11 @@ abstract class AbstractSearchFactory
 
         if (count($prices) > 0) {
             foreach ($prices as $price) {
+<<<<<<< HEAD
                 $waypoint->addPrices($price);
+=======
+                $waypoint->setPrices($price);
+>>>>>>> added response objects
             }
         }
 
@@ -189,7 +224,11 @@ abstract class AbstractSearchFactory
 
     public static function buildPrice($waypoint, $price)
     {
+<<<<<<< HEAD
         $prices = new Prices();
+=======
+        $prices = new Price();
+>>>>>>> added response objects
         $prices->setWaypoint($waypoint);
         $prices->setPrice($price);
 
