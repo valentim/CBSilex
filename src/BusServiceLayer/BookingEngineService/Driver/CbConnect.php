@@ -20,14 +20,14 @@ use GuzzleHttp\Query;
 
 class CbConnect extends AbstractDriverTemplate
 {
-    protected $host = 'http://33.33.33.94';
     protected $client;
     protected $method;
+    protected $config;
 
-    public function __construct()
+    public function __construct(array $config)
     {
         parent::__construct();
-        $this->client = new Client(['base_url' => $this->host]);
+        $this->client = new Client(['base_url' => $config['host']]);
     }
 
     protected function callBooking(OutputInterface $output, BookingRequest $bookingTransfer)

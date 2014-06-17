@@ -9,7 +9,7 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService\Service;
 
 
-use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineDriver;
+use Clickbus\BusServiceLayer\BookingEngineService\BookingEngineDriverInterface;
 use Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsMethodException;
 use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
@@ -23,7 +23,7 @@ abstract class AbstractService
     protected $adapter;
     protected $result;
 
-    public function __construct(BookingEngineDriver $adapter)
+    public function __construct(BookingEngineDriverInterface $adapter)
     {
         $this->adapter = $adapter;
     }

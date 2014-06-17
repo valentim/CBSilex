@@ -19,7 +19,7 @@ class CbConnectTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new CbConnect;
+        $this->object = new CbConnect(array('host' => '33.33.33.94'));
     }
 
     protected function tearDown()

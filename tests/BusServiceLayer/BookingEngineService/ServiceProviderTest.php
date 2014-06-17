@@ -21,7 +21,7 @@ class ServiceProviderTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $driver = new CbConnect;
+        $driver = new CbConnect(array('host' => '33.33.33.94'));
         $this->object = new ServiceProvider($driver);
     }
 

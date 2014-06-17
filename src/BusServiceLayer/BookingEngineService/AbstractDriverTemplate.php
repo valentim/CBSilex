@@ -16,7 +16,7 @@ use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
 
-abstract class AbstractDriverTemplate implements BookingEngineDriver
+abstract class AbstractDriverTemplate implements BookingEngineDriverInterface
 {
     protected $output;
     protected $factory;
