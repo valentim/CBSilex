@@ -71,7 +71,7 @@ class TripDtoTest extends \PHPUnit_Framework_TestCase
         $details = new Details();
         $details->setPrice(1100);
         $details->setCurrency('BRL');
-        $details->addSeatType($seatType);
+        $details->setSeatType($seatType);
 
         $seat = new Seat();
         $seat->setId(13);
@@ -81,10 +81,10 @@ class TripDtoTest extends \PHPUnit_Framework_TestCase
         $seat->setDetails($details);
 
         $trip = new Trip();
-        $trip->setTripId(40123);
+        $trip->setTrip_id(40123);
         $trip->setBusCompany($busCompany);
         $trip->setBus($bus);
-        $trip->addSeat($seat);
+        $trip->setSeats($seat);
 
 
         $this->tripDto = new TripDto($trip);
