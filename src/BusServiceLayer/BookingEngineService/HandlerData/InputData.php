@@ -46,7 +46,7 @@ class InputData implements TransferInterface, InputInterface
         $request = new Request;
         $request->setMeta($data['meta']);
         $request->setRequest($this->transferData->getObject());
-
+        
         return $request;
     }
 }
