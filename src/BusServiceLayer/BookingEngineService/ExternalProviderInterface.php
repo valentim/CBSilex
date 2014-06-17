@@ -9,13 +9,16 @@
 namespace Clickbus\BusServiceLayer\BookingEngineService;
 
 
-use Clickbus\RestHandler\DataTransfer\TransferInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
 
 interface ExternalProviderInterface
 {
-    public function getSearch(TransferInterface $searchTransfer);
-    public function getSeats(TransferInterface $searchTransfer);
-    public function reserve(TransferInterface $searchTransfer);
-    public function doBooking(TransferInterface $searchTransfer);
+    public function getSearch(SearchRequest $searchTransfer);
+    public function getSeats(PortfolioRequest $portfolioTransfer);
+    public function seatBlock(SeatBlockRequest $seatBlockTransfer);
+    public function doBooking(BookingRequest $bookingTransfer);
 
 } 
