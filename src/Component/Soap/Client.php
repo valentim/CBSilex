@@ -51,6 +51,7 @@ class Client extends \SoapClient
     public function __doRequest($request, $location, $action, $version, $one_way = 0)
     {
         if ($this->isResponse) {
+            
             return $this->response->getBody(true);
 
         } else {
