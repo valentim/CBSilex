@@ -3,3 +3,4 @@ tests/_reports
 .vagrant
 .git
 .idea
+.DS_Store
