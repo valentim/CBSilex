@@ -1,7 +1,9 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Trip;
 
-class BusCompany
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class BusCompany extends AbstractTransferBehavior
 {
     public $name;
 

@@ -1,15 +1,20 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Trip;
 
-use Clickbus\RestHandler\DataTransfer\Response\Trip\SeatType;
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
-class Details
+class Details extends AbstractTransferBehavior
 {
     public $price;
 
     public $currency;
 
-    public $seatTypes = array();
+    public $seatTypes;
+
+    public function __construct()
+    {
+        $this->seatTypes = new \SplObjectStorage;
+    }
 
     public function setPrice($price)
     {
@@ -21,8 +26,8 @@ class Details
         $this->currency = $currency;
     }
 
-    public function addSeatType(SeatType $seatType)
+    public function setSeatType(SeatType $seatType)
     {
-        $this->seatTypes[] = $seatType;
+        $this->seatTypes->attach($seatType);
     }
 }

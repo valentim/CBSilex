@@ -1,11 +1,9 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Trip;
 
-use Clickbus\RestHandler\DataTransfer\Response\Trip\BusCompany;
-use Clickbus\RestHandler\DataTransfer\Response\Trip\Bus;
-use Clickbus\RestHandler\DataTransfer\Response\Trip\Seat;
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
-class Trip
+class Trip extends AbstractTransferBehavior
 {
     public $trip_id;
 
@@ -13,9 +11,14 @@ class Trip
 
     public $bus;
 
-    public $seats = array();
+    public $seats;
 
-    public function setTripId($tripId)
+    public function __construct()
+    {
+        $this->seats = new \SplObjectStorage;
+    }
+
+    public function setTrip_id($tripId)
     {
         $this->trip_id = $tripId;
     }
@@ -30,8 +33,8 @@ class Trip
         $this->bus = $bus;
     }
 
-    public function addSeat(Seat $seat)
+    public function setSeats(Seat $seat)
     {
-        $this->seats[] = $seat;
+        $this->seats->attach($seat);
     }
 }

@@ -1,7 +1,9 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Trip;
 
-class Position
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+
+class Position extends AbstractTransferBehavior
 {
     public $x;
 
