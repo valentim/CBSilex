@@ -9,8 +9,6 @@
 namespace Clickbus\RestHandler\DataTransfer;
 
 
-use SplObjectStorage;
-
 abstract class AbstractTransferBehavior implements TransferInterface, \JsonSerializable
 {
     public function getData()
@@ -39,7 +37,7 @@ abstract class AbstractTransferBehavior implements TransferInterface, \JsonSeria
 
         $data = [];
         foreach ($properties as $property => $value) {
-            if ($value instanceof SplObjectStorage) {
+            if ($value instanceof \SplObjectStorage) {
                 $value = $this->getCollection($value);
             }
             $data[$property] = $value;
