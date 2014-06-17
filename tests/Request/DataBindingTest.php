@@ -8,16 +8,15 @@
 
 namespace Request;
 
-
-use Clickbus\RestHandler\DataTransfer\Request\Seat\BlockRequest;
-use Clickbus\RestHandler\DataTransfer\Request\Seat\BuyerRequest;
-use Clickbus\RestHandler\DataTransfer\Request\Seat\OrderItemRequest;
-use Clickbus\RestHandler\DataTransfer\Request\Seat\PassengerRequest;
-use Clickbus\RestHandler\DataTransfer\Request\Seat\ReservationRequest;
-use Clickbus\RestHandler\DataTransfer\Request\Seat\ScheduleRequest;
-use Clickbus\RestHandler\DataTransfer\Request\Trip\TripRequest;
-use Clickbus\RestHandler\DataTransfer\Request\Trip\WaypointRequest;
-use Clickbus\Request\DataBinding;
+use Clickbus\HandlerData\DataBinding;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Block;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Buyer;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\OrderItem;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Passenger;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Reservation;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Schedule;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\Trip;
+use Clickbus\RestHandler\DataTransfer\Request\Trip\Waypoint;
 
 class DataBindingTest extends \PHPUnit_Framework_TestCase
 {
@@ -47,18 +46,18 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
               }';
 
 
-        $outputSubObject1 = new WaypointRequest;
+        $outputSubObject1 = new Waypoint;
         $outputSubObject1->setTo('Ribeirão Preto')
             ->setQuantity('2')
             ->setDate('2010-10-12');
 
-        $outputSubObject2 = new WaypointRequest;
+        $outputSubObject2 = new Waypoint;
         $outputSubObject2->setTo('Goiânia')
             ->setQuantity('2')
             ->setDate('2010-10-14');
 
 
-        $outputObject = new TripRequest;
+        $outputObject = new Trip;
         $outputObject->setFrom('Terminal do Tiete')
             ->setDeparture('2010-10-10')
             ->setFlexibleDates(true)
@@ -93,14 +92,14 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
 
     public function testBindDataWaypointRequest()
     {
-        $this->object = new DataBinding(new WaypointRequest);
+        $this->object = new DataBinding(new Waypoint);
         $input = '{
                     "to": "Ribeirão Preto",
                     "date": "2010-10-12",
                     "quantity": 2
                   }';
 
-        $outputSubObject1 = new WaypointRequest;
+        $outputSubObject1 = new Waypoint;
         $outputSubObject1->setTo('Ribeirão Preto')
             ->setQuantity('2')
             ->setDate('2010-10-12');
@@ -113,7 +112,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
 
     public function testBindDataScheduleRequest()
     {
-        $this->object = new DataBinding(new ScheduleRequest);
+        $this->object = new DataBinding(new Schedule);
         $input = '{
                 "id": "e5b193ca-f11e-4108-887c-9656edf91611",
                 "date": "2014-06-23",
@@ -121,7 +120,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
                 "timezone": "Pakistan Time Zone (UTC +5)"
               }';
 
-        $outputScheduleData = new ScheduleRequest;
+        $outputScheduleData = new Schedule;
         $outputScheduleData->setDate('2014-06-23')
             ->setId('e5b193ca-f11e-4108-887c-9656edf91611')
             ->setTime('07:00')
@@ -134,7 +133,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
 
     public function testBindDataBlockRequest()
     {
-        $this->object = new DataBinding(new BlockRequest);
+        $this->object = new DataBinding(new Block);
         $input = '{
               "from":"2a6578da-9db4-48d5-9191-1f9524c9d043",
               "to": "cd7bc748-131d-4900-b04a-019f7e1234b2",
@@ -148,13 +147,13 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
               "sessionId": "DDFF999-AAACCC-DDDFFF@113-AFAFDD"
            }';
 
-        $outputScheduleData = new ScheduleRequest;
+        $outputScheduleData = new Schedule;
         $outputScheduleData->setDate('2014-06-23')
             ->setId('e5b193ca-f11e-4108-887c-9656edf91611')
             ->setTime('07:00')
             ->setTimezone('Pakistan Time Zone (UTC +5)');
 
-        $outputBlockData = new BlockRequest;
+        $outputBlockData = new Block;
         $outputBlockData->setFrom('2a6578da-9db4-48d5-9191-1f9524c9d043')
             ->setTo('cd7bc748-131d-4900-b04a-019f7e1234b2')
             ->setSeat("")
@@ -176,7 +175,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
 
     public function testBindDataReservationRequest()
     {
-        $this->object = new DataBinding(new ReservationRequest);
+        $this->object = new DataBinding(new Reservation);
 
         $input = '{
                 "sessionId": "DDFF999-AAACCC-DDDFFF@113-AFAFDD",
@@ -206,7 +205,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
                 ]
              }';
 
-        $outputDataBuyer = new BuyerRequest;
+        $outputDataBuyer = new Buyer;
         $outputDataBuyer->setBirthday('1986-05-17')
             ->setDocument('123.123.123-11')
             ->setEmail('dev@clickbus.com.br')
@@ -215,7 +214,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
             ->setLastName('Bueno')
             ->setMeta([]);
 
-        $outputDataPassenger = new PassengerRequest;
+        $outputDataPassenger = new Passenger;
         $outputDataPassenger->setMeta("")
             ->setFirstName('Klederson')
             ->setLastName('Bueno')
@@ -225,12 +224,12 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
             ->setMeta([])
             ->setEmail('dev@clickbus.com.br');
 
-        $outputOrderItemData = new OrderItemRequest;
+        $outputOrderItemData = new OrderItem;
         $outputOrderItemData->setPassenger($outputDataPassenger)
             ->setProducts([])
             ->setSeatReservation('DDFF999-AAACCC-DDDFFF@113-AFAFDD');
 
-        $outputReservationData = new ReservationRequest;
+        $outputReservationData = new Reservation;
         $outputReservationData->setSessionId('DDFF999-AAACCC-DDDFFF@113-AFAFDD')
             ->setBuyer($outputDataBuyer)
             ->setOrderItems($outputOrderItemData);
@@ -277,7 +276,7 @@ class DataBindingTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new DataBinding(new TripRequest);
+        $this->object = new DataBinding(new Trip);
     }
 
     protected function tearDown()
