@@ -10,7 +10,7 @@ namespace Clickbus\Controller;
 
 
 use Clickbus\BusServiceLayer\BookingEngineService\HandlerData\InputData;
-use Clickbus\BusServiceLayer\BookingEngineService\Service\NotExistsServiceException;
+use Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsServiceException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
