@@ -1,7 +1,7 @@
 <?php
 namespace Clickbus\Controller;
 
-use Clickbus\RestHandler\DataTransfer\Request\Seat\ReservationRequest;
+use Clickbus\RestHandler\DataTransfer\Request\Seat\Reservation;
 use Symfony\Component\HttpFoundation\Request;
 
 use Silex\Application;
@@ -12,7 +12,7 @@ class BookingController extends AbstractController
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
         $dataTransfer = $this->getInput($request);
-        $dataTransfer->setTransferType(new ReservationRequest);
+        $dataTransfer->setTransferType(new Reservation);
 
         $response = $bookingEngine->doBooking($dataTransfer->getData());
 
