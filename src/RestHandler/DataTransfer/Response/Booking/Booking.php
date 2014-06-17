@@ -1,57 +1,78 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Booking;
 
-use Clickbus\RestHandler\DataTransfer\Response\Booking\Payment;
-use Clickbus\RestHandler\DataTransfer\Response\Booking\Item;
+use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
-class Booking
+class Booking extends AbstractTransferBehavior
 {
-    public $id;
-
+    public $seatReservation;
     public $status;
+    public $messages;
+    public $products;
 
-    public $localizer;
-
-    public $uuid;
-
-    public $payment;
-
-    public $items = array();
-
-    public $createdAt;
-
-    public function setId($id)
+    /**
+     * @param mixed $messages
+     */
+    public function setMessages($messages)
     {
-        $this->id = $id;
+        $this->messages = $messages;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param mixed $seatReservation
+     */
+    public function setSeatReservation($seatReservation)
+    {
+        $this->seatReservation = $seatReservation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeatReservation()
+    {
+        return $this->seatReservation;
+    }
+
+    /**
+     * @param mixed $status
+     */
     public function setStatus($status)
     {
         $this->status = $status;
     }
 
-    public function setLocalizer($localizer)
+    /**
+     * @return mixed
+     */
+    public function getStatus()
     {
-        $this->localizer = $localizer;
+        return $this->status;
     }
 
-    public function setUuid($uuid)
-    {
-        $this->uuid = $uuid;
-    }
 
-    public function setPayment(Payment $payment)
-    {
-        $this->payment = $payment;
-    }
-
-    public function addItem(Item $item)
-    {
-        $this->items[] = $item;
-    }
-
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
 }
