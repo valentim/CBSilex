@@ -16,7 +16,7 @@ class SeatBlockController extends AbstractController
     public function blockAction(Application $app, Request $request)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
-        $seatBlockTransfer = $this->getTransfer(new SeatBlockRequest, $request->request->all());
+        $seatBlockTransfer = $this->getTransfer(new SeatBlockRequest, $request->getRequest()->all());
 
         $response = $bookingEngine->seatBlock($seatBlockTransfer);
 
