@@ -14,6 +14,7 @@ use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Trip\PortfolioRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
+use Clickbus\RestHandler\DtoInterface;
 
 abstract class AbstractDriverTemplate implements BookingEngineDriverInterface
 {
@@ -57,7 +58,7 @@ abstract class AbstractDriverTemplate implements BookingEngineDriverInterface
         $this->setOutput($data);
     }
 
-    protected function setOutput($data)
+    protected function setOutput(DtoInterface $data)
     {
         $this->output->setOutput($data);
     }

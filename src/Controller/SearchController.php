@@ -11,7 +11,7 @@ class SearchController extends AbstractController
     public function getAction(Application $app, Request $request)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
-        $searchTransfer = $this->getTransfer(new SearchRequest, $request->query->all());
+        $searchTransfer = $this->getTransfer(new SearchRequest, $request->request->all());
         $response = $bookingEngine->getSearch($searchTransfer);
 
         return $app->json($response->getResult(), 200);

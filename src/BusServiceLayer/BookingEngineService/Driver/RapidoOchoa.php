@@ -94,7 +94,7 @@ class RapidoOchoa extends AbstractDriverTemplate
         $from = $searchTransfer->getRequest()->getFrom();
         $to = $searchTransfer->getRequest()->getTo();
 
-        $searchDTO = new searchDTO();
+        $searchDTO = new SearchDTO();
         $trips = $this->loadSoapResult($this->callSoapSearch($searchTransfer));
 
         foreach ($trips as $trip) {
@@ -176,7 +176,7 @@ class RapidoOchoa extends AbstractDriverTemplate
             $searchDTO->add($search);
         }
 
-        $output->setOutput($searchDTO);
+        return $searchDTO;
     }
 
     /**
