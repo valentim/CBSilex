@@ -6,9 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use DerAlex\Silex\YamlConfigServiceProvider;
 
-use Clickbus\Provider\DoctrineORMServiceProvider;
-use Silex\Provider\DoctrineServiceProvider;
-
 /**
  * Registering Yaml service provider
  */

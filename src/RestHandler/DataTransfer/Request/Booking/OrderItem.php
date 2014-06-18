@@ -70,6 +70,4 @@ class OrderItem extends AbstractTransferBehavior
     {
         return $this->seatReservation;
     }
-
-
-} 
+}

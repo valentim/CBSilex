@@ -8,11 +8,6 @@ use Silex\Application;
 
 class BookingController extends AbstractController
 {
-    public function postAction(Application $app, Request $request)
-    {
-        
-    }
-
     public function putAction(Application $app, Request $request)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);

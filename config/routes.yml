@@ -33,11 +33,6 @@ seat_block_delete:
     defaults: { _controller: 'Clickbus\Controller\SeatBlockController::deleteAction' }
     methods: [DELETE]
 
-booking_post:
-    path: /api/v2/booking/
-    defautls: { _controller: 'Clickbus\Controller\BookingController::postAction' }
-    methods: [POST]
-
 booking_put:
     path: /api/v2/booking/
     defaults: { _controller: 'Clickbus\Controller\BookingController::putAction' }

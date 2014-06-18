@@ -214,7 +214,7 @@ class PayuLatam implements CreditCardDriverInterface
     /**
      * Cancel a payment
      * 
-     * @param  \Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
+     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
      * 
      * @return array
      */
