@@ -11,7 +11,6 @@ namespace Clickbus\BusServiceLayer\BookingEngineService\Driver;
 
 use Camcima\Soap\Client;
 use Clickbus\BusServiceLayer\BookingEngineService\AbstractDriverTemplate;
-use Clickbus\HandlerData\OutputInterface;
 use Clickbus\RestHandler\DataTransfer\Request\Booking\BookingRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Search\SearchRequest;
 use Clickbus\RestHandler\DataTransfer\Request\Seat\SeatBlockRequest;
