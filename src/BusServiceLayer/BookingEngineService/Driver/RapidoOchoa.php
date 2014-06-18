@@ -67,7 +67,7 @@ class RapidoOchoa extends AbstractDriverTemplate
      * 
      * @param  string $wsdl
      * 
-     * @return Camcima\Soap\Client
+     * @return \Camcima\Soap\Client
      */
     private function getClient($wsdl)
     {
