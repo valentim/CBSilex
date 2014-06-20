@@ -1,9 +1,10 @@
 <?php
 namespace Clickbus\RestHandler\DataTransfer\Response\Booking;
 
+
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
 
-class Booking extends AbstractTransferBehavior
+class BookingDelete extends AbstractTransferBehavior
 {
     public $id;
 
@@ -11,13 +12,9 @@ class Booking extends AbstractTransferBehavior
 
     public $localizer;
 
-    public $uuid;
-
     public $payment;
 
     public $items;
-
-    public $createdAt;
 
     public function __construct()
     {
@@ -39,23 +36,13 @@ class Booking extends AbstractTransferBehavior
         $this->localizer = $localizer;
     }
 
-    public function setUuid($uuid)
+    public function setPayment(PaymentDelete $paymentDelete)
     {
-        $this->uuid = $uuid;
+        $this->payment = $paymentDelete;
     }
 
-    public function setPayment(Payment $payment)
+    public function addItem(DeleteItem $deleteItem)
     {
-        $this->payment = $payment;
-    }
-
-    public function setItem(Item $item)
-    {
-        $this->items->attach($item);
-    }
-
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
+        $this->items->attach($deleteItem);
     }
 }
