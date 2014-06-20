@@ -60,6 +60,11 @@ class PayuLatam implements CreditCardDriverInterface
     protected $transaction;
 
     /**
+     * @var string
+     */
+    protected $referenceCode;
+
+    /**
      * @var float
      */
     protected $txValue;
@@ -68,6 +73,11 @@ class PayuLatam implements CreditCardDriverInterface
      * @var string
      */
     protected $currency;
+
+    /**
+     * @var string
+     */
+    protected $country;
 
     /**
      * @var bool
@@ -87,6 +97,7 @@ class PayuLatam implements CreditCardDriverInterface
         $this->accountId = $config['account_id'];
         $this->txValue = $config['tx_value'];
         $this->currency = $config['currency'];
+        $this->country = $config['country'];
         $this->responseUrl = $config['response_url'];
         $this->language = $config['language'];
     }
@@ -134,6 +145,7 @@ class PayuLatam implements CreditCardDriverInterface
         $buyer = $dataTransfer->getBuyer();
         $payment = $buyer->getPayment();
         $orderItems = $dataTransfer->getOrderItems();
+        $this->referenceCode = $orderItems[0]->getSeatReservation();
 
         $merchant = array(
             'apiLogin' => $this->apiLogin,
@@ -162,7 +174,7 @@ class PayuLatam implements CreditCardDriverInterface
 
         $order = array(
             'accountId' => $this->accountId,
-            'referenceCode' => 'TestPayU',
+            'referenceCode' => $this->referenceCode,
             'description' => 'Test order Colombia',
             'language' => $this->language,
             'notifyUrl' => $this->notifyUrl,
@@ -174,19 +186,19 @@ class PayuLatam implements CreditCardDriverInterface
         );
 
         $creditCard = array(
-            'number' => '4111111111111111',
-            'securityCode' => '737',
-            'expirationDate' => '2016/06',
-            'name' => 'Tiago Butzke'
+            'number' => $payment->getMeta()->getCard(),
+            'securityCode' => $payment->getMeta()->getCode(),
+            'expirationDate' => $payment->getMeta()->getExpiration(),
+            'name' => $payment->getMeta()->getName()
         );
 
         $payer = array(
-            'fullName' => 'Tiago Butzke',
-            'emailAddress' => 'tiago.butzke@clickbus.com.br'
+            'fullName' => $payment->getMeta()->getName(),
+            'emailAddress' => $buyer->getEmail()
         );
 
         $extraParameters = array(
-            'installmentsNumber' => 1,
+            'installmentsNumber' => $payment->getInstallment(),
             'responseUrl' => $this->responseUrl
         );
 
@@ -195,7 +207,7 @@ class PayuLatam implements CreditCardDriverInterface
             'creditCard' => $creditCard,
             'type' => self::AUTHORIZATION_AND_CAPTURE,
             'paymentMethod' => self::VISA,
-            'paymentCountry' => 'CO',
+            'paymentCountry' => $this->country,
             'payer' => $payer,
             'ipAddress' => '127.0.0.1',
             'userAgent' => 'Firefox',

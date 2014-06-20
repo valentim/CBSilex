@@ -22,6 +22,7 @@ PayuLatam:
     response_url: http://www.api.dev/
     language: en
     test: true
+    country: CO
 
 booking_engines: [CbConnect, RapidoOchoa]
 
