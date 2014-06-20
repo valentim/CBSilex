@@ -18,7 +18,6 @@ class AbstractBookingFactory
         $status,
         $localizer,
         $uuid,
-        $payment,
         $createdAt,
         $card,
         $code,

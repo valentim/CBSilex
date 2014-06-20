@@ -127,7 +127,6 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
         $status = 'pending';
         $localizer = 'ABDDDD999';
         $uuid = '53347e09aee47';
-        $payment = false;
         $createdAt = '2010-10-30';
         $card = 'XXXX-XXXX-XXXX-1234';
         $code = 'XXX';
@@ -181,7 +180,6 @@ class AbstractBookingFactoryMethod extends \PHPUnit_Framework_TestCase
             $status,
             $localizer,
             $uuid,
-            $payment,
             $createdAt,
             $card,
             $code,
