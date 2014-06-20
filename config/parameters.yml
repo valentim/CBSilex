@@ -38,9 +38,3 @@ RapidoOchoa:
     locale: es_CO
     place_country: COL
     bus_company_name: RapidoOchoa
-
-# payment:
-#     payu_latam:
-#         payment: https://stg.api.payulatam.com/payments-api/4.0/service.cgi
-#         consultation: https://stg.api.payulatam.com/reports-api/4.0/service.cgi
-

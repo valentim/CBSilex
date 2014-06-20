@@ -36,8 +36,9 @@ class DriverServiceProvider implements ServiceProviderInterface
 
     /**
      * Verify if exists
-     * 
+     *
      * @param  string $class
+     * @throws Exception\NotExistsServiceException
      */
     private function verifyExistence($class)
     {

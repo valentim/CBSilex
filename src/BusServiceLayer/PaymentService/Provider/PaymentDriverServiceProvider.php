@@ -35,7 +35,7 @@ class PaymentDriverServiceProvider implements ServiceProviderInterface
     private function registerDrivers($paymentType, array $drivers, Application $app)
     {
         $parameters = $app['config'];
-        
+
         foreach ($drivers as $driver) {
             $driverName = self::DRIVER_NAMESPACE . "{$paymentType}\\{$driver}";
             $this->verifyExistence($driverName);

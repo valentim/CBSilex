@@ -124,30 +124,34 @@ class PayuLatam implements CreditCardDriverInterface
 
     /**
      * Make payment call
-     * 
+     *
      * @param  \Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
-     * 
+     *
      * @return array
      */
     public function doPayment(PaymentTransferInterface $dataTransfer)
     {
+        $buyer = $dataTransfer->getBuyer();
+        $payment = $buyer->getPayment();
+        $orderItems = $dataTransfer->getOrderItems();
+
         $merchant = array(
             'apiLogin' => $this->apiLogin,
             'apiKey' => $this->apiKey
         );
 
         $shippingAddress = array(
-            'street1' => 'Calle 93 B 17 – 25',
-            'city' => 'Bogotá',
-            'state' => 'Cundinamarca',
-            'country' => 'CO',
-            'phone' => '5582254'
+//            'street1' => 'Calle 93 B 17 – 25',
+//            'city' => 'Bogotá',
+//            'state' => 'Cundinamarca',
+//            'country' => 'CO',
+//            'phone' => '5582254'
         );
 
         $buyer = array(
-            'fullName' => 'Tiago Butzke',
-            'emailAddress' => 'tiago.butzke@clickbus.com.br',
-            'dniNumber' => '1155255887',
+            'fullName' => "{$buyer->getFirstName()} {$buyer->getLastName()}",
+            'emailAddress' => $buyer->getEmail(),
+            'dniNumber' => $buyer->getDocument(),
             'shippingAddress' => $shippingAddress
         );
 
@@ -214,7 +218,7 @@ class PayuLatam implements CreditCardDriverInterface
     /**
      * Cancel a payment
      * 
-     * @param  Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
+     * @param  \Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
      * 
      * @return array
      */
@@ -257,7 +261,8 @@ class PayuLatam implements CreditCardDriverInterface
 
     /**
      * Send a post request
-     * 
+     *
+     * @param  string $url
      * @param  array $data
      * 
      * @return string

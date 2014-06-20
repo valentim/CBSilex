@@ -37,7 +37,7 @@ abstract class AbstractController
      * @param Application $app
      * @param Request $request
      *
-     * @return string
+     * @return mixed
      *
      * @throws \Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsServiceException
      */
@@ -48,7 +48,30 @@ abstract class AbstractController
         if (isset($meta['bookingengine']) && isset($app[$meta['bookingengine']])) {
             $bookingEngine = $app[$meta['bookingengine']];
 
-            return (string) $bookingEngine;
+            return $bookingEngine;
+        }
+
+        throw new NotExistsServiceException;
+    }
+
+    /**
+     * @param Application $app
+     * @param Request $request
+     *
+     * @return mixed
+     *
+     * @throws \Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsServiceException
+     */
+    public function getPayment(Application $app, Request $request)
+    {
+        $paymentMethod = $request->get('request')['buyer']['payment']['method'];
+        $availablePayments = $app['config']['payments'];
+
+        if (isset($availablePayments[$paymentMethod]) && count($availablePayments[$paymentMethod]) > 0) {
+            $driver = $availablePayments[$paymentMethod][0];
+            $serviceName = strtolower("payment_gateway_driver_{$paymentMethod}_{$driver}");
+
+            return $app[$serviceName];
         }
 
         throw new NotExistsServiceException;

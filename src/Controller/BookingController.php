@@ -10,10 +10,14 @@ class BookingController extends AbstractController
 {
     public function putAction(Application $app, Request $request)
     {
-        $bookingEngine = $this->getBookingEngine($app, $request);
-        $bookingTransfer = $this->getTransfer(new BookingRequest, $request->getRequest()->all());
+        $transfer = $this->getTransfer(new BookingRequest, $request->request->all());
 
-        $response = $bookingEngine->doBooking($bookingTransfer);
+        $bookingEngine = $this->getBookingEngine($app, $request);
+        $response = $bookingEngine->doBooking($transfer);
+        $payment = $this->getPayment($app, $request);
+        $paymentResponse = $payment->doPayment($transfer);
+        var_dump($paymentResponse->getResult());
+        die;
 
         return $app->json($response->getResult(), 200);
     }
