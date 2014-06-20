@@ -21,7 +21,7 @@ class PaymentDriverServiceProvider implements ServiceProviderInterface
         $payments = $app['config']['payments'];
 
         foreach ($payments as $paymentType => $drivers) {
-            $this->registerDrivers($paymentType, $drivers, $app['config']);
+            $this->registerDrivers($paymentType, $drivers, $app);
         }
     }
 
@@ -30,9 +30,12 @@ class PaymentDriverServiceProvider implements ServiceProviderInterface
      *
      * @param string $paymentType
      * @param array $drivers
+     * @param \Silex\Application $app
      */
-    private function registerDrivers($paymentType, array $drivers, $parameters)
+    private function registerDrivers($paymentType, array $drivers, Application $app)
     {
+        $parameters = $app['config'];
+        
         foreach ($drivers as $driver) {
             $driverName = self::DRIVER_NAMESPACE . "{$paymentType}\\{$driver}";
             $this->verifyExistence($driverName);
@@ -47,15 +50,17 @@ class PaymentDriverServiceProvider implements ServiceProviderInterface
 
             $driverObject = new $driverName($config);
             $adapter = new $adapterName($driverObject);
+            $serviceName = strtolower("payment_gateway_driver_{$paymentType}_{$driver}");
 
-            $app["payment_gateway_driver_{$paymentType}_{$driver}"] = new PaymentContext($adapter);
+            $app[$serviceName] = new PaymentContext($adapter);
         }
     }
 
     /**
      * Verify if exists
-     * 
+     *
      * @param  string $class
+     * @throws \Clickbus\BusServiceLayer\BookingEngineService\Service\Exception\NotExistsServiceException
      */
     private function verifyExistence($class)
     {
