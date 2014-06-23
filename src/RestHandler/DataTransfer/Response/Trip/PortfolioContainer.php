@@ -10,8 +10,9 @@ namespace Clickbus\RestHandler\DataTransfer\Response\Trip;
 
 
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+use Clickbus\RestHandler\DtoInterface;
 
-class PortfolioContainer extends AbstractTransferBehavior
+class PortfolioContainer extends AbstractTransferBehavior implements DtoInterface
 {
     protected $meta;
     protected $content;

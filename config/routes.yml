@@ -6,7 +6,7 @@ home:
 search:
     path: /api/v2/search/
     defaults: { _controller: 'Clickbus\Controller\SearchController::getAction' }
-    methods: [GET]
+    methods: [POST]
 
 trip_portfolio:
     path: /api/v2/trip/portfolio/{from}/{to}/{date}
