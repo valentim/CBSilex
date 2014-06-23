@@ -110,7 +110,7 @@ class CbConnect extends AbstractDriverTemplate
             $typeName,
             $typeDicount,
             $typeId,
-            $items
+            [$items]
         );
 
         return new BookingDto($booking);
