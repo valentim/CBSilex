@@ -11,7 +11,7 @@ class BookingController extends AbstractController
     public function putAction(Application $app, Request $request)
     {
         $bookingEngine = $this->getBookingEngine($app, $request);
-        $bookingTransfer = $this->getTransfer(new BookingRequest, $request->getRequest()->all());
+        $bookingTransfer = $this->getTransfer(new BookingRequest, $request->request->all());
 
         $response = $bookingEngine->doBooking($bookingTransfer);
 
