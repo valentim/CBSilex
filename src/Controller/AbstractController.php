@@ -64,14 +64,12 @@ abstract class AbstractController
      */
     public function getPayment(Application $app, Request $request)
     {
-        $paymentMethod = $request->get('request')['buyer']['payment']['method'];
-        $availablePayments = $app['config']['payments'];
+        $meta = $request->get('meta');
 
-        if (isset($availablePayments[$paymentMethod]) && count($availablePayments[$paymentMethod]) > 0) {
-            $driver = $availablePayments[$paymentMethod][0];
-            $serviceName = strtolower("payment_gateway_driver_{$paymentMethod}_{$driver}");
+        if (isset($meta['paymentmethod']) && isset($app[$meta['paymentmethod']])) {
+            $paymentMethod = $app[$meta['paymentmethod']];
 
-            return $app[$serviceName];
+            return $paymentMethod;
         }
 
         throw new NotExistsServiceException;
