@@ -10,8 +10,9 @@ namespace Clickbus\RestHandler\DataTransfer\Response\Search;
 
 
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+use Clickbus\RestHandler\DtoInterface;
 
-class SearchContainer extends AbstractTransferBehavior
+class SearchContainer extends AbstractTransferBehavior implements DtoInterface
 {
     protected $meta;
     protected $items;

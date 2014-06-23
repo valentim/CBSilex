@@ -10,8 +10,9 @@ namespace Clickbus\RestHandler\DataTransfer\Response\SeatBlock;
 
 
 use Clickbus\RestHandler\DataTransfer\AbstractTransferBehavior;
+use Clickbus\RestHandler\DtoInterface;
 
-class SeatBlockContainer extends AbstractTransferBehavior
+class SeatBlockContainer extends AbstractTransferBehavior implements DtoInterface
 {
     protected $meta;
     protected $content;
