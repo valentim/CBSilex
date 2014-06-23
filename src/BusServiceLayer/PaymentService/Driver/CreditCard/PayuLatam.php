@@ -3,6 +3,7 @@ namespace Clickbus\BusServiceLayer\PaymentService\Driver\CreditCard;
 
 use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCardDriverInterface;
 use Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Payment\PaymentRequest;
 
 class PayuLatam implements CreditCardDriverInterface
 {
@@ -62,16 +63,6 @@ class PayuLatam implements CreditCardDriverInterface
     /**
      * @var string
      */
-    protected $referenceCode;
-
-    /**
-     * @var float
-     */
-    protected $txValue;
-
-    /**
-     * @var string
-     */
     protected $currency;
 
     /**
@@ -95,7 +86,6 @@ class PayuLatam implements CreditCardDriverInterface
         $this->apiLogin = $config['api_login'];
         $this->merchantId = $config['merchant_id'];
         $this->accountId = $config['account_id'];
-        $this->txValue = $config['tx_value'];
         $this->currency = $config['currency'];
         $this->country = $config['country'];
         $this->responseUrl = $config['response_url'];
@@ -136,16 +126,18 @@ class PayuLatam implements CreditCardDriverInterface
     /**
      * Make payment call
      *
-     * @param  \Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface $dataTransfer
+     * @param \Clickbus\RestHandler\DataTransfer\Request\Payment\PaymentRequest $dataTransfer
      *
      * @return array
      */
-    public function doPayment(PaymentTransferInterface $dataTransfer)
+    public function doPayment(PaymentRequest $dataTransfer)
     {
-        $buyer = $dataTransfer->getBuyer();
+        $request = $dataTransfer->getRequest();
+
+        $buyer = $request->getBuyer();
         $payment = $buyer->getPayment();
-        $orderItems = $dataTransfer->getOrderItems();
-        $this->referenceCode = $orderItems[0]->getSeatReservation();
+        $orderItems = $request->getOrderItems();
+        $referenceCode = 'Us code to reference in notifications'; // OrderId
 
         $merchant = array(
             'apiLogin' => $this->apiLogin,
@@ -160,7 +152,7 @@ class PayuLatam implements CreditCardDriverInterface
 //            'phone' => '5582254'
         );
 
-        $buyer = array(
+        $payuBuyer = array(
             'fullName' => "{$buyer->getFirstName()} {$buyer->getLastName()}",
             'emailAddress' => $buyer->getEmail(),
             'dniNumber' => $buyer->getDocument(),
@@ -168,18 +160,18 @@ class PayuLatam implements CreditCardDriverInterface
         );
 
         $txValue = array(
-            'value' => $this->txValue,
+            'value' => $payment->getTotal(),
             'currency' => $this->currency
         );
 
         $order = array(
             'accountId' => $this->accountId,
-            'referenceCode' => $this->referenceCode,
+            'referenceCode' => $referenceCode,
             'description' => 'Test order Colombia',
             'language' => $this->language,
             'notifyUrl' => $this->notifyUrl,
-            'signature' => $this->getSignature(),
-            'buyer' => $buyer,
+            'signature' => $this->getSignature($referenceCode, $payment->getTotal()),
+            'buyer' => $payuBuyer,
             'additionalValues' => array(
                 'TX_VALUE' => $txValue
             )
@@ -206,7 +198,7 @@ class PayuLatam implements CreditCardDriverInterface
             'order' => $order,
             'creditCard' => $creditCard,
             'type' => self::AUTHORIZATION_AND_CAPTURE,
-            'paymentMethod' => self::VISA,
+            'paymentMethod' => self::PAYMENT_METHOD_VISA,
             'paymentCountry' => $this->country,
             'payer' => $payer,
             'ipAddress' => '127.0.0.1',
@@ -216,7 +208,7 @@ class PayuLatam implements CreditCardDriverInterface
 
         $submitTransaction = array(
             'language' => $this->language,
-            'command' => self::SUBMIT_TRANSACTION,
+            'command' => self::COMMAND_SUBMIT,
             'merchant' => $merchant,
             'transaction' => $transaction,
             'test' => $this->test
@@ -266,9 +258,9 @@ class PayuLatam implements CreditCardDriverInterface
      * 
      * @return string
      */
-    private function getSignature()
+    private function getSignature($referenceCode, $txValue)
     {
-        return md5("{$this->apiKey}~{$this->merchantId}~{$this->referenceCode}~{$this->txValue}~{$this->currency}");
+        return md5("{$this->apiKey}~{$this->merchantId}~{$referenceCode}~{$txValue}~{$this->currency}");
     }
 
     /**

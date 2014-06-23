@@ -12,6 +12,7 @@ namespace Clickbus\BusServiceLayer\PaymentService\Adapter;
 use Clickbus\BusServiceLayer\PaymentService\Driver\CreditCardDriverInterface;
 use Clickbus\BusServiceLayer\PaymentService\GatewayInterface;
 use Clickbus\BusServiceLayer\PaymentService\PaymentTransferInterface;
+use Clickbus\RestHandler\DataTransfer\Request\Payment\PaymentRequest;
 
 class CreditCardAdapter implements GatewayInterface
 {
@@ -27,7 +28,7 @@ class CreditCardAdapter implements GatewayInterface
         $this->driver->verifyPayment($dataTransfer);
     }
 
-    public function doPayment(PaymentTransferInterface $dataTransfer)
+    public function doPayment(PaymentRequest $dataTransfer)
     {
         $this->driver->doPayment($dataTransfer);
     }

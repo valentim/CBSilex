@@ -9,9 +9,11 @@
 namespace Clickbus\BusServiceLayer\PaymentService;
 
 
+use Clickbus\RestHandler\DataTransfer\Request\Payment\PaymentRequest;
+
 interface PaymentInterface
 {
     public function verifyPayment(PaymentTransferInterface $dataTransfer);
-    public function doPayment(PaymentTransferInterface $dataTransfer);
+    public function doPayment(PaymentRequest $dataTransfer);
     public function doCancelation(PaymentTransferInterface $dataTransfer);
 } 

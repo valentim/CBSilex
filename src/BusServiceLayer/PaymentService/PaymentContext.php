@@ -8,6 +8,8 @@
 
 namespace Clickbus\BusServiceLayer\PaymentService;
 
+use Clickbus\RestHandler\DataTransfer\Request\Payment\PaymentRequest;
+
 class PaymentContext implements PaymentInterface
 {
     protected $paymentAdapter;
@@ -22,7 +24,7 @@ class PaymentContext implements PaymentInterface
         $this->paymentAdapter->verifyPayment($dataTransfer);
     }
 
-    public function doPayment(PaymentTransferInterface $dataTransfer)
+    public function doPayment(PaymentRequest $dataTransfer)
     {
         $this->paymentAdapter->doPayment($dataTransfer);
     }
