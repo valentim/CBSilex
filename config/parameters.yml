@@ -17,7 +17,6 @@ PayuLatam:
     api_login: 11959c415b33d0c
     merchant_id: 500238
     account_id: 500538
-    tx_value: 3
     currency: USD
     response_url: http://www.api.dev/
     language: en
