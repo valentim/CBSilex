@@ -51,3 +51,8 @@ booking_guid_delete:
     methods: [DELETE]
     requirements:
         guid: "[a-zA-Z0-9-]+"
+
+payment_post:
+    path: /api/v2/payment/
+    defaults: { _controller: 'Clickbus\Controller\PaymentController::postAction' }
+    methods: [POST]

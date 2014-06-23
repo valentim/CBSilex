@@ -8,7 +8,13 @@
 
 namespace Clickbus\Controller;
 
+use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 
-class PaymentController {
-
-} 
+class PaymentController extends AbstractController
+{
+    public function postAction(Application $app, Request $request)
+    {
+        return $app->json([], 200);
+    }
+}
