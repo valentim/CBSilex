@@ -16,9 +16,10 @@ class Response implements \JsonSerializable
     {
         $properties = get_object_vars($this->dto);
         $contentType = key($properties);
+        $meta = (isset($properties['meta'])) ? $properties['meta'] : null;
 
         return [
-            'meta' => null,
+            'meta' => $meta,
              $contentType => $properties[$contentType]
         ];
     }
