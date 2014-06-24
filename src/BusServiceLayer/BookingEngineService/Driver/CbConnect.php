@@ -97,7 +97,6 @@ class CbConnect extends AbstractDriverTemplate
             $status,
             $localizer,
             $uuid,
-            $payment,
             $createdAt,
             $card,
             $code,
