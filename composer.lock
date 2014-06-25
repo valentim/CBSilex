@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "66d7f63c7ce779934d0cdd0c90449111",
+    "hash": "f698c35d7b555cad26c9487c1ef9d45e",
     "packages": [
         {
             "name": "camcima/camcima-soap-client",
@@ -95,6 +96,68 @@
                 "silex"
             ],
             "time": "2014-01-29 15:54:57"
+        },
+        {
+            "name": "dflydev/doctrine-orm-service-provider",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider.git",
+                "reference": "c5820e9e14884ebca9419bc3ceafe52899be6d5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dflydev/dflydev-doctrine-orm-service-provider/zipball/c5820e9e14884ebca9419bc3ceafe52899be6d5a",
+                "reference": "c5820e9e14884ebca9419bc3ceafe52899be6d5a",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "~2.3",
+                "php": ">=5.3.3",
+                "pimple/pimple": "1.*@dev"
+            },
+            "require-dev": {
+                "cilex/cilex": "1.*@dev",
+                "cilex/console-service-provider": "@dev",
+                "silex/silex": "1.*@dev"
+            },
+            "suggest": {
+                "dflydev/psr0-resource-locator-service-provider": "1.0.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Dflydev\\Cilex\\Provider\\DoctrineOrm": "src",
+                    "Dflydev\\Pimple\\Provider\\DoctrineOrm": "src",
+                    "Dflydev\\Silex\\Provider\\DoctrineOrm": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dragonfly Development Inc.",
+                    "email": "info@dflydev.com",
+                    "homepage": "http://dflydev.com"
+                },
+                {
+                    "name": "Beau Simensen",
+                    "email": "beau@dflydev.com",
+                    "homepage": "http://beausimensen.com"
+                }
+            ],
+            "description": "Doctrine ORM Service Provider",
+            "homepage": "http://dflydev.com/projects/doctrine-orm-service-provider/",
+            "keywords": [
+                "cilex",
+                "doctrine",
+                "orm",
+                "pimple",
+                "silex"
+            ],
+            "time": "2014-06-17 22:52:19"
         },
         {
             "name": "doctrine/annotations",
@@ -728,16 +791,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "4.1.1",
+            "version": "4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "577a69ff7d0a24e9576a2885c3a7afbaadd51ec1"
+                "reference": "095cf4db559bebc78d967890eb93280d8ceb5a08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/577a69ff7d0a24e9576a2885c3a7afbaadd51ec1",
-                "reference": "577a69ff7d0a24e9576a2885c3a7afbaadd51ec1",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/095cf4db559bebc78d967890eb93280d8ceb5a08",
+                "reference": "095cf4db559bebc78d967890eb93280d8ceb5a08",
                 "shasum": ""
             },
             "require": {
@@ -789,7 +852,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-06-08 20:00:20"
+            "time": "2014-06-18 18:22:41"
         },
         {
             "name": "guzzlehttp/streams",
