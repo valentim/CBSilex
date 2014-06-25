@@ -2,16 +2,12 @@
 
 namespace Clickbus\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Behavior;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Order
- *
- * @ORM\Table(name="orders")
- * @ORM\Entity(repositoryClass="\Clickbus\Repository\OrderRepository")
+ * @Table(name="orders")
+ * @Entity(repositoryClass="\Clickbus\Repository\OrderRepository")
  */
 class Order
 {
@@ -19,128 +15,126 @@ class Order
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="id", type="integer")
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
     /**
      * @var \Clickbus\Entity\OrderStatus
      *
-     * @ORM\ManyToOne(targetEntity="OrderStatus")
-     * @ORM\JoinColumn(name="order_status_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="OrderStatus")
+     * @JoinColumn(name="order_status_id", referencedColumnName="id")
      */
     protected $orderStatus;
 
     /**
      * @var \Clickbus\Entity\OrderStatusHistory
      *
-     * @ORM\OneToMany(targetEntity="OrderStatusHistory", mappedBy="order", cascade={"all"})
+     * @OneToMany(targetEntity="OrderStatusHistory", mappedBy="order", cascade={"all"})
      */
     protected $orderStatusHistory;
 
     /**
      * @var \Clickbus\Entity\OrderItem
      *
-     * @ORM\OneToMany(targetEntity="OrderItem", mappedBy="order", cascade={"all"})
+     * @OneToMany(targetEntity="OrderItem", mappedBy="order", cascade={"all"})
      */
     protected $orderItems;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contact_name", type="string", nullable=false)
+     * @Column(name="contact_name", type="string", nullable=false)
      */
     protected $contactName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contact_phone", type="string", nullable=true)
+     * @Column(name="contact_phone", type="string", nullable=true)
      */
     protected $contactPhone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contact_email", type="string", nullable=false)
+     * @Column(name="contact_email", type="string", nullable=false)
      */
     protected $contactEmail;
 
     /**
      * @var \Clickbus\Entity\OrderPayment
      *
-     * @ORM\OneToOne(targetEntity="OrderPayment", mappedBy="order", cascade={"all"})
+     * @OneToOne(targetEntity="OrderPayment", mappedBy="order", cascade={"all"})
      */
     protected $payment;
 
     /**
      * @var \Clickbus\Entity\Customer
      *
-     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="orders")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Customer", inversedBy="orders")
+     * @JoinColumn(name="customer_id", referencedColumnName="id")
      */
     protected $customer;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @Column(type="string", nullable=true)
      */
     protected $localizer;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="payment_type", type="string", nullable=false)
+     * @Column(name="payment_type", type="string", nullable=false)
      */
     protected $paymentType;
 
     /**
-     * @ORM\Column(name="service_fee", type="decimal", precision=7, scale=2, nullable=false)
-     * @Assert\NotBlank()
+     * @Column(name="service_fee", type="decimal", precision=7, scale=2, nullable=false)
      */
     protected $serviceFee;
 
     /**
-     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=false)
-     * @Assert\NotBlank()
+     * @Column(type="decimal", precision=7, scale=2, nullable=false)
      */
     protected $total;
-    
+
     /**
      * @var integer
      *
-     * @ORM\Column(name="workflow_execution_id", type="integer", nullable=true)
+     * @Column(name="workflow_execution_id", type="integer", nullable=true)
      */
     protected $workflowExecutionId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="workflow_cancelation_execution_id", type="integer", nullable=true)
+     * @Column(name="workflow_cancelation_execution_id", type="integer", nullable=true)
      */
     protected $workflowCancelationExecutionId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="workflow_item_cancelation_execution_id", type="integer", nullable=true)
+     * @Column(name="workflow_item_cancelation_execution_id", type="integer", nullable=true)
      */
     protected $workflowItemCancelationExecutionId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="customer_ip", type="string", nullable=true)
+     * @Column(name="customer_ip", type="string", nullable=true)
      */
     protected $customerIp;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @Column(name="created_at", type="datetime")
      * @Behavior\Timestampable(on="create")
      */
     protected $createdAt;
@@ -148,7 +142,7 @@ class Order
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @Column(name="updated_at", type="datetime")
      * @Behavior\Timestampable(on="update")
      */
     protected $updatedAt;
@@ -595,10 +589,10 @@ class Order
         $this->customerIp = $customerIp;
         return $this;
     }
-    
+
     /**
      * Generate UNIQUE OrderNumber
-     * 
+     *
      * @return string
      */
     public function getOrderNumber(){
