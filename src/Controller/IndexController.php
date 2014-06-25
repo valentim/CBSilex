@@ -15,6 +15,10 @@ class IndexController
 {
     public function indexAction(Application $app)
     {
+        $foo = $app['orm.em'];
+
+        var_dump($foo->getRepository('Clickbus\Entity\Order')); exit;
+
         return $app->json([], 200);
     }
 } 
