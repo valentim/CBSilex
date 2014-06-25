@@ -23,12 +23,10 @@
         "symfony/config": "v2.2.0",
         "symfony/validator": "~2.3",
         "guzzlehttp/guzzle": "~4.0",
-        "doctrine/orm": "~2.4",
-        "doctrine/common": "~2.3",
-        "doctrine/dbal": "~2.3",
+        "doctrine/orm": "2.4.*",
+        "dflydev/doctrine-orm-service-provider": "v1.0.5",
         "gedmo/doctrine-extensions": "2.3.*@dev",
         "deralex/yaml-config-service-provider": "1.0.*@dev",
-        "guzzlehttp/guzzle": "~4.0",
         "camcima/camcima-soap-client": "dev-master"
     },
     "require-dev": {
