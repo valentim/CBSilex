@@ -1,20 +1,16 @@
 {
-    "name": "Clickbus 2.0",
-    "description": "New Archteture",
+    "name": "CricketBrasil Silex",
+    "description": "Silex test",
     "minimum-stability": "stable",
     "license": "proprietary",
     "authors": [
         {
             "name": "Thiago Valentim",
             "email": "thiago.valentim@clickbus.com.br"
-        },
-        {
-            "name": "Tiago Butzke",
-            "email": "tiago.butzke@clickbus.com.br"
         }
     ],
     "autoload": {
-        "psr-4": {"Clickbus\\": "src/"}
+        "psr-4": {"CricketBrasil\\": "src/"}
     },
     "require": {
         "silex/silex": "~1.2",
@@ -27,7 +23,6 @@
         "dflydev/doctrine-orm-service-provider": "v1.0.5",
         "gedmo/doctrine-extensions": "2.3.*@dev",
         "deralex/yaml-config-service-provider": "1.0.*@dev",
-        "camcima/camcima-soap-client": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",

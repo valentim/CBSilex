@@ -1,6 +1,6 @@
 <?php
 
-use Clickbus\Exception\ProcessCallbackException;
+use CricketBrasil\Exception\ProcessCallbackException;
 
 $app->error(function (\Exception $e, $code) {
 

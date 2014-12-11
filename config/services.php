@@ -1,6 +1,4 @@
 <?php
-use Clickbus\BusServiceLayer\BookingEngineService\Service\DriverServiceProvider;
-use Clickbus\BusServiceLayer\PaymentService\Provider\PaymentDriverServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,22 +10,12 @@ use DerAlex\Silex\YamlConfigServiceProvider;
  */
 $app->register(new YamlConfigServiceProvider(__DIR__ . '/parameters.yml'));
 
-/**
- * Drivers of Booking Engine
- */
-$app->register(new DriverServiceProvider);
-
-/**
- * Drivers of PaymentService
- */
-$app->register(new PaymentDriverServiceProvider);
-
 
 // Register Doctrine ORM
 $app->register(new DoctrineServiceProvider, array(
     "db.options"    => array(
         "driver"    => "pdo_mysql",
-        "dbname"    => "newplataform",
+        "dbname"    => "database",
         "host"      => "localhost",
         "user"      => "root",
         "password"  => "root"
@@ -39,7 +27,7 @@ $app->register(new DoctrineOrmServiceProvider, array(
         "mappings" => array(
             array(
                 "type" => "annotation",
-                "namespace" => "Clickbus\Entity",
+                "namespace" => "CricketBrasil\Entity",
                 "path" => __DIR__."/../src/Entity",
             )
         ),

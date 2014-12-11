@@ -1,6 +1,6 @@
 <?php
 
-namespace Clickbus\Entity;
+namespace CricketBrasil\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

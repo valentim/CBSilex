@@ -6,7 +6,7 @@
  * Time: 12:12
  */
 
-namespace Clickbus\Exception;
+namespace CricketBrasil\Exception;
 
 
 class ProcessCallbackException extends \Exception

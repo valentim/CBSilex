@@ -6,7 +6,7 @@
  * Time: 12:44
  */
 
-namespace Clickbus\Exception;
+namespace CricketBrasil\Exception;
 
 
 class GenericCallbackMessageException extends ProcessCallbackException
