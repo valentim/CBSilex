@@ -6,8 +6,7 @@
  * Time: 0:14
  */
 
-namespace Clickbus\Controller;
-
+namespace CricketBrasil\Controller;
 
 use Silex\Application;
 
@@ -17,6 +16,6 @@ class IndexController
     {
         $foo = $app['orm.em'];
 
-        return $app->json([], 200);
+        return $app->json(['Hello' => 'World'], 200);
     }
 } 
