@@ -16,6 +16,6 @@ class IndexController
     {
         $foo = $app['orm.em'];
 
-        return $app->json(['Hello' => 'World'], 200);
+        return $app->json(array('Hello' => 'World'), 200);
     }
 } 

@@ -18,7 +18,7 @@
         "symfony/yaml": "~2.4",
         "symfony/config": "v2.2.0",
         "symfony/validator": "~2.3",
-        "guzzlehttp/guzzle": "~4.0",
+        "guzzlehttp/guzzle": "3.8.*",
         "doctrine/orm": "2.4.*",
         "dflydev/doctrine-orm-service-provider": "v1.0.5",
         "gedmo/doctrine-extensions": "2.3.*@dev",
