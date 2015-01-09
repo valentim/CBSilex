@@ -21,10 +21,10 @@ class GenericCallbackMessageException extends ProcessCallbackException
 
         $f = function() use ($message) {
 
-            $messageTemplate = [
+            $messageTemplate = array(
                 'error' => true,
                 'message' => $message
-            ];
+            );
 
             return json_encode($messageTemplate);
         };
