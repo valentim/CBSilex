@@ -1,12 +1,12 @@
-{
-    "name": "CricketBrasil Silex",
+phpunit {
+    "name": "cricketbrasil/silex",
     "description": "Silex test",
     "minimum-stability": "stable",
     "license": "proprietary",
     "authors": [
         {
             "name": "Thiago Valentim",
-            "email": "thiago.valentim@clickbus.com.br"
+            "email": "thiago.valentim@cricketbrasil.com.br"
         }
     ],
     "autoload": {
@@ -25,7 +25,8 @@
         "deralex/yaml-config-service-provider": "1.0.*@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
-        "symfony/browser-kit": ">=2.3,<2.4-dev"
+        "phpunit/phpunit": "4.0.0",
+        "symfony/browser-kit": ">=2.3,<2.4-dev",
+        "phpdocumentor/phpdocumentor": "2.*"
     }
 }
